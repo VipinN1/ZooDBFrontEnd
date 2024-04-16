@@ -1,0 +1,62 @@
+/* AddEnclosureForm.css */
+
+.enclosure-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #1f6f78;
+  margin-top: 50px;
+}
+
+.form-group-enclosure {
+  margin-bottom: 15px;
+}
+
+.form-group-enclosure label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group-enclosure input[type="number"],
+.form-group-enclosure input[type="text"],
+.form-group-enclosure input[type="date"],
+.form-group-enclosure input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-actions-enclosure {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-actions-enclosure button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-actions-enclosure button[type="submit"] {
+  background-color: #004445;
+  color: #fff;
+}
+
+.form-actions-enclosure button[type="submit"] {
+  background-color: #004445;
+  color: #fff;
+}
+
+.form-actions-enclosure button[type="submit"]:hover,
+.form-actions-enclosure button[type="reset"]:hover {
+  background-color: #062925;
+}
+
+.error-message {
+  color: red;
+}

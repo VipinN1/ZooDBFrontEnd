@@ -1,0 +1,106 @@
+/* TicketBuy.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background-color: #f7d794; /* Light orange background */
+}
+
+.ticket-buy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.buy-menu {
+  background-color: #327a7f; /* Coral pink background */
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+.buy-menu h1 {
+  font-size: 48px;
+  color: #fff; /* White text */
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.ticket-types {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.ticket-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #fff; /* Add border between ticket types */
+  padding-bottom: 10px; /* Add some padding to separate items */
+}
+
+.ticket-type:last-child {
+  margin-bottom: 0; /* Remove bottom margin from the last ticket type */
+  border-bottom: none; /* Remove border from the last ticket type */
+}
+
+.ticket-type label {
+  font-size: 24px;
+  color: #fff; /* White text */
+}
+
+.ticket-type input {
+  padding: 8px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 60px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.ticket-type span {
+  font-size: 24px;
+  color: #fff; /* White text */
+}
+
+.datepicker-container {
+  margin-bottom: 40px;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center the content horizontally */
+}
+
+.datepicker-container label {
+  font-size: 24px;
+  color: #fff; /* White text */
+  margin-right: 10px; /* Add some space to the right of the label */
+  margin-top: -4px; /* Add some space to the right of the label */
+}
+
+.total-cost {
+  font-size: 24px;
+  color: #fff; /* White text */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+button {
+  padding: 20px 40px;
+  background-color: #448d9b; /* Dark red button */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+button:hover {
+  background-color: #ff5252; /* Lighter red on hover */
+}

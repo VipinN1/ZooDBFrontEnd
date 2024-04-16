@@ -1,0 +1,48 @@
+.vision-content{
+  width: 700px;
+  padding: 15px;
+  background-color: #497458 ;
+  border-radius: 5px;
+}
+
+
+.about-header{
+  margin-top: 100px;
+}
+
+.why-header{
+  margin-top: 20px;
+}
+
+.vision-content h3{
+  font-weight: normal;
+}
+
+
+.mission-content{
+  width: 700px;
+  padding: 15px;
+  background-color: #497458 ;
+  border-radius: 5px;
+  margin-top: 30px;
+
+
+}
+
+.mission-content h3{
+  font-weight: normal;
+}
+
+.why-content{
+  width: 700px;
+
+}
+
+.why-content h3{
+  font-weight: normal;
+}
+
+.entire-page{
+  margin-left: 100px;
+}
+

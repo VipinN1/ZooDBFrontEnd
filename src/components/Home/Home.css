@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  flex-direction: column; /* Change to column layout */
+  display: flex;
+  width: 100%;
+  height: 120vh; /* Set the height to be taller than the viewport */
+  background-image: url(../Image/LandingPage.jpg);
+  background-size: cover;
+  background-position: center;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Adjust the opacity by changing the last value (0.3) */
+  pointer-events: none; /* This ensures that the pseudo-element doesn't capture pointer events */
+}
+
+.content h1{
+  color: lightgrey;
+  margin: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 40px;
+
+}
+
+
+.content h3{
+  margin: 0px;
+  margin-bottom: 5px;
+  color: lightgrey;
+  font-weight: bold;
+  font-size: 25px;
+
+
+  
+}
+
+.content a{
+  font-size: 20px;
+  font-weight: bold;
+  color:rgb(103, 206, 240);
+  margin-bottom: 550px;
+  margin-top: 5px;
+  padding: 10px 20px; /* Add padding to the link */
+  border: 3px solid rgb(103, 206, 240); /* Add border to the link */
+  border-radius: 5px; 
+  text-decoration: none;
+}

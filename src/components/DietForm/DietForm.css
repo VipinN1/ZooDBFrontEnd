@@ -1,0 +1,52 @@
+.diet-form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #1f6f78;
+  margin-top: 50px;
+}
+
+.form-group-diet-form {
+  margin-bottom: 10px;
+}
+
+.label-diet-form {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-diet-form {
+  width: calc(100% - 20px); /* Adjusted width to accommodate padding */
+  padding: 10px; /* Keep consistent padding */
+  font-size: 16px; /* Keep consistent font size */
+  border: 1px solid #ccc; /* Keep consistent border */
+  border-radius: 5px; /* Keep consistent border radius */
+  box-sizing: border-box; /* Keep consistent box sizing */
+}
+
+.button-diet {
+  padding: 10px 20px;
+  margin-top: 15px;
+  font-size: 16px;
+  background-color: #004445;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button-diet-2 {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #004445;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #062925;
+}

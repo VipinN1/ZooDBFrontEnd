@@ -1,0 +1,94 @@
+/* Container styles */
+.security-report-container {
+  max-width: 800px; /* Increase width to accommodate the report data table */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #1f6f78;
+  margin-top: 50px;
+  text-align: center; /* Center the content */
+}
+
+/* Title styles */
+.security-report-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white; /* White text color */
+}
+
+/* Form styles */
+.security-report-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center form elements */
+}
+
+.security-form-group,
+.security-label,
+.security-input,
+.security-select,
+.security-button {
+  margin-bottom: 10px;
+  width: 100%; /* Set width to 100% for better alignment */
+}
+
+.security-input,
+.security-select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.security-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #004445;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.security-button:hover {
+  background-color: #062925;
+}
+
+/* Error message styles */
+.security-error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Report data table styles */
+.report-data {
+  margin-top: 20px; /* Add space between the form and the table */
+}
+
+.report-table {
+  width: 80%; /* Set the table width to 80% of the container */
+  margin: 0 auto; /* Center the table within the container */
+  border-collapse: collapse; /* Collapse borders */
+  background-color: #f1f1f1; /* Light gray background for the table */
+}
+
+.report-table th,
+.report-table td {
+  padding: 10px; /* Add padding to cells */
+  border: 1px solid #ccc; /* Add border to cells */
+}
+
+.report-table th {
+  background-color: #004445; /* Darker background for headers */
+  color: white; /* White text color for headers */
+  font-weight: bold; /* Make headers bold */
+}
+
+.report-table tr:nth-child(even) {
+  background-color: #e6f7f8; /* Light blue color for even rows */
+}
+
+.report-table tr:nth-child(odd) {
+  background-color: #ffffff; /* White color for odd rows */
+}

@@ -1,0 +1,55 @@
+.business-report-container {
+  background-color: #1f6f78;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+}
+
+.business-report-title {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.business-report-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.business-form-group {
+  margin-bottom: 15px;
+}
+
+.business-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.business-select,
+.business-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.business-button {
+  padding: 10px 20px;
+  background-color: #004445;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.business-button:hover {
+  background-color: #062925;
+}
+
+.business-error-message {
+  color: #dc3545;
+  margin-top: 5px;
+}
