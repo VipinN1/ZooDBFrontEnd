@@ -25,33 +25,41 @@ function AnimalReport() {
         };
 
         try {
-            // POST request to fetch animal report data
-            const animalResponse = await axios.post('http://localhost:5095/api/ZooDb/Animal/Get`', requestData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+            // Fetch animal data
+            const response = await axios.get('http://localhost:5095/api/ZooDb/Animal/Get', {
+                params: requestData,
             });
 
-            // Get the animal data and animal ID from the response
-            const animalData = animalResponse.data;
-            setAnimalData(animalData);
-            
-            if (animalData && animalData.animalID) {
-                // Fetch diet report data using the animal ID
-                const dietResponse = await axios.post('http://localhost:5095/api/ZooDb/DietReport', { animalID: animalData.animalID }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                setDietData(dietResponse.data);
+            const data = response.data;
 
-                // Fetch vet records report data using the animal ID
-                const vetResponse = await axios.post('http://localhost:5095/api/ZooDb/VetRecordsReport', { animalID: animalData.animalID }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+            // Set the animal data state with the retrieved data
+            setAnimalData(data);
+
+            // Check if animal data contains animalID
+            if (data && data.animalID) {
+                // Fetch vet data using the animalID
+                const animalID = data.animalID;
+
+                const dietResponse = await axios.get('http://localhost:5095/api/ZooDb/GetDiet', {
+                  params: {
+                    animalName,
+                    animalSpecies,
+                    animalDoB
+                  },
+              });
+
+              setDietData(dietResponse.data);
+
+                const vetRecordsResponse = await axios.get('http://localhost:5095/api/ZooDb/GetVetRecords', {
+                    params: {
+                        animalName,
+                        animalSpecies,
+                        animalDoB
+                    }
                 });
-                setVetData(vetResponse.data);
+
+                // Set the vet data state with the retrieved data
+                setVetData(vetRecordsResponse.data);
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -62,6 +70,7 @@ function AnimalReport() {
         <div className="animal-report-container">
             <h2>Animal Report</h2>
             <form onSubmit={handleFormSubmit}>
+                {/* Form inputs */}
                 <div className="form-group">
                     <label htmlFor="animalName">Animal Name:</label>
                     <input
@@ -103,33 +112,25 @@ function AnimalReport() {
                 <div className="query-data">
                     <h3>Animal Information:</h3>
                     <table className="query-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Species</th>
+                                <th>Date of Birth</th>
+                                <th>Gender</th>
+                                <th>Endangered</th>
+                                <th>Date of Arrival</th>
+                                <th>Origin</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
-                                <td>Name:</td>
                                 <td>{animalData.animalName}</td>
-                            </tr>
-                            <tr>
-                                <td>Species:</td>
                                 <td>{animalData.animalSpecies}</td>
-                            </tr>
-                            <tr>
-                                <td>Date of Birth:</td>
                                 <td>{new Date(animalData.animalDoB).toLocaleDateString()}</td>
-                            </tr>
-                            <tr>
-                                <td>Gender:</td>
                                 <td>{animalData.animalGender}</td>
-                            </tr>
-                            <tr>
-                                <td>Endangered:</td>
                                 <td>{animalData.animalEndangered ? 'Yes' : 'No'}</td>
-                            </tr>
-                            <tr>
-                                <td>Date of Arrival:</td>
                                 <td>{new Date(animalData.animalDoA).toLocaleDateString()}</td>
-                            </tr>
-                            <tr>
-                                <td>Origin:</td>
                                 <td>{animalData.animalOrigin}</td>
                             </tr>
                         </tbody>
@@ -137,7 +138,7 @@ function AnimalReport() {
                 </div>
             )}
 
-            {/* Display diet data */}
+             {/* Display diet data */}
             {dietData.length > 0 && (
                 <div className="query-data">
                     <h3>Diet Records:</h3>
@@ -162,7 +163,7 @@ function AnimalReport() {
                 </div>
             )}
 
-            {/* Display vet data */}
+                        {/* Display vet data */}
             {vetData.length > 0 && (
                 <div className="query-data">
                     <h3>Vet Records:</h3>
