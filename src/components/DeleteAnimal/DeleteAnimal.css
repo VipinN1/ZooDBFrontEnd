@@ -1,0 +1,48 @@
+/* CSS file for DeleteAnimal form */
+
+.delete-animal-container {
+  max-width: 600px; /* Keep the max-width consistent */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 20px; /* Add padding around the form */
+  border: 1px solid #ccc; /* Add a border around the form */
+  border-radius: 20px; /* Rounded corners for the form */
+  background-color: #1f6f78; /* Background color of the form */
+  margin-top: 50px; /* Add margin above the form */
+}
+
+.delete-animal-container h2 {
+  text-align: center; /* Center the heading text */
+  margin-bottom: 20px; /* Margin below the heading */
+}
+
+.form-group-animal {
+  margin-bottom: 15px; /* Space between form groups */
+}
+
+.form-group-animal label {
+  display: block; /* Display labels as blocks */
+  font-weight: bold; /* Bold text for labels */
+}
+
+.form-group-animal input[type="text"] {
+  width: 100%; /* Full width for the input field */
+  padding: 10px; /* Padding inside the input field */
+  border: 1px solid #ccc; /* Border around the input field */
+  border-radius: 5px; /* Rounded corners for the input field */
+}
+
+.form-group-animal button[type="submit"] {
+  width: 100%; /* Full width for the button */
+  padding: 10px; /* Padding inside the button */
+  font-size: 16px; /* Font size for the button text */
+  background-color: #004445; /* Background color for the button */
+  color: #fff; /* White text color for the button */
+  border: none; /* No border around the button */
+  border-radius: 5px; /* Rounded corners for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.form-group-animal button[type="submit"]:hover {
+  background-color: #062925; /* Darker background color on hover */
+}

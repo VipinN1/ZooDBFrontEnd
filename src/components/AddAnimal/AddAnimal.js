@@ -9,7 +9,6 @@ function AddAnimal() {
   const [animalDoB, setAnimalDoB] = useState('');
   const [animalEndangered, setAnimalEndangered] = useState(false); // Use boolean state
   const [animalOrigin, setAnimalOrigin] = useState('');
-  const [animalLifeStage, setAnimalLifeStage] = useState('');
   const [animalDoA, setAnimalDoA] = useState('');
 
   // Function to reset form fields
@@ -20,7 +19,6 @@ function AddAnimal() {
     setAnimalDoB('');
     setAnimalEndangered('');
     setAnimalOrigin('');
-    setAnimalLifeStage('');
   };
 
   async function handleSubmit(event) {
@@ -41,7 +39,6 @@ function AddAnimal() {
     console.log('Animal DoB:', animalDoB);
     console.log('Is Animal Endangered:', animalEndangered);
     console.log('Animal Origin:', animalOrigin);
-    console.log('Animal Life Stage:', animalLifeStage);
     console.log('Animal DoA:', formattedDate);
 
     // Implement backend logic here to send the data inputs to the backend
@@ -52,7 +49,6 @@ function AddAnimal() {
       animalDoB: animalDoB,
       animalEndangered: animalEndangered,
       animalOrigin: animalOrigin,
-      animalLifeStage: animalLifeStage,
       animalDoA: formattedDate
     };
 
@@ -91,7 +87,7 @@ function AddAnimal() {
             required
           />
         </div>
-        <div className="form-group-animal">
+        <div className="form-group-animal"> 
           <label htmlFor="animalSpecies">Animal Species:</label>
           <input
             type="text"
@@ -102,14 +98,17 @@ function AddAnimal() {
           />
         </div>
         <div className="form-group-animal">
-          <label htmlFor="animalGender">Animal Gender:</label>
-          <input
-            type="text"
-            id="animalGender"
-            value={animalGender}
-            onChange={(e) => setAnimalGender(e.target.value)}
-            required
-          />
+            <label htmlFor="animalGender">Animal Gender:</label>
+            <select
+              id="animalGender"
+              value={animalGender}
+              onChange={(e) => setAnimalGender(e.target.value)}
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
         </div>
         <div className="form-group-animal">
           <label htmlFor="animalDoB">Animal DoB:</label>
@@ -125,10 +124,11 @@ function AddAnimal() {
           <label htmlFor="animalEndangered">Is Animal Endangered?</label>
           <select
             id="animalEndangered"
-            value={animalEndangered ? "Yes" : "No"} // Map boolean value to dropdown option
-            onChange={(e) => setAnimalEndangered(e.target.value === "Yes")} // Map dropdown option to boolean value
+            value={animalEndangered ? "Yes" : "No"}
+            onChange={(e) => setAnimalEndangered(e.target.value === "Yes")}
             required
           >
+            <option value="">Select</option>
             <option value="No">No</option>
             <option value="Yes">Yes</option>
           </select>
@@ -140,16 +140,6 @@ function AddAnimal() {
             id="animalOrigin"
             value={animalOrigin}
             onChange={(e) => setAnimalOrigin(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group-animal">
-          <label htmlFor="animalLifeStage">Animal Life Stage:</label>
-          <input
-            type="text"
-            id="animalLifeStage"
-            value={animalLifeStage}
-            onChange={(e) => setAnimalLifeStage(e.target.value)}
             required
           />
         </div>

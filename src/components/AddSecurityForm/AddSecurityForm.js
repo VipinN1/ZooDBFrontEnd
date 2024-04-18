@@ -51,7 +51,7 @@ function AddSecurityForm({employeeId}) {
 
   return (
     <div className="add-security-form-container">
-      <h2>Add Security Event</h2>
+      <h2>Add Security Event Log</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group-security-form">
           <label htmlFor="date">Date:</label>

@@ -24,15 +24,6 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
       return;
     }
 
-    // Store the form data in variables
-    const enclosureData = {
-      name,
-      enclosure_type,
-      build_date,
-      cleaning_start,
-      cleaning_end
-    };
-
     // Backend logic should be done here to handle storing the data.
     // You can pass the enclosureData to any function or API call for further processing.
 
@@ -53,9 +44,9 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
       cleaningScheduleEnd: cleaning_end,
     };
 
-    // Call the function passed from parent component to add animal
+    // Call the function passed from parent component to add enclosure
     // Reset form fields after submission
-   // handleReset();
+    handleReset();
 
     try {
       const response = await axios.post('http://localhost:5095/api/ZooDb/NewEnclosure', userData);
@@ -79,16 +70,17 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
   };
 
   // Function to reset form fields
-  // const handleReset = () => {
-  //   setName('');
-  //   setType('');
-  //   setBuildDate('');
-  //   setCleaningStart('');
-  //   setCleaningEnd('');
-  // };
+  const handleReset = () => {
+    setName('');
+    setType('');
+    setBuildDate('');
+    setCleaningStart('');
+    setCleaningEnd('');
+  };
   
   return (
     <form onSubmit={handleSubmit} className="enclosure-form">
+      <h2>Add Enclosure</h2>
       <div className="form-group-enclosure">
         <label htmlFor="name">Name:</label>
         <input
@@ -143,7 +135,6 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
       </div>
       <div className="form-actions-enclosure">
         <button type="submit">Add Enclosure</button>
-        <button type="button" ></button>
       </div>
     </form>
   );

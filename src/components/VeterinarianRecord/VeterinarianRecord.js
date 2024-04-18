@@ -7,6 +7,7 @@ function VeterinarianRecord() {
   const [height, setHeight] = useState('');
   const [medications, setMedications] = useState('');
   const [diagnosis, setDiagnosis] = useState('');
+  const [animalName, setAnimalName] = useState('');
   const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalDoB, setAnimalDoB] = useState('');
 
@@ -36,6 +37,7 @@ function VeterinarianRecord() {
     // setDiagnosis('');
 
     const data = {
+      animalName: animalName,
       animalSpecies: animalSpecies,
       animalDoB: animalDoB,
       weight: weight,
@@ -52,26 +54,39 @@ function VeterinarianRecord() {
     <div className="veterinarian-records-container">
       <h2>Veterinarian Records</h2>
       <form onSubmit={handleSubmit}>
-      <div className="form-group-diet-form">
-          <label className='label-diet-form' htmlFor="animalSpecies">Animal Species:</label>
-          <input
-            type="text"
-            id="animalSpecies"
-            value={animalSpecies}
-            onChange={(e) => setAnimalSpecies(e.target.value)}
-            className="input-diet-form"
-          />
-        </div>
-        <div className="form-group-diet-form">
-          <label className='label-diet-form' htmlFor="animalDoB">Animal DoB:</label>
-          <input
-            type="text"
-            id="animalDoB"
-            value={animalDoB}
-            onChange={(e) => setAnimalDoB(e.target.value)}
-            className="input-diet-form"
-          />
-        </div>
+      <div className="form-group-vet">
+        <label className='label-vet' htmlFor="animalName">Animal Name:</label>
+        <input
+          type="text"
+          id="animalName"
+          value={animalName}
+          onChange={(e) => setAnimalName(e.target.value)}
+          className="input-vet"
+        />
+      </div>
+      <div className="form-group-vet">
+        <label className='label-vet' htmlFor="animalSpecies">Animal Species:</label>
+        <input
+          type="text"
+          id="animalSpecies"
+          value={animalSpecies}
+          onChange={(e) => setAnimalSpecies(e.target.value)}
+          className="input-vet"
+        />
+      </div>
+      <div className="form-group-vet">
+        <label className='label-vet' htmlFor="animalDoB">Animal DoB:</label>
+        <input
+          type="date"
+          id="animalDoB"
+          value={animalDoB}
+          onChange={(e) => setAnimalDoB(e.target.value)}
+          className="input-vet"
+          // Optional min and max attributes
+          min="1900-01-01"
+          max={new Date().toISOString().split('T')[0]} // Sets max to today's date
+        />
+      </div>
         <div className="form-group-vet">
           <label className="label-vet" htmlFor="weight">Weight (lbs):</label>
           <input

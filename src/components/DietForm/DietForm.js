@@ -7,12 +7,14 @@ function DietForm() {
   const [dietType, setDietType] = useState('');
   const [dietSchedule, setDietSchedule] = useState([]);
   const [scheduleInput, setScheduleInput] = useState('');
+  const [animalName, setAnimalName] = useState('');
   const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalDoB, setAnimalDoB] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    console.log('Animal Name: ', animalName);
     console.log('Animal Species: ', animalSpecies);
     console.log('Animal DoB: ', animalDoB);
     console.log('Diet Name:', dietName);
@@ -27,6 +29,7 @@ function DietForm() {
 
 
     const data = {
+      animalName: animalName,
       animalSpecies: animalSpecies,
       animalDoB: animalDoB,
       dietName: dietName,
@@ -56,6 +59,16 @@ function DietForm() {
     <div className="diet-form-container">
       <h2>Diet Form</h2>
       <div className="form-group-diet-form">
+          <label className='label-diet-form' htmlFor="animalName">Animal Name:</label>
+          <input
+            type="text"
+            id="animalName"
+            value={animalName}
+            onChange={(e) => setAnimalName(e.target.value)}
+            className="input-diet-form"
+          />
+        </div>
+      <div className="form-group-diet-form">
           <label className='label-diet-form' htmlFor="animalSpecies">Animal Species:</label>
           <input
             type="text"
@@ -66,14 +79,17 @@ function DietForm() {
           />
         </div>
         <div className="form-group-diet-form">
-          <label className='label-diet-form' htmlFor="animalDoB">Animal DoB:</label>
-          <input
-            type="text"
-            id="animalDoB"
-            value={animalDoB}
-            onChange={(e) => setAnimalDoB(e.target.value)}
-            className="input-diet-form"
-          />
+            <label className='label-diet-form' htmlFor="animalDoB">Animal DoB:</label>
+            <input
+                type="date"
+                id="animalDoB"
+                value={animalDoB}
+                onChange={(e) => setAnimalDoB(e.target.value)}
+                className="input-diet-form"
+                // Optionally set min and max attributes to limit the date range
+                min="1900-01-01"
+                max={new Date().toISOString().split('T')[0]} // Sets max to today's date
+            />
         </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group-diet-form">
