@@ -24,6 +24,7 @@ import AddSecurityForm from './components/AddSecurityForm/AddSecurityForm';
 import ModifyAnimal from './components/ModifyAnimal/ModifyAnimal';
 import DeleteAnimal from './components/DeleteAnimal/DeleteAnimal';
 import SearchAnimal from './components/SearchAnimal/SearchAnimal';
+import AddAnimalToEnclosure from './components/AddAnimalToEnclosure/AddAnimalToEnclosure';
 import SecurityReport from './components/SecurityReport/SecurityReport';
 import EnclosureReport from './components/EnclosureReport/EnclosureReport';
 import AnimalReport from './components/AnimalReport/AnimalReport';
@@ -149,6 +150,7 @@ function App() {
                     <Route path="/search-animal" element={<SearchAnimal />} />
                     <Route path="/modify-animal" element={<ModifyAnimal />} />
                     <Route path="/delete-animal" element={<DeleteAnimal />} />
+                    <Route path="/transfer-animal" element={<AddAnimalToEnclosure />} />
                     <Route path="/add-security-form" element={<AddSecurityForm employeeId={employeeId} />} />
                     <Route path="/security-report" element={<SecurityReport />} />
                     <Route path="/enclosure-report" element={<EnclosureReport />} />

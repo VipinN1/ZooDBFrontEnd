@@ -1,0 +1,55 @@
+.modify-animal-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #1f6f78;
+    margin-top: 50px;
+  }
+  
+  .modify-animal-container h2 {
+    text-align: center;
+  }
+  
+  .form-group-animal label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-group-animal input[type="text"],
+  .form-group-animal input[type="date"],
+  .form-group-animal select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group-animal select {
+    appearance: none;
+    padding: 10px 30px 10px 10px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+  
+  .form-group-animal button[type="submit"] {
+    width: 100%; 
+    padding: 10px; 
+    font-size: 16px; 
+    background-color: #004445;
+    color: #fff; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-group-animal button[type="submit"]:hover {
+    background-color: #062925; 
+  }
+  
+  .form-group-animal button[type="button"] {
+      margin-top: 15px;
+  }
