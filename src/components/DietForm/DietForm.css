@@ -1,15 +1,12 @@
+
 .diet-form-container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #1f6f78;
   margin-top: 50px;
-}
-
-.diet-form-container h2 {
-  text-align: center; /* Center-align the header text */
 }
 
 .form-group-diet-form {

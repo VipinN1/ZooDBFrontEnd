@@ -110,15 +110,20 @@ function SearchAnimal() {
             className="input"
           />
         </div>
+        {/* Updated section for the animal origin field */}
         <div className="form-group">
           <label htmlFor="animalOrigin">Origin:</label>
-          <input
-            type="text"
+          <select
             id="animalOrigin"
             value={animalOrigin}
             onChange={(e) => setAnimalOrigin(e.target.value)}
             className="input"
-          />
+          >
+            <option value="">Select Origin</option>
+            <option value="Captive Bred">Captive Bred</option>
+            <option value="Wild Capture">Wild Capture</option>
+            <option value="Transferred In">Transferred In</option>
+          </select>
         </div>
         <button type="submit" className="submit-button">Generate Query</button>
       </form>

@@ -24,7 +24,6 @@ export default function ManagerNavbar({handleSignOut}) {
             </div>
           )}
         </CustomLink>
-        <CustomLink to="/business-report">Business Reports</CustomLink>
         <CustomLink to="/about-us">About us</CustomLink>
         <li className="nav-item">
         <button onClick={handleSignOut}>Sign out</button>

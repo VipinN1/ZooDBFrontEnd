@@ -17,7 +17,7 @@ function AddAnimal() {
     setAnimalSpecies('');
     setAnimalGender('');
     setAnimalDoB('');
-    setAnimalEndangered('');
+    setAnimalEndangered(false);
     setAnimalOrigin('');
   };
 
@@ -30,8 +30,7 @@ function AddAnimal() {
       .toString()
       .padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
 
-    // Use functional form of setState to ensure you're working with the latest state value
-    setAnimalDoA(prevDoA => formattedDate);
+    setAnimalDoA(formattedDate);
 
     console.log('Animal Name:', animalName);
     console.log('Animal Species:', animalSpecies);
@@ -41,33 +40,27 @@ function AddAnimal() {
     console.log('Animal Origin:', animalOrigin);
     console.log('Animal DoA:', formattedDate);
 
-    // Implement backend logic here to send the data inputs to the backend
     const userData = {
-      animalName: animalName,
-      animalSpecies: animalSpecies,
-      animalGender: animalGender,
-      animalDoB: animalDoB,
-      animalEndangered: animalEndangered,
-      animalOrigin: animalOrigin,
+      animalName,
+      animalSpecies,
+      animalGender,
+      animalDoB,
+      animalEndangered,
+      animalOrigin,
       animalDoA: formattedDate
     };
-
-    // Call the function passed from parent component to add animal
-    // Reset form fields after submission
-    //handleReset();
 
     try {
       const response = await axios.post('http://localhost:5095/api/ZooDb/NewAnimal', userData);
       console.log('Response:', response);
       // Handle success scenario
+      handleReset();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        // The error is specifically an AxiosError
         console.error('Error data:', error.response?.data);
         console.error('Error status:', error.response?.status);
         console.error('Error headers:', error.response?.headers);
       } else {
-        // The error is not an AxiosError (could be a network error, etc.)
         console.error('Non-Axios error:', error);
       }
     }
@@ -87,7 +80,7 @@ function AddAnimal() {
             required
           />
         </div>
-        <div className="form-group-animal"> 
+        <div className="form-group-animal">
           <label htmlFor="animalSpecies">Animal Species:</label>
           <input
             type="text"
@@ -98,17 +91,17 @@ function AddAnimal() {
           />
         </div>
         <div className="form-group-animal">
-            <label htmlFor="animalGender">Animal Gender:</label>
-            <select
-              id="animalGender"
-              value={animalGender}
-              onChange={(e) => setAnimalGender(e.target.value)}
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-            </select>
+          <label htmlFor="animalGender">Animal Gender:</label>
+          <select
+            id="animalGender"
+            value={animalGender}
+            onChange={(e) => setAnimalGender(e.target.value)}
+            required
+          >
+            <option value="">Select Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
         </div>
         <div className="form-group-animal">
           <label htmlFor="animalDoB">Animal DoB:</label>
@@ -128,20 +121,23 @@ function AddAnimal() {
             onChange={(e) => setAnimalEndangered(e.target.value === "Yes")}
             required
           >
-            <option value="">Select</option>
             <option value="No">No</option>
             <option value="Yes">Yes</option>
           </select>
         </div>
         <div className="form-group-animal">
           <label htmlFor="animalOrigin">Animal Origin:</label>
-          <input
-            type="text"
+          <select
             id="animalOrigin"
             value={animalOrigin}
             onChange={(e) => setAnimalOrigin(e.target.value)}
             required
-          />
+          >
+            <option value="">Select Origin</option>
+            <option value="Captive Bred">Captive Bred</option>
+            <option value="Wild Capture">Wild Capture</option>
+            <option value="Transferred In">Transferred In</option>
+          </select>
         </div>
         <button type="submit">Submit</button>
       </form>

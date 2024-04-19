@@ -97,7 +97,7 @@ function AddAnimalToEnclosure() {
 
     return (
         <div className="modify-animal-container">
-            <h2>Transfer Animal to Enclosure</h2>
+            <h2>Assign Animal to Enclosure</h2>
             <form onSubmit={handleSubmit}>
                 {/* Search form for original animal data */}
                 <div className="form-group-animal">

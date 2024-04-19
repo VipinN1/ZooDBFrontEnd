@@ -14,7 +14,6 @@ import TicketView from './components/TicketView/TicketView';
 import Donation from './components/Donation/Donation';
 import VeterinarianRecord from './components/VeterinarianRecord/VeterinarianRecord';
 import DietForm from './components/DietForm/DietForm';
-import Orders from './components/Orders/Orders';
 import AddAnimal from './components/AddAnimal/AddAnimal';
 import AddEnclosureForm from './components/AddEnclosureForm/AddEnclosureForm';
 import ModifyEnclosure from './components/ModifyEnclosure/ModifyEnclosure';
@@ -28,7 +27,6 @@ import AddAnimalToEnclosure from './components/AddAnimalToEnclosure/AddAnimalToE
 import SecurityReport from './components/SecurityReport/SecurityReport';
 import EnclosureReport from './components/EnclosureReport/EnclosureReport';
 import AnimalReport from './components/AnimalReport/AnimalReport';
-import BusinessReport from './components/BusinessReport/BusinessReport';
 import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavbarTemp from './components/Navbar/NavbarTemp';
@@ -99,7 +97,7 @@ function App() {
     const handleSignOut = () => {
         // Reset authentication status
         setLoggedIn(false);
-        setUserRole('');
+        /*setUserRole('');
         setUserEmail('');
         setEmployeeId('');
         setCustomerId('');
@@ -109,7 +107,7 @@ function App() {
         localStorage.removeItem('userEmail');
         localStorage.removeItem('employeeId');
         localStorage.removeItem('customerId');
-
+*/
         // Navigate to sign-in page
         navigate('/sign-in');
     };
@@ -145,17 +143,15 @@ function App() {
                     <Route path="/modify-enclosure" element={<ModifyEnclosure />} />
                     <Route path="/delete-enclosure" element={<DeleteEnclosure />} />
                     <Route path="/search-enclosure" element={<SearchEnclosure />} />
-                    <Route path="/orders" element={<Orders />} />
                     <Route path="/add-animal" element={<AddAnimal />} />
                     <Route path="/search-animal" element={<SearchAnimal />} />
                     <Route path="/modify-animal" element={<ModifyAnimal />} />
                     <Route path="/delete-animal" element={<DeleteAnimal />} />
-                    <Route path="/transfer-animal" element={<AddAnimalToEnclosure />} />
+                    <Route path="/assign-enclosure" element={<AddAnimalToEnclosure />} />
                     <Route path="/add-security-form" element={<AddSecurityForm employeeId={employeeId} />} />
                     <Route path="/security-report" element={<SecurityReport />} />
                     <Route path="/enclosure-report" element={<EnclosureReport />} />
                     <Route path="/animal-report" element={<AnimalReport />} />
-                    <Route path="/business-report" element={<BusinessReport />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </div>

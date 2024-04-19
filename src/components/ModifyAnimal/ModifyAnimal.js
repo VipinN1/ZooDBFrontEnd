@@ -19,7 +19,7 @@ function ModifyAnimal() {
     const [updatedAnimalData, setUpdatedAnimalData] = useState({
         animalName: '',
         animalSpecies: '',
-        animalGender: 'M',
+        animalGender: '',
         animalDoB: '',
         animalEndangered: false,
         animalOrigin: ''
@@ -28,7 +28,6 @@ function ModifyAnimal() {
 
     const fetchAnimalData = async () => {
         try {
-            // Use the searchData to fetch the animal data
             const response = await axios.get(`http://localhost:5095/api/ZooDb/Animal/Get`, {
                 params: {
                     animalName: searchData.animalName,
@@ -38,7 +37,7 @@ function ModifyAnimal() {
             });
 
             const data = response.data;
-            
+
             // Extract date part and remove time part from date of birth
             const formattedDoB = data.animalDoB.split('T')[0];
 
@@ -62,8 +61,7 @@ function ModifyAnimal() {
                 animalOrigin: data.animalOrigin
             });
 
-            setIsAnimalFetched(true); // Show form fields and save button
-
+            setIsAnimalFetched(true);
         } catch (error) {
             console.error('Failed to fetch animal data:', error);
             alert('Failed to fetch animal data.');
@@ -81,13 +79,10 @@ function ModifyAnimal() {
         };
 
         try {
-            // Use combinedData as the payload for the update request
-            console.log('Combined Data:', combinedData);
             const response = await axios.put('http://localhost:5095/api/ZooDb/Animal/Modify', combinedData);
             console.log('Animal updated:', response);
             alert('Animal details updated successfully.');
         } catch (error) {
-            // Handle errors as before
             console.error('Failed to update animal data:', error);
             alert('Failed to update animal details.');
         }
@@ -211,10 +206,10 @@ function ModifyAnimal() {
                                 <option value="Yes">Yes</option>
                             </select>
                         </div>
+                        {/* Updated section for the animal origin field */}
                         <div className="form-group-animal">
                             <label htmlFor="animalOrigin">Animal Origin:</label>
-                            <input
-                                type="text"
+                            <select
                                 id="animalOrigin"
                                 value={updatedAnimalData.animalOrigin}
                                 onChange={(e) => setUpdatedAnimalData({
@@ -222,9 +217,14 @@ function ModifyAnimal() {
                                     animalOrigin: e.target.value
                                 })}
                                 required
-                            />
+                            >
+                                <option value="">Select Origin</option>
+                                <option value="Captive Bred">Captive Bred</option>
+                                <option value="Wild Capture">Wild Capture</option>
+                                <option value="Transferred In">Transferred In</option>
+                            </select>
                         </div>
-                        {/* Add other form fields here */}
+
                         <button type="submit">Save Changes</button>
                     </>
                 )}

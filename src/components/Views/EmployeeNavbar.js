@@ -27,7 +27,7 @@ export default function EmployeeNavbar({ handleSignOut }) {
               <CustomLink to="/search-animal">Search</CustomLink>
               <CustomLink to="/add-animal">Add</CustomLink>
               <CustomLink to="/modify-animal">Modify</CustomLink>
-              <CustomLink to="/transfer-animal">Transfer</CustomLink>
+              <CustomLink to="/assign-enclosure">Transfer</CustomLink>
               <CustomLink to="/delete-animal">Delete</CustomLink>
             </div>
           )}
@@ -75,7 +75,6 @@ export default function EmployeeNavbar({ handleSignOut }) {
         </CustomLink>
 
         {/* Other menu items */}
-        <CustomLink to="/orders">Orders</CustomLink>
         <CustomLink to="/add-security-form">Security</CustomLink>
         <li className="nav-item">
           <button onClick={handleSignOut}>Sign out</button>
