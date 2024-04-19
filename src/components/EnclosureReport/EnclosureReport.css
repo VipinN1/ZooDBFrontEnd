@@ -1,87 +1,94 @@
-/* EnclosureReport.css */
-
 /* General styles */
 .enclosure-report-container {
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #1f6f78;
   margin-top: 50px;
-  text-align: center; /* Center the content */
-  max-width: 800px; /* Set maximum width for the container */
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Title styles */
-.enclosure-report-title {
+.enclosure-report-container h2 {
+  text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: white; /* White text color */
 }
 
 /* Form styles */
-.enclosure-report-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center form elements */
+.form-group {
+  margin-bottom: 15px; /* Increased margin-bottom for each form group */
+  width: 100%; /* Width set to 100% */
 }
 
-.enclosure-type-label,
-.enclosure-type-input,
-.generate-report-button {
-  margin-bottom: 10px;
-  width: 100%; /* Set width to 100% for better alignment */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px; /* Increased margin-bottom for more space between label and input */
 }
 
-.enclosure-type-input {
-  padding: 8px;
-  font-size: 16px;
+.input {
+  padding: 10px;
+  width: 100%; /* Adjust width to 100% */
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px; /* Added margin-top for more space above input */
 }
 
-.generate-report-button {
-  padding: 10px 20px;
-  font-size: 18px;
+/* Submit button styles */
+.submit-button {
+  width: 20%; /* Adjusted width to 20% */
+  padding: 10px;
+  font-size: 16px;
   background-color: #004445;
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* Added margin-top for more space between input and button */
 }
 
-.generate-report-button:hover {
-  background-color: #062925;
+.submit-button:hover {
+  background-color: #062925; /* Darker color on hover */
 }
 
-/* Table styles */
-.report-data {
+/* Query data table styles */
+.query-data {
   margin-top: 20px; /* Add space between the form and the table */
 }
 
-.report-table {
-  width: 100%; /* Set the table width to 100% of the container */
+.query-data h3 {
+  text-align: center; /* Center-align the header text */
+}
+
+.query-table {
+  width: 80%; /* Set the table width to 80% of the container */
+  max-width: 500px; /* Set the maximum width of the table to 500px */
+  margin: 20px auto 0; /* Center the table and add top margin */
   border-collapse: collapse; /* Collapse borders */
-  background-color: #f1f1f1; /* Light gray background for the table */
+  background-color: #f1f1f1; /* Light gray background */
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.report-table th,
-.report-table td {
-  padding: 10px; /* Add padding to cells */
-  border: 1px solid #ccc; /* Add border to cells */
+.query-table th, .query-table td {
+  padding: 10px; /* Padding for cells */
+  border: 1px solid #ccc; /* Border for cells */
 }
 
-.report-table th {
-  background-color: #004445; /* Darker background for headers */
+.query-table th {
+  background-color: #004445; /* Dark green background for headers */
   color: white; /* White text color for headers */
   font-weight: bold; /* Make headers bold */
 }
 
-.report-table tr:nth-child(even) {
-  background-color: #e6f7f8; /* Light blue color for even rows */
+.query-table tr:nth-child(even) {
+  background-color: #e6f7f8; /* Light blue for even rows */
 }
 
-.report-table tr:nth-child(odd) {
-  background-color: #ffffff; /* White color for odd rows */
+.query-table tr:nth-child(odd) {
+  background-color: white; /* White for odd rows */
 }
