@@ -11,7 +11,8 @@ import SignUp from './components/SignUp/SignUp';
 import CustomerProfile from './components/CustomerProfile/CustomerProfile';
 import CustomerProfileUpdate from './components/CustomerProfile/CustomerProfileUpdate';
 import CustomerProfileView from './components/CustomerProfile/CustomerProfileView';
-import EmployeeProfile from './components/EmployeeProfile/EmployeeProfile';
+import EmployeeProfileView from './components/EmployeeProfile/EmployeeProfileView'; // Import the view component
+import EmployeeProfileUpdate from './components/EmployeeProfile/EmployeeProfileUpdate'; // Import the update component
 import TicketBuy from './components/TicketBuy/TicketBuy';
 import TicketView from './components/TicketView/TicketView';
 import Donation from './components/Donation/Donation';
@@ -85,7 +86,8 @@ function App() {
         <Route path="/customer-profile" element={<CustomerProfile />} />
         <Route path="/customer-profile-update" element={<CustomerProfileUpdate customerId={customerId}/>} />
         <Route path="/customer-profile-view" element={<CustomerProfileView customerId={customerId}/>} />
-        <Route path="/employee-profile" element={<EmployeeProfile />} />
+        <Route path="/employee-profile-view" element={<EmployeeProfileView employeeId={employeeId} />} />
+        <Route path="/employee-profile-update" element={<EmployeeProfileUpdate employeeId={employeeId} />} />
         <Route path="/ticket-buy" element={<TicketBuy customerId={customerId} />} />
         <Route path="/ticket-view" element={<TicketView customerId={customerId} />} />
         <Route path="/donation" element={<Donation customerId={customerId} />} />

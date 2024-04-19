@@ -1,0 +1,82 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Change alignment to start higher up */
+    padding-top: 10vh; /* Added top padding to move the box up */
+    min-height: 100vh;
+    background-color: #f0f8ff;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .profile-header {
+    animation: slideDown 1s ease-out forwards;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center; /* Centering the header text */
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centering content horizontally */
+    justify-content: center; /* Centering content vertically */
+    padding: 20px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    text-align: center; /* Text alignment */
+    max-width: 40%; /* Further reducing the width */
+    min-width: 300px; /* Ensuring minimum readability */
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: calc(var(--animate-order) * 100ms);
+  }
+  
+  .profile-info p:hover {
+    color: #16a085;
+    transition: color 0.3s ease;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .loading, .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-size: 20px;
+    color: #e74c3c;
+  }
+  
