@@ -11,7 +11,7 @@ function TicketView({ customerId }) {
     setLoading(true);
     setError(null);
     
-    axios.get(`http://localhost:5095/api/ZooDb/viewTickets?customerId=${customerId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/viewTickets?customerId=${customerId}`)
       .then(response => {
         setTickets(response.data);
         setLoading(false);

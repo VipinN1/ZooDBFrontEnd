@@ -67,7 +67,7 @@ function ClockIn({employeeId}) {
         clockOut: currentTime,
         totalHours: totalHoursWorked,
       }
-      axios.post('http://localhost:5095/api/ZooDb/NewClockIn', data)
+      axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewClockIn', data)
         .then((res) =>{console.log(res); });
 
 

@@ -58,7 +58,7 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
    // handleReset();
 
     try {
-      const response = await axios.post('http://localhost:5095/api/ZooDb/NewEnclosure', userData);
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewEnclosure', userData);
       console.log('Response:', response);
       // Handle success scenario
     } catch (error) {

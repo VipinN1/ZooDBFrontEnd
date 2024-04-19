@@ -61,7 +61,7 @@ function AddAnimal() {
     //handleReset();
 
     try {
-      const response = await axios.post('http://localhost:5095/api/ZooDb/NewAnimal', userData);
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewAnimal', userData);
       console.log('Response:', response);
       // Handle success scenario
     } catch (error) {

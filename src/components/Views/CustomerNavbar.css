@@ -2,59 +2,18 @@
   box-sizing: border-box;
 }
 
-
-
 body {
   margin: 0;
 }
 
-.container {
-  margin: 0rem;
-}
-
-
-.nav-customer li.nav-item {
-  /* Apply the same styling as other navigation items */
-  color: inherit;
-  text-decoration: none;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  position: relative;
-}
-
-.nav-customer li.nav-item:hover {
-  background-color: #1f6f78; /* Apply hover effect */
-}
-
-
-.nav-customer li.nav-item button {
-  /* Apply button styling */
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font-size: 23px;
-  font-weight: bold;
-}
-
-
-.nav-customer { /* Entire nav bar */
+.nav-customer {
   background-color: #062925;
   width: 100%;
   color: darkcyan;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  gap: 2rem;
-  padding: 0 1.5rem;
-  
-}
-
-.site-title-customer {
-  font-size: 4.5rem;
+  align-items: center;
+  padding: 0;
 }
 
 .nav-customer ul {
@@ -62,55 +21,71 @@ body {
   margin: 0;
   list-style: none;
   display: flex;
-  gap: 1rem;
-  font-size: 22px;
-  font-weight: bold;
-  
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
 }
 
-.nav-customer a {
+.nav-customer li {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-customer a, .nav-customer li {
   color: inherit;
   text-decoration: none;
-  height: 100%;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: .5rem;
-  
-  
+  height: 100%;
+  padding: 0.5rem;
+  font-size: 22px;
+  font-weight: bold;
 }
 
-.nav-customer li.active { 
-  background-color: #004445;   
-  
+.nav-customer .nav-item-title .site-title-customer {
+  font-size: 3rem;
 }
 
-.nav-customer li:hover {
+.nav-customer .nav-item-dropdown, .nav-customer .nav-item-button {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-customer .nav-item-dropdown:hover .sub-menu-customer,
+.nav-customer .nav-item-dropdown:focus-within .sub-menu-customer {
+  display: block;
+}
+
+.nav-customer li.active, .nav-customer li:hover {
   background-color: #004445;
-  
+  height: 100%;
 }
 
-.sub-menu-customer {  /* Buy Tickets and View Tickets buttons */
+.sub-menu-customer {
   display: none;
   position: absolute;
   background-color: #2c786c;
   border-radius: 5px;
   padding: 10px;
-  top: calc(100% + 1.5px);
+  top: 100%;
   left: 0;
-  width: 100%;
+  right: 0;
   color: rgb(12, 55, 32);
-  padding: 0px;
+  z-index: 1000;
 }
 
-.nav-customer li {
-  position: relative; /* Ensure positioning context for sub-menu */
-  text-align: left;
-  padding: 5px;
-  
-}
-
-.nav-customer li:hover .sub-menu-customer {
-  display: block;
-
-  
+.nav-customer li.nav-item-button button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 23px;
+  font-weight: bold;
 }

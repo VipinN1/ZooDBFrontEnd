@@ -13,7 +13,7 @@ function AnimalReport() {
 
     try {
       // Post request to fetch report data based on the animal species
-      const response = await axios.post('http://localhost:5095/api/ZooDb/GenerateAnimalReport', {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateAnimalReport', {
         animalSpecies: animalSpecies,
       }, {
         headers: {

@@ -12,7 +12,7 @@ function EnclosureReport() {
 
     try {
       // Send a POST request to the backend to fetch report data based on the enclosure type
-      const response = await axios.post('http://localhost:5095/api/ZooDb/GenerateEnclosureReport', {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateEnclosureReport', {
         enclosureType: enclosureType,
       }, {
         headers: {

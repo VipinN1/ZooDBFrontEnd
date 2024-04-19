@@ -39,7 +39,7 @@ function SignUp() {
       userType: 'customer'
     };
 
-    axios.post('http://localhost:5095/api/ZooDb/NewUser', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewUser', data)
       .then((res) =>{console.log(res); });
   };
 
