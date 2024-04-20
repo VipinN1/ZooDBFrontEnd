@@ -22,6 +22,22 @@ export default function CustomerNavbar({ handleSignOut }) {
               <CustomLink to="/ticket-buy">Buy Tickets</CustomLink>
             </div>
           )}
+
+          
+        </CustomLink>
+        <CustomLink
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Customer Profile
+          {isHovered && (
+            <div className="sub-menu-customer">
+              <CustomLink to="/customer-profile-view">View Profile</CustomLink>
+              <CustomLink to="/customer-profile-update">Update Profile</CustomLink>
+            </div>
+          )}
+
+          
         </CustomLink>
         <CustomLink to="/donation">Donate</CustomLink>
         <CustomLink to="/about-us">About Us</CustomLink>

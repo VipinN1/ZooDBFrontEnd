@@ -27,6 +27,10 @@ import AddAnimalToEnclosure from './components/AddAnimalToEnclosure/AddAnimalToE
 import SecurityReport from './components/SecurityReport/SecurityReport';
 import EnclosureReport from './components/EnclosureReport/EnclosureReport';
 import AnimalReport from './components/AnimalReport/AnimalReport';
+import EmployeeProfileView from './components/EmployeeProfile/EmployeeProfileView';
+import CustomerProfileUpdate from './components/CustomerProfile/CustomerProfileUpdate';
+import CustomerProfileView from './components/CustomerProfile/CustomerProfileView';
+import RevenueReport from './components/RevenueReport/RevenueReport';
 import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavbarTemp from './components/Navbar/NavbarTemp';
@@ -133,6 +137,9 @@ function App() {
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/sign-up" element={<SignUp />} />
                     <Route path="/customer-profile" element={<CustomerProfile />} />
+                    <Route path="/customer-profile-update" element={<CustomerProfileUpdate customerId={customerId}/>} />
+                    <Route path="/customer-profile-view" element={<CustomerProfileView customerId={customerId}/>} />
+                    <Route path="/employee-profile-view" element={<EmployeeProfileView employeeId={employeeId} />} />
                     <Route path="/employee-profile" element={<EmployeeProfile />} />
                     <Route path="/ticket-buy" element={<TicketBuy customerId={customerId} />} />
                     <Route path="/ticket-view" element={<TicketView customerId={customerId} />} />
@@ -152,6 +159,7 @@ function App() {
                     <Route path="/security-report" element={<SecurityReport />} />
                     <Route path="/enclosure-report" element={<EnclosureReport />} />
                     <Route path="/animal-report" element={<AnimalReport />} />
+                    <Route path="/revenue-report" element={<RevenueReport />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </div>

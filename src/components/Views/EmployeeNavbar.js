@@ -76,6 +76,7 @@ export default function EmployeeNavbar({ handleSignOut }) {
 
         {/* Other menu items */}
         <CustomLink to="/add-security-form">Security</CustomLink>
+        <CustomLink to="/employee-profile-view">View Profile</CustomLink>
         <li className="nav-item">
           <button onClick={handleSignOut}>Sign out</button>
         </li>

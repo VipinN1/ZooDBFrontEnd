@@ -18,9 +18,10 @@ export default function ManagerNavbar({handleSignOut}) {
           Zoo Reports
           {isHovered && (
             <div className="sub-menu-customer">
-              <CustomLink to="/enclosure-report">Enclosure Reports</CustomLink>
-              <CustomLink to="/animal-report">Animal Reports</CustomLink>
-              <CustomLink to="/security-report">Security Reports</CustomLink>
+              <CustomLink to="/enclosure-report">Enclosure Report</CustomLink>
+              <CustomLink to="/animal-report">Animal Report</CustomLink>
+              <CustomLink to="/revenue-report">Revenue Report</CustomLink>
+              <CustomLink to="/security-report">Security Report</CustomLink>
             </div>
           )}
         </CustomLink>

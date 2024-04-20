@@ -61,7 +61,7 @@ function TicketView({ customerId }) {
           </table>
         </div>
       ) : (
-        <p className="no-ticket-text">No tickets found for customer ID: {customerId}</p>
+        <p className="no-ticket-text">No Ticket History </p>
       )}
     </div>
   );

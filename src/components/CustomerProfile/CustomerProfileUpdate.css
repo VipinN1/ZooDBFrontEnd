@@ -1,0 +1,130 @@
+.profile-update-container {
+  background-color: #f8f9fa;
+  padding: 40px;
+  margin: 8vh auto; /* Slightly higher up on the page */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  max-width: 600px; /* Slightly larger width */
+  animation: fadeIn 0.8s ease-out, popIn 0.8s ease-out;
+}
+
+.profile-update-container h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px; /* Larger font size for the header */
+}
+
+.profile-update-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-update-container label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%; /* Maintains full width */
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px; /* Larger text for better readability */
+}
+
+.profile-update-container input, .react-datepicker-wrapper {
+  width: 100%; /* Ensures full-width inputs */
+  padding: 12px; /* Larger padding for inputs */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 6px;
+  font-size: 16px; /* Bigger font size for inputs */
+}
+
+.profile-update-container button {
+  padding: 12px 24px;
+  background-color: #4a8d7c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 18px; /* Larger button text */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile-update-container button:hover {
+  background-color: #367b62;
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+/* Adding animations for entry */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); }
+  80% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Styles for react-datepicker to make it larger */
+.react-datepicker {
+  font-size: 16px; /* Increased font size for date picker */
+}
+
+.react-datepicker__header {
+  background-color: #4a8d7c;
+  border-bottom: 1px solid #ddd;
+}
+
+.react-datepicker__navigation {
+  top: -25px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__current-year {
+  font-size: 18px; /* Larger month and year display */
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+  width: 50px; /* Larger day cells */
+  line-height: 32px;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #204e57;
+  color: white;
+}
+
+.react-datepicker__day--today {
+  font-weight: bold;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #000000;
+}
+
+/* Customizing the clear button to be just a circular 'X' */
+.react-datepicker__close-icon {
+  position: absolute;
+  top: -7px;  /* Adjust the vertical position */
+  right: 10px; /* Adjust the horizontal position */
+  width: 20px; /* Diameter of the circle */
+  height: 25px; /* Diameter of the circle */
+  cursor: pointer;
+  border-radius: 50%; /* Makes the button circular */
+  background-color: #ffffff; /* Background color of the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-datepicker__close-icon::after {
+  content: "✕"; /* Customize the symbol */
+  color: white; /* Color of the 'X' symbol */
+  font-size: 14px; /* Size of the 'X' symbol */
+  line-height: 16px;
+}
