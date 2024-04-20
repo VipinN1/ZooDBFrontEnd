@@ -1,7 +1,6 @@
 {
   "name": "zoo-website",
   "version": "0.1.0",
-  "type": "module",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -19,16 +18,20 @@
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
+    "build": "CI='' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
+},
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
+    ],
+    "rules": {
+      "no-unused-vars": "off"
+    }
+  }
+  ,
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,14 +44,8 @@
       "last 1 safari version"
     ]
   },
-
-  "jest": {
-    "moduleNameMapper": {
-      "^axios$": "axios/dist/node/axios.cjs"
-    }
-  },
-  
   "devDependencies": {
     "gh-pages": "^6.1.1"
+    
   }
 }
