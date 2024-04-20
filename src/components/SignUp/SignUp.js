@@ -25,14 +25,15 @@ function SignUp() {
     console.log('Email:', email);
     console.log('Password:', password);
     // Reset the form fields after submission
-    if(email && password){
-    navigate('/customer-profile');
-    setEmail('');
-    setPassword('');
-    }
-    else{
-      alert('enter both fields')
-    }
+    // In SignUp.js, modify the navigate function in handleSubmit
+
+if(email && password) {
+  navigate('/customer-profile', { state: { email: email } });
+  setEmail('');
+  setPassword('');
+} else {
+  alert('Enter both fields');
+}
     const data = {
       email: email,
       password: password,

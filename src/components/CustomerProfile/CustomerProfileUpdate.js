@@ -84,21 +84,7 @@ function CustomerProfileUpdate({ customerId }) {
           Zip Code:
           <input type="text" value={zipCode} onChange={e => setZipCode(e.target.value)} required />
         </label>
-        <label>
-          Date of Birth:
-          <DatePicker
-            selected={dob}
-            onChange={date => setDob(date)}
-            dateFormat="yyyy-MM-dd"
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            yearDropdownItemNumber={100}
-            isClearable={true}
-            maxDate={new Date()}
-            required
-          />
-        </label>
+       
         <button type="submit">Update Profile</button>
       </form>
     </div>
