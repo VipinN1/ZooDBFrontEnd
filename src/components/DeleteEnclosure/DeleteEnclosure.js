@@ -22,7 +22,7 @@ function DeleteEnclosure() {
 
         try {
             // Use axios to send a DELETE request with the enclosureName and enclosureType as parameters
-            const response = await axios.delete('http://localhost:5095/api/ZooDb/Enclosure/Delete', {
+            const response = await axios.delete('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Enclosure/Delete', {
                 params: {
                     enclosureName,
                     enclosureType,

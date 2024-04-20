@@ -70,7 +70,7 @@ function CustomerProfile() {
     };
 
     // Post data to API
-    axios.post('http://localhost:5095/api/ZooDb/NewUserProfile', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewUserProfile', data)
       .then((res) => { console.log(res); })
       .catch((error) => { console.error(error); });
   };

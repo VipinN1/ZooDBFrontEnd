@@ -10,7 +10,7 @@ function EmployeeProfileView({ employeeId }) {
   useEffect(() => {
     setIsLoading(true);
     console.log(employeeId);
-    axios.get(`http://localhost:5095/api/ZooDb/GetEmployeeProfile?employeeId=${employeeId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetEmployeeProfile?employeeId=${employeeId}`)
       .then(response => {
         console.log("Fetched data:", response.data); // Debugging line
         setEmployee(response.data);

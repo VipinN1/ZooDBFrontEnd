@@ -14,7 +14,7 @@ function CustomerProfileUpdate({ customerId }) {
   const [oldData, setOldData] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:5095/api/ZooDb/GetUserProfile?customerId=${customerId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUserProfile?customerId=${customerId}`)
       .then(response => {
         const data = response.data;
         setOldData(data);

@@ -29,8 +29,8 @@ function SecurityReport() {
     try {
       // Define the API endpoint URL based on the query option
       const endpointUrl = queryOption === 'dates'
-        ? 'http://localhost:5095/api/ZooDb/GenerateSecurityReportByDates'
-        : 'http://localhost:5095/api/ZooDb/GenerateSecurityReportByDatesAndLocation';
+        ? 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateSecurityReportByDates'
+        : 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateSecurityReportByDatesAndLocation';
 
       // Define the request payload based on the query option
       const payload = queryOption === 'dates'

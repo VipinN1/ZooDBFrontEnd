@@ -71,7 +71,7 @@ function App() {
         };
 
         try {
-            const response = await axios.post('http://localhost:5095/api/ZooDb/ValidateUser', userData);
+            const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/ValidateUser', userData);
             
             // Handle response data and set state accordingly
             if (response.data.userType === 'employee' || response.data.userType === 'manager') {

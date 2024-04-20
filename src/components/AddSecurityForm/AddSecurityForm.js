@@ -35,7 +35,7 @@ function AddSecurityForm({employeeId}) {
       location: location,
       severityLevel: severityLevel
     }
-    axios.post('http://localhost:5095/api/ZooDb/NewSecurityReport', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewSecurityReport', data)
       .then((res) =>{console.log(res); });
   };
 

@@ -24,7 +24,7 @@ function DeleteAnimal() {
 
         try {
             // Use axios to send a DELETE request with the animalName, animalSpecies, and animalDoB as parameters
-            const response = await axios.delete('http://localhost:5095/api/ZooDb/Animal/Delete', {
+            const response = await axios.delete('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Delete', {
                 params: {
                     animalName,
                     animalSpecies,

@@ -28,7 +28,7 @@ function RevenueReport() {
     
     try {
       // Post request to fetch revenue data based on the input fields
-      const response = await axios.post('http://localhost:5095/api/ZooDb/RevenueReport', requestData, {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/RevenueReport', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },

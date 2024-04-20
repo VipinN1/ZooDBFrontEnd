@@ -16,7 +16,7 @@ function CustomerProfileView({ customerId }) {
     }
 
     setIsLoading(true);
-    axios.get(`http://localhost:5095/api/ZooDb/GetUserProfile?customerId=${customerId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUserProfile?customerId=${customerId}`)
       .then(response => {
         setCustomer(response.data);
         setError(null);

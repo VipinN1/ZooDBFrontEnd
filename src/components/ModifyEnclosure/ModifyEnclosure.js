@@ -30,7 +30,7 @@ function ModifyEnclosure() {
     // Fetches the enclosure data from the server based on search criteria
     const fetchEnclosureData = async () => {
         try {
-            const response = await axios.get('http://localhost:5095/api/ZooDb/Enclosure/Get', {
+            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Enclosure/Get', {
                 params: {
                     enclosureName: searchData.enclosureName,
                     enclosureType: searchData.enclosureType,

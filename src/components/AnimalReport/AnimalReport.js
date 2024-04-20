@@ -26,7 +26,7 @@ function AnimalReport() {
 
         try {
             // Fetch animal data
-            const response = await axios.get('http://localhost:5095/api/ZooDb/Animal/Get', {
+            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Get', {
                 params: requestData,
             });
 
@@ -40,7 +40,7 @@ function AnimalReport() {
                 // Fetch vet data using the animalID
                 const animalID = data.animalID;
 
-                const dietResponse = await axios.get('http://localhost:5095/api/ZooDb/GetDiet', {
+                const dietResponse = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetDiet', {
                   params: {
                     animalName,
                     animalSpecies,

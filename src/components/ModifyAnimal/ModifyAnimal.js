@@ -28,7 +28,7 @@ function ModifyAnimal() {
 
     const fetchAnimalData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5095/api/ZooDb/Animal/Get`, {
+            const response = await axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Get`, {
                 params: {
                     animalName: searchData.animalName,
                     animalSpecies: searchData.animalSpecies,

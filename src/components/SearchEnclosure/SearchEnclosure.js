@@ -27,7 +27,7 @@ function SearchEnclosure() {
     try {
       // Post request to fetch enclosure data based on the input fields
       console.log('Request Data:', requestData);
-      const response = await axios.post('http://localhost:5095/api/ZooDb/SearchEnclosure', requestData, {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/SearchEnclosure', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -68,7 +68,7 @@ function TicketBuy({ customerId }) {
       customerId: customerId
     };
     console.log('Before Sending Date: ', formattedDate);
-    axios.post('http://localhost:5095/api/ZooDb/NewTickets', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewTickets', data)
       .then((res) => { 
         console.log(res);
         alert('Tickets successfully purchased!');

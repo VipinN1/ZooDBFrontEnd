@@ -34,7 +34,7 @@ function DietForm() {
       dietSchedule: scheduleJSON
     };
 
-    axios.post('http://localhost:5095/api/ZooDb/NewDiet', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewDiet', data)
       .then((res) =>{console.log(res); });
   };
 

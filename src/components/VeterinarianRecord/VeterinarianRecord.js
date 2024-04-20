@@ -44,7 +44,7 @@ function VeterinarianRecord() {
       diagnosis: diagnosis
     }
 
-    axios.post('http://localhost:5095/api/ZooDb/NewVetRecords',data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewVetRecords',data)
       .then((res) =>{console.log(res); });
   };
 

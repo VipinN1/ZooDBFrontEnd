@@ -14,7 +14,7 @@ function EnclosureReport() {
     const fetchUniqueEnclosureTypes = async () => {
         try {
             const response = await axios.get(
-                'http://localhost:5095/api/ZooDb/GetUniqueEnclosureTypes'
+                'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUniqueEnclosureTypes'
             );
             // Set the unique enclosure types to the state
             setUniqueEnclosureTypes(response.data);
@@ -35,7 +35,7 @@ function EnclosureReport() {
         // First, fetch enclosures based on the current filter parameters
         try {
             const response = await axios.post(
-                'http://localhost:5095/api/ZooDb/GenerateEnclosureReport',
+                'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateEnclosureReport',
                 {
                     enclosureName,
                     enclosureType,
@@ -73,7 +73,7 @@ function EnclosureReport() {
     const fetchAnimalsForEnclosure = async (enclosureID) => {
         try {
             const response = await axios.get(
-                `http://localhost:5095/api/ZooDb/FetchAnimalsForEnclosure/${enclosureID}`
+                `https://zoodatabasebackend.azurewebsites.net/api/ZooDb/FetchAnimalsForEnclosure/${enclosureID}`
             );
             return response.data;
         } catch (error) {
