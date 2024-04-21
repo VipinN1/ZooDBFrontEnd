@@ -1,0 +1,37 @@
+/* deleteDonatedNameForm.css */
+
+.delete-donated-name-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .delete-donated-name-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .delete-donated-name-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .delete-donated-name-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-donated-name-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

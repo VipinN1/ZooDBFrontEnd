@@ -53,3 +53,21 @@
 .form-group-animal button[type="submit"]:hover {
   background-color: #062925; /* Change background color on hover */
 }
+
+.add-animal-main-container {
+  display: flex;
+}
+
+.donated-names-sidebar {
+  width: 200px; /* Adjust width as necessary */
+  margin-right: 20px;
+}
+
+.add-animal-container {
+  flex-grow: 1;
+}
+
+.donated-names-sidebar{
+  text-align: center;
+  margin-top: 50px;
+}

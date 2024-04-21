@@ -29,6 +29,7 @@ export default function EmployeeNavbar({ handleSignOut }) {
               <CustomLink to="/modify-animal">Modify</CustomLink>
               <CustomLink to="/assign-enclosure">Transfer</CustomLink>
               <CustomLink to="/delete-animal">Delete</CustomLink>
+              <CustomLink to="/delete-donated-name">Deleted Donated Name</CustomLink>
             </div>
           )}
         </CustomLink>

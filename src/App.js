@@ -31,6 +31,7 @@ import EmployeeProfileView from './components/EmployeeProfile/EmployeeProfileVie
 import CustomerProfileUpdate from './components/CustomerProfile/CustomerProfileUpdate';
 import CustomerProfileView from './components/CustomerProfile/CustomerProfileView';
 import RevenueReport from './components/RevenueReport/RevenueReport';
+import DeleteDonatedNameForm from './components/AddAnimal/DeleteDonatedName/DeleteDonatedName';
 import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavbarTemp from './components/Navbar/NavbarTemp';
@@ -160,6 +161,7 @@ function App() {
                     <Route path="/enclosure-report" element={<EnclosureReport />} />
                     <Route path="/animal-report" element={<AnimalReport />} />
                     <Route path="/revenue-report" element={<RevenueReport />} />
+                    <Route path="/delete-donated-name" element={<DeleteDonatedNameForm />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </div>

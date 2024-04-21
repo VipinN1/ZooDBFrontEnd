@@ -1,79 +1,30 @@
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #FFFFFF; /* White background */
-  color: #000000; /* Black text */
-  position: relative;
+/* Donation form disabled state */
+.DonationForm-disabled {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
-
-
-
-
-.Footer-donation {
-  background-color: #062925; /* Slightly darker orange */
-  padding: 20px;
-  position: absolute;
-  bottom: 0;
-  left: 0; /* Stretch to the left */
-  right: 0; /* Stretch to the right */
-  border-top-left-radius: 60px; /* Add curved edges to the top left corner */
-  border-top-right-radius: 60px;
-  text-align: center;
-  color: darkcyan;
-  font-weight: bold;
-}
-
-.Main-donation {
-  flex: 1;
-  padding: 15px 20px 20px; /* Add padding-top to create space for the header */
+/* Special Name Form Styling */
+.SpecialNameForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  background-color: #1f6f78;
-  margin-top: 50px;
-  border-radius: 20px;
-  
+  margin-top: 20px;
 }
 
-.DonationForm {
-  max-width: 300px;
-  width: 100%;
+.SpecialNameForm input, .SpecialNameForm button {
+  width: 80%; /* Match width for aesthetic consistency */
+  margin-bottom: 10px; /* Space between inputs */
 }
 
-.DonationForm label {
-  margin-bottom: 5px;
-  font-size: 20px;
+.SpecialNameForm label {
+  font-size: 14px; /* Smaller label font size */
 }
 
-.DonationForm input {
-  margin-bottom: 10px;
-  padding: 9px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 100%;
-  color: #000000; /* Black text color */
-  /* Add background-color property to change the text box background color */
-  background-color: #FFFFFF; /* White background color */
+.SpecialNameForm button {
+  background-color: #556B2F; /* Dark Olive Green for contrast */
 }
 
-.DonationForm button {
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #004445; /* Darker orange */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 10px;
-}
-
-.DonationForm button:hover {
-  background-color: #062925; /* Even darker orange on hover */
+.SpecialNameForm button:hover {
+  background-color: #6B8E23; /* Olive Drab on hover */
 }
