@@ -14,7 +14,6 @@ body {
 
 
 .nav-customer li.nav-item {
-  /* Apply the same styling as other navigation items */
   color: inherit;
   text-decoration: none;
   height: 100%;
@@ -26,12 +25,11 @@ body {
 }
 
 .nav-customer li.nav-item:hover {
-  background-color: #1f6f78; /* Apply hover effect */
+  background-color: #1f6f78;
 }
 
 
 .nav-customer li.nav-item button {
-  /* Apply button styling */
   background: none;
   border: none;
   color: inherit;
@@ -41,7 +39,7 @@ body {
 }
 
 
-.nav-customer { /* Entire nav bar */
+.nav-customer { 
   background-color: #062925;
   width: 100%;
   color: darkcyan;
@@ -102,7 +100,7 @@ body {
 }
 
 .nav-customer li {
-  position: relative; /* Ensure positioning context for sub-menu */
+  position: relative;
   text-align: left;
   padding: 5px;
   

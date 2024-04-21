@@ -1,7 +1,6 @@
-// EmployeeProfile.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './EmployeeProfile.css'; // Import EmployeeProfile.css for styling
+import './EmployeeProfile.css';
 
 function EmployeeProfile() {
   const [firstName, setFirstName] = useState('');
@@ -38,7 +37,6 @@ function EmployeeProfile() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can handle the submission, such as sending data to a server or storing it locally
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
     console.log('Date of Birth:', dateOfBirth);

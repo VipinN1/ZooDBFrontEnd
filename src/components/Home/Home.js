@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import videoBackground from "../Videos/ZooVid2.mp4"; // Import your video file
+import videoBackground from "../Videos/ZooVid2.mp4"; 
 import "./Home.css"
 const Home = () => {
   return (

@@ -3,7 +3,6 @@ import './RevenueReport.css';
 import axios from 'axios';
 
 function RevenueReport() {
-  // State for form fields
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [transactionType, setTransactionType] = useState('all');
@@ -21,7 +20,6 @@ function RevenueReport() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
   
-    // Request payload
     const requestData = {
       transactionType,
       ...(startDate && { startDate }),
@@ -30,16 +28,14 @@ function RevenueReport() {
 
     console.log('Request Data:', requestData);
   
-    // Post request to fetch revenue data based on the input fields
     try {
-      const response = await axios.post('http://localhost:5095/api/ZooDb/RevenueReport', requestData, {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/RevenueReport', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       console.log('Response Data:', response.data);
   
-      // Sort the response data by TransactionDate
       const sortedData = response.data.slice().sort((a, b) => {
         return new Date(a.TransactionDate) - new Date(b.TransactionDate);
       });
@@ -152,12 +148,10 @@ function RevenueReport() {
         </button>
       </form>
 
-      {/* Display report data if available */}
       {queryData.length > 0 && (
         <div className="query-data">
           <h3>Revenue Report:</h3>
           <p>Total Revenue: ${totalRevenue.toFixed(2)}</p>
-          {/* Display ticket type percentages only if "Ticket Purchase" is selected and the report is generated */}
           {showAdditionalColumns && (
             <div className="ticket-type-percentages">
               <h4>Ticket Type Percentages:</h4>
@@ -177,7 +171,6 @@ function RevenueReport() {
                 <th>Transaction Type</th>
                 <th>Date</th>
                 <th>Amount</th>
-                {/* Only show additional columns if "Ticket Purchase" is selected and the report is generated */}
                 {showAdditionalColumns && (
                   <>
                     <th>Adult Tickets</th>
@@ -195,7 +188,6 @@ function RevenueReport() {
                   <td>{transaction.TransactionType}</td>
                   <td>{transaction.TransactionDate ? new Date(transaction.TransactionDate).toLocaleDateString() : ""}</td>
                   <td>${transaction.Amount ? transaction.Amount.toFixed(2) : ""}</td>
-                  {/* Display ticket type values only if the transaction type is "Ticket Purchase" */}
                   {showAdditionalColumns && transaction.TransactionType === "Ticket Purchase" && (
                     <>
                       <td>{transaction.AdultTickets || 0}</td>

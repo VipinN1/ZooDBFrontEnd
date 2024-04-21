@@ -5,7 +5,7 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #1f6f78;
-  margin-top: 50px;
+  margin-top: -50px;
 }
 
 .add-animal-container h2 {
@@ -52,4 +52,9 @@
 }
 .form-group-animal button[type="submit"]:hover {
   background-color: #062925; /* Change background color on hover */
+}
+
+.donated-names-sidebar{
+  margin-left: 75px;
+
 }

@@ -10,12 +10,10 @@ function DeleteAnimal() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Log the input values for debugging purposes
         console.log('Animal Name:', animalName);
         console.log('Animal Species:', animalSpecies);
         console.log('Animal DoB:', animalDoB);
 
-        // Ask for confirmation before deleting the animal
         const confirmed = window.confirm('Are you sure you want to delete this animal?');
         if (!confirmed) {
             // If the user does not confirm, do nothing
@@ -23,8 +21,7 @@ function DeleteAnimal() {
         }
 
         try {
-            // Use axios to send a DELETE request with the animalName, animalSpecies, and animalDoB as parameters
-            const response = await axios.delete('http://localhost:5095/api/ZooDb/Animal/Delete', {
+            const response = await axios.delete('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Delete', {
                 params: {
                     animalName,
                     animalSpecies,
@@ -32,7 +29,6 @@ function DeleteAnimal() {
                 },
             });
 
-            // Log the response for debugging purposes
             console.log('Animal deleted:', response);
             
             // Handle success scenario

@@ -45,7 +45,7 @@ function CustomerProfileUpdate({ customerId }) {
       dob: formattedDate
     };
 
-    axios.put(`http://localhost:5095/api/ZooDb/UpdateUserProfile/${customerId}`, data, {
+    axios.put(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/UpdateUserProfile/${customerId}`, data, {
       headers: {
         'Content-Type': 'application/json'
       }

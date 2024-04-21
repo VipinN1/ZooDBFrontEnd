@@ -9,37 +9,35 @@
   margin-top: 50px;
 }
 
-/* Title styles */
 .enclosure-report-container h2 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Form styles */
 .form-group {
-  margin-bottom: 15px; /* Increased margin-bottom for each form group */
-  width: 100%; /* Width set to 100% */
+  margin-bottom: 15px; 
+  width: 100%; 
 }
 
 .form-group label {
   display: block;
   font-weight: bold;
-  margin-bottom: 10px; /* Increased margin-bottom for more space between label and input */
+  margin-bottom: 10px; 
 }
 
 .input {
   padding: 10px;
-  width: 100%; /* Adjust width to 100% */
+  width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  margin-top: 5px; /* Added margin-top for more space above input */
+  margin-top: 5px; 
 }
 
-/* Submit button styles */
+
 .submit-button {
-  width: 20%; /* Adjusted width to 20% */
+  width: 20%; 
   padding: 10px;
   font-size: 16px;
   background-color: #004445;
@@ -48,47 +46,46 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px; /* Added margin-top for more space between input and button */
+  margin-top: 20px; 
 }
 
 .submit-button:hover {
-  background-color: #062925; /* Darker color on hover */
+  background-color: #062925;
 }
 
-/* Query data table styles */
 .query-data {
-  margin-top: 20px; /* Add space between the form and the table */
+  margin-top: 20px; 
 }
 
 .query-data h3 {
-  text-align: center; /* Center-align the header text */
+  text-align: center;
 }
 
 .query-table {
-  width: 80%; /* Set the table width to 80% of the container */
-  max-width: 500px; /* Set the maximum width of the table to 500px */
-  margin: 20px auto 0; /* Center the table and add top margin */
-  border-collapse: collapse; /* Collapse borders */
-  background-color: #f1f1f1; /* Light gray background */
+  width: 80%; 
+  max-width: 500px; 
+  margin: 20px auto 0; 
+  border-collapse: collapse; 
+  background-color: #f1f1f1; 
   border-radius: 5px;
   overflow: hidden;
 }
 
 .query-table th, .query-table td {
-  padding: 10px; /* Padding for cells */
-  border: 1px solid #ccc; /* Border for cells */
+  padding: 10px; 
+  border: 1px solid #ccc; 
 }
 
 .query-table th {
-  background-color: #004445; /* Dark green background for headers */
-  color: white; /* White text color for headers */
-  font-weight: bold; /* Make headers bold */
+  background-color: #004445; 
+  color: white; 
+  font-weight: bold; 
 }
 
 .query-table tr:nth-child(even) {
-  background-color: #e6f7f8; /* Light blue for even rows */
+  background-color: #e6f7f8; 
 }
 
 .query-table tr:nth-child(odd) {
-  background-color: white; /* White for odd rows */
+  background-color: white; 
 }

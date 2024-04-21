@@ -15,7 +15,6 @@ function SearchEnclosure() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // Request payload
     const requestData = {
       enclosureName: enclosureName || null,
       enclosureType: enclosureType || null,
@@ -27,7 +26,7 @@ function SearchEnclosure() {
     try {
       // Post request to fetch enclosure data based on the input fields
       console.log('Request Data:', requestData);
-      const response = await axios.post('http://localhost:5095/api/ZooDb/SearchEnclosure', requestData, {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/SearchEnclosure', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -44,7 +43,6 @@ function SearchEnclosure() {
     <div className="enclosure-query-container">
       <h2>Zoo Enclosure Search</h2>
       <form onSubmit={handleFormSubmit}>
-        {/* Form inputs for enclosure search */}
         <div className="form-group">
           <label htmlFor="enclosureName">Enclosure Name:</label>
           <input
@@ -98,7 +96,6 @@ function SearchEnclosure() {
         <button type="submit" className="submit-button">Search Enclosures</button>
       </form>
 
-      {/* Display enclosure data if available */}
       {queryData.length > 0 && (
         <div className="query-data">
           <h3>Enclosures Found:</h3>
@@ -119,11 +116,9 @@ function SearchEnclosure() {
                   <td>{enclosure.enclosureType}</td>
                   <td>{new Date(enclosure.builtDate).toLocaleDateString()}</td>
                   <td>
-                    {/* Format cleaning schedule start time without seconds */}
                     {new Date(`1970-01-01T${enclosure.cleaningScheduleStart}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </td>
                   <td>
-                    {/* Format cleaning schedule end time without seconds */}
                     {new Date(`1970-01-01T${enclosure.cleaningScheduleEnd}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </td>
                 </tr>

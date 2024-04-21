@@ -55,7 +55,7 @@ function TicketBuy({ customerId }) {
       CustomerId: customerId,
     };
   
-    axios.post(`http://localhost:5095/api/ZooDb/CheckDiscountStatus`, userData)
+    axios.post(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/CheckDiscountStatus`, userData)
       .then(response => {
         if (response.data.DiscountApplied) {
           setDiscount(true);
@@ -93,7 +93,7 @@ function TicketBuy({ customerId }) {
       customerId: customerId
     };
   
-    axios.post('http://localhost:5095/api/ZooDb/NewTickets', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewTickets', data)
       .then((res) => {
         console.log(res);
         alert('Tickets successfully purchased!');

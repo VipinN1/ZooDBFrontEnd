@@ -25,8 +25,7 @@ function AddSecurityForm({employeeId}) {
     console.log('Event Description:', eventDescription);
     console.log('Location:', location);
     console.log('Severity Level:', severityLevel);
-    // Backend logic for sending data to the backend should be implemented here
-    // Example: sendSecurityEventDataToBackend({ date, time, eventDescription, location, severityLevel });
+    
     const data = {
       empId: employeeId,
       date: date,
@@ -35,7 +34,7 @@ function AddSecurityForm({employeeId}) {
       location: location,
       severityLevel: severityLevel
     }
-    axios.post('http://localhost:5095/api/ZooDb/NewSecurityReport', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewSecurityReport', data)
       .then((res) =>{console.log(res); });
 
 
@@ -64,7 +63,7 @@ function AddSecurityForm({employeeId}) {
             value={date}
             onChange={(e) => setDate(e.target.value)}
             required
-            className="input-field-security-form" // Add the new class name here
+            className="input-field-security-form" 
           />
         </div>
         <div className="form-group-security-form">
@@ -75,7 +74,7 @@ function AddSecurityForm({employeeId}) {
             value={time}
             onChange={handleTimeChange}
             required
-            className="input-field-security-form" // Add the new class name here
+            className="input-field-security-form" 
           />
         </div>
         <div className="form-group-security-form">
@@ -85,7 +84,7 @@ function AddSecurityForm({employeeId}) {
             value={eventDescription}
             onChange={(e) => setEventDescription(e.target.value)}
             required
-            className="input-field-security-form" // Add the new class name here
+            className="input-field-security-form" 
           />
         </div>
         <div className="form-group-security-form">
@@ -96,7 +95,7 @@ function AddSecurityForm({employeeId}) {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
-            className="input-field-security-form" // Add the new class name here
+            className="input-field-security-form" 
           />
         </div>
         <div className="form-group-security-form">
@@ -105,7 +104,7 @@ function AddSecurityForm({employeeId}) {
             id="severityLevel"
             value={severityLevel}
             onChange={(e) => setSeverityLevel(e.target.value)}
-            className="input-field-security-form" // Add the new class name here
+            className="input-field-security-form" 
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>

@@ -34,6 +34,8 @@ import RevenueReport from './components/RevenueReport/RevenueReport';
 import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavbarTemp from './components/Navbar/NavbarTemp';
+import DeleteDonatedNameForm from './components/DeleteDonatedName/DeleteDonatedName';
+
 import axios from 'axios';
 
 function App() {
@@ -44,7 +46,6 @@ function App() {
     const [employeeId, setEmployeeId] = useState('');
     const [customerId, setCustomerId] = useState('');
 
-    // Load user data from local storage on initial app load
     useEffect(() => {
         const storedUserRole = localStorage.getItem('userRole');
         const storedUserEmail = localStorage.getItem('userEmail');
@@ -71,7 +72,7 @@ function App() {
         };
 
         try {
-            const response = await axios.post('http://localhost:5095/api/ZooDb/ValidateUser', userData);
+            const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/ValidateUser', userData);
             
             // Handle response data and set state accordingly
             if (response.data.userType === 'employee' || response.data.userType === 'manager') {
@@ -103,7 +104,7 @@ function App() {
             
             if (response.data.userType === "customer") {
                 try {
-                    const response1 = await axios.put('http://localhost:5095/api/ZooDb/logging-in', data);
+                    const response1 = await axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/logging-in', data);
                     console.log('Logging-in attribute updated successfully:', response1.data);
                 } catch (error) {
                     console.error('Error updating logging-in attribute:', error);
@@ -138,7 +139,7 @@ try {
 
     if (userRole === "customer") {
         try {
-            const response1 =  axios.put('http://localhost:5095/api/ZooDb/logging-out', data1);
+            const response1 =  axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/logging-out', data1);
             console.log('Logging-out attribute updated successfully:', response1.data);
         } catch (error) {
             console.error('Error updating logging-in attribute:', error);
@@ -198,6 +199,7 @@ try {
                     <Route path="/enclosure-report" element={<EnclosureReport />} />
                     <Route path="/animal-report" element={<AnimalReport />} />
                     <Route path="/revenue-report" element={<RevenueReport />} />
+                    <Route path="/delete-donated-name" element={<DeleteDonatedNameForm />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </div>

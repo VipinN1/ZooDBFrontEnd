@@ -27,24 +27,20 @@ function SecurityReport() {
     setErrorMessage('');
 
     try {
-      // Define the API endpoint URL based on the query option
       const endpointUrl = queryOption === 'dates'
-        ? 'http://localhost:5095/api/ZooDb/GenerateSecurityReportByDates'
-        : 'http://localhost:5095/api/ZooDb/GenerateSecurityReportByDatesAndLocation';
+        ? 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/ZooDb/GenerateSecurityReportByDates'
+        : 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateSecurityReportByDatesAndLocation';
 
-      // Define the request payload based on the query option
       const payload = queryOption === 'dates'
         ? { startDate, endDate }
         : { startDate, endDate, location };
 
-      // Send the POST request to the backend
       const response = await axios.post(endpointUrl, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      // Set the report data based on the response from the backend
       setReportData(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -119,7 +115,6 @@ function SecurityReport() {
         {errorMessage && <p className="security-error-message">{errorMessage}</p>}
       </form>
 
-      {/* Display the report data in a table */}
       {reportData.length > 0 && (
         <div className="report-data">
           <h3>Logs within the timeframe (and location if provided):</h3>
@@ -133,7 +128,6 @@ function SecurityReport() {
                 <th>Description</th>
                 <th>Location</th>
                 <th>Severity Level</th>
-                {/* Add more columns as needed based on the data structure */}
               </tr>
             </thead>
             <tbody>

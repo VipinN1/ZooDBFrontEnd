@@ -3,39 +3,35 @@ import './EnclosureReport.css';
 import axios from 'axios';
 
 function EnclosureReport() {
-    const [enclosures, setEnclosures] = useState([]); // State for enclosures data
+    const [enclosures, setEnclosures] = useState([]); 
     const [enclosureName, setEnclosureName] = useState('');
     const [enclosureType, setEnclosureType] = useState('');
     const [dateRange, setDateRange] = useState({ start: '', end: '' });
     const [timeRange, setTimeRange] = useState({ start: '', end: '' });
-    const [uniqueEnclosureTypes, setUniqueEnclosureTypes] = useState([]); // State for unique enclosure types
+    const [uniqueEnclosureTypes, setUniqueEnclosureTypes] = useState([]); 
 
-    // Fetch unique enclosure types
     const fetchUniqueEnclosureTypes = async () => {
         try {
             const response = await axios.get(
-                'http://localhost:5095/api/ZooDb/GetAllEnclosureTypes'
+                'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosureTypes'
             );
-            // Set the unique enclosure types to the state
             setUniqueEnclosureTypes(response.data);
         } catch (error) {
             console.error('Error fetching unique enclosure types:', error);
         }
     };
 
-    // Use effect to fetch unique enclosure types on component mount
     useEffect(() => {
         fetchUniqueEnclosureTypes();
     }, []);
 
-    // Handle form submission
     const handleFormSubmit = async (event) => {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
-        // First, fetch enclosures based on the current filter parameters
+        //  fetch enclosures based on the current filter parameters
         try {
             const response = await axios.post(
-                'http://localhost:5095/api/ZooDb/GenerateEnclosureReport',
+                'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateEnclosureReport',
                 {
                     enclosureName,
                     enclosureType,
@@ -54,7 +50,7 @@ function EnclosureReport() {
             // Store the enclosures data in state
             const enclosuresData = response.data;
 
-            // Next, fetch animals for each enclosure
+            //  fetch animals for each enclosure
             const updatedEnclosures = await Promise.all(
                 enclosuresData.map(async (enclosure) => {
                     const animalsData = await fetchAnimalsForEnclosure(enclosure.enclosureID);
@@ -73,7 +69,7 @@ function EnclosureReport() {
     const fetchAnimalsForEnclosure = async (enclosureID) => {
         try {
             const response = await axios.get(
-                `http://localhost:5095/api/ZooDb/FetchAnimalsForEnclosure/${enclosureID}`
+                `https://zoodatabasebackend.azurewebsites.net/api/ZooDb/FetchAnimalsForEnclosure/${enclosureID}`
             );
             return response.data;
         } catch (error) {
@@ -109,7 +105,6 @@ function EnclosureReport() {
                     />
                 </div>
 
-                {/* Enclosure type dropdown */}
                 <div className="form-group">
                     <label htmlFor="enclosureType" className="enclosure-type-label">Enclosure Type:</label>
                     <select
@@ -128,7 +123,6 @@ function EnclosureReport() {
                 </div>
 
 
-                {/* Date range inputs */}
                 <div className="form-group">
                     <label htmlFor="dateRangeStart" className="date-range-label">Built Date Range:</label>
                     <input
@@ -147,7 +141,6 @@ function EnclosureReport() {
                     />
                 </div>
 
-                {/* Time range inputs */}
                 <div className="form-group">
                     <label htmlFor="timeRangeStart" className="time-range-label">Cleaning Schedule Time Range:</label>
                     <input
@@ -169,7 +162,6 @@ function EnclosureReport() {
                 <button type="submit" className="submit-button">Generate Report</button>
             </form>
 
-            {/* Display enclosures and animals */}
             {enclosures.length > 0 && (
                 <div className="report-data">
                     <h3>Enclosures:</h3>
@@ -193,7 +185,6 @@ function EnclosureReport() {
                                     <td>{formatTimeTo12Hour(enclosure.cleaningScheduleStart)}</td>
                                     <td>{formatTimeTo12Hour(enclosure.cleaningScheduleEnd)}</td>
                                     <td>
-                                        {/* Display animals within each enclosure */}
                                         <ul>
                                             {enclosure.animals && enclosure.animals.map((animal, index) => (
                                                 <li key={index}>

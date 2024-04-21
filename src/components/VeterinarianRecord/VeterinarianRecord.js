@@ -16,7 +16,7 @@ function VeterinarianRecord() {
     // Function to fetch all animal species
     const fetchAnimalSpecies = async () => {
       try {
-        const response = await axios.get('http://localhost:5095/api/ZooDb/GetAllAnimalSpecies');
+        const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
         setAnimalSpeciesList(response.data);
       } catch (error) {
         console.error('Failed to fetch animal species:', error);
@@ -68,7 +68,7 @@ function VeterinarianRecord() {
     };
   
     try {
-      const response = await axios.post('http://localhost:5095/api/ZooDb/NewVetRecords', data);
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewVetRecords', data);
   
       // Check if the response indicates that no such animal is found
       if (response.data === 'No such animal found') {

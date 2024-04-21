@@ -7,11 +7,10 @@ function DeleteEnclosure() {
     const [enclosureType, setEnclosureType] = useState('');
     const [enclosureTypes, setEnclosureTypes] = useState([]);
 
-    // Fetch unique enclosure types from the backend when the component mounts
     useEffect(() => {
         const fetchEnclosureTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:5095/api/ZooDb/GetUniqueEnclosureTypes');
+                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUniqueEnclosureTypes');
                 setEnclosureTypes(response.data);
             } catch (error) {
                 console.error('Failed to fetch enclosure types:', error);
@@ -25,29 +24,24 @@ function DeleteEnclosure() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Ask for confirmation before deleting the enclosure
         const confirmed = window.confirm('Are you sure you want to delete this enclosure?');
         if (!confirmed) {
-            // If the user does not confirm, do nothing
             return;
         }
 
         try {
-            // Use axios to send a DELETE request with the enclosureName and enclosureType as parameters
-            const response = await axios.delete('http://localhost:5095/api/ZooDb/Enclosure/Delete', {
+            const response = await axios.delete('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Enclosure/Delete', {
                 params: {
                     enclosureName,
                     enclosureType,
                 },
             });
 
-            // Log the response for debugging purposes
             console.log('Enclosure deleted:', response);
             
             // Handle success scenario
             alert('Enclosure deleted successfully.');
             
-            // Clear input fields after deletion
             setEnclosureName('');
             setEnclosureType('');
         } catch (error) {
@@ -56,10 +50,9 @@ function DeleteEnclosure() {
                 console.error('Error status:', error.response?.status);
                 console.error('Error headers:', error.response?.headers);
                 
-                // Check if the error status is 404 (Not Found), indicating that the enclosure does not exist
                 if (error.response?.status === 404) {
-                    alert('No such enclosure found.'); // Alert for enclosure not found
-                    return; // Prevent further execution
+                    alert('No such enclosure found.'); 
+                    return;
                 }
             } else {
                 console.error('Non-Axios error:', error);

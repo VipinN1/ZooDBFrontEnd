@@ -9,7 +9,6 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
   const [cleaning_start, setCleaningStart] = useState('');
   const [cleaning_end, setCleaningEnd] = useState('');
 
-  // Function to handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
     if (!name || !enclosure_type || !build_date || !cleaning_start || !cleaning_end) {
@@ -17,15 +16,13 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
       return;
     }
 
-    // Check if the build date is after the present date
     const currentDate = new Date().toISOString().split('T')[0]; // Get current date in 'yyyy-mm-dd' format
     if (build_date > currentDate) {
       alert('Build date cannot be after the present date');
       return;
     }
 
-    // Backend logic should be done here to handle storing the data.
-    // You can pass the enclosureData to any function or API call for further processing.
+
 
     // Logging variables
     console.log('Name:', name);
@@ -51,15 +48,12 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
     try {
       const response = await axios.post('http://localhost:5095/api/ZooDb/NewEnclosure', userData);
       console.log('Response:', response);
-      // Handle success scenario
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        // The error is specifically an AxiosError
         console.error('Error data:', error.response?.data);
         console.error('Error status:', error.response?.status);
         console.error('Error headers:', error.response?.headers);
       } else {
-        // The error is not an AxiosError (could be a network error, etc.)
         console.error('Non-Axios error:', error);
 
 

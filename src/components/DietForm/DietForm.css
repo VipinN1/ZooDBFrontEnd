@@ -20,12 +20,12 @@
 }
 
 .input-diet-form {
-  width: calc(100% - 20px); /* Adjusted width to accommodate padding */
-  padding: 10px; /* Keep consistent padding */
-  font-size: 16px; /* Keep consistent font size */
-  border: 1px solid #ccc; /* Keep consistent border */
-  border-radius: 5px; /* Keep consistent border radius */
-  box-sizing: border-box; /* Keep consistent box sizing */
+  width: calc(100% - 20px);
+  padding: 10px;
+  font-size: 16px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  box-sizing: border-box; 
 }
 
 .button-diet {

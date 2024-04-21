@@ -1,4 +1,4 @@
-/* General styles */
+
 .revenue-query-container {
   max-width: 900px;
   margin: 0 auto;
@@ -7,16 +7,16 @@
   border-radius: 20px;
   background-color: #1f6f78;
   margin-top: 50px;
-  text-align: center; /* Center-align content */
+  text-align: center; 
 }
 
-/* Title styles */
+
 .revenue-query-container h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Form styles */
+
 .form-group {
   margin-bottom: 15px;
   width: 100%;
@@ -65,13 +65,13 @@
 }
 
 .total-revenue {
-  font-size: 18px; /* Adjust font size */
-  margin-bottom: 10px; /* Add margin bottom */
+  font-size: 18px; 
+  margin-bottom: 10px; 
 }
 
 .ticket-type-percentages {
-  font-size: 16px; /* Adjust font size */
-  margin-bottom: 10px; /* Add margin bottom */
+  font-size: 16px; 
+  margin-bottom: 10px; 
 }
 
 /* Remove bullet points from list */

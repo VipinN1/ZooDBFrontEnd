@@ -31,7 +31,7 @@ function ModifyEnclosure() {
     // Fetches the enclosure data from the server based on search criteria
     const fetchEnclosureData = async () => {
         try {
-            const response = await axios.get('http://localhost:5095/api/ZooDb/Enclosure/Get', {
+            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Enclosure/Get', {
                 params: {
                     enclosureName: searchData.enclosureName,
                     enclosureType: searchData.enclosureType,
@@ -66,7 +66,7 @@ function ModifyEnclosure() {
     useEffect(() => {
         const fetchUniqueEnclosureTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:5095/api/ZooDb/GetUniqueEnclosureTypes');
+                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUniqueEnclosureTypes');
                 setUniqueEnclosureTypes(response.data);
             } catch (error) {
                 console.error('Failed to fetch unique enclosure types:', error);
@@ -86,7 +86,7 @@ function ModifyEnclosure() {
         };
 
         try {
-            const response = await axios.put('http://localhost:5095/api/ZooDb/Enclosure/Modify', requestData);
+            const response = await axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Enclosure/Modify', requestData);
             console.log('Enclosure updated:', response);
             alert('Enclosure details updated successfully.');
         } catch (error) {

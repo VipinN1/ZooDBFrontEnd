@@ -31,7 +31,7 @@ function ModifyAnimal() {
         // Function to fetch all animal species
         const fetchAnimalSpecies = async () => {
             try {
-                const response = await axios.get('http://localhost:5095/api/ZooDb/GetAllAnimalSpecies');
+                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
                 setAnimalSpeciesList(response.data);
             } catch (error) {
                 console.error('Failed to fetch animal species:', error);
@@ -45,7 +45,7 @@ function ModifyAnimal() {
 
     const fetchAnimalData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5095/api/ZooDb/Animal/Get`, {
+            const response = await axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Get`, {
                 params: {
                     animalName: searchData.animalName,
                     animalSpecies: searchData.animalSpecies,
@@ -103,7 +103,7 @@ function ModifyAnimal() {
         };
 
         try {
-            const response = await axios.put('http://localhost:5095/api/ZooDb/Animal/Modify', combinedData);
+            const response = await axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Modify', combinedData);
             console.log('Animal updated:', response);
             alert('Animal details updated successfully.');
         } catch (error) {
@@ -116,7 +116,6 @@ function ModifyAnimal() {
         <div className="modify-animal-container">
             <h2>Modify Animal</h2>
             <form onSubmit={handleSubmit}>
-                {/* Search form for original animal data */}
                 <div className="form-group-animal">
                     <label htmlFor="searchName">Animal Name:</label>
                     <input
@@ -163,7 +162,6 @@ function ModifyAnimal() {
                 </div>
                 <button type="button" onClick={fetchAnimalData}>Search</button>
 
-                {/* Form fields for updating animal data, shown only after fetching animal data */}
                 {isAnimalFetched && (
                     <>
                         <div className="form-group-animal">
@@ -235,7 +233,6 @@ function ModifyAnimal() {
                                 <option value="Yes">Yes</option>
                             </select>
                         </div>
-                        {/* Updated section for the animal origin field */}
                         <div className="form-group-animal">
                             <label htmlFor="animalOrigin">Animal Origin:</label>
                             <select

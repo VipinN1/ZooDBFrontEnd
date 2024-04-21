@@ -1,4 +1,3 @@
-// Import required modules and hooks
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
@@ -10,7 +9,6 @@ function CustomerProfile() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Initialize states
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,7 +17,6 @@ function CustomerProfile() {
   const [zipCode, setZipCode] = useState('');
   const [dob, setDob] = useState(null);
 
-  // Handler functions
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
   const handleLastNameChange = (event) => setLastName(event.target.value);
   const handlePhoneNumberChange = (event) => setPhoneNumber(event.target.value);

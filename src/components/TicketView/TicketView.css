@@ -1,16 +1,15 @@
-/* TicketView.css */
 
 .ticket-view-container {
   max-width: 800px;
   margin: 0 auto;
   margin-top: 50px;
   padding: 20px;
-  background-color: #134e4c; /* Dark blue-green background */
+  background-color: #134e4c;
   border-radius: 10px;
 }
 
 .zoo-title {
-  color: #fff; /* White text */
+  color: #fff; 
   text-align: center;
   font-size: 28px;
 }
@@ -29,7 +28,7 @@
 }
 
 .purchase-text {
-  color: #134e4c; /* Dark blue-green text */
+  color: #134e4c; 
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
@@ -42,20 +41,20 @@
 
 .ticket-table th,
 .ticket-table td {
-  border: 1px solid #134e4c; /* Dark blue-green border */
+  border: 1px solid #134e4c; 
   padding: 10px;
   text-align: center;
 }
 
 .ticket-table th {
-  background-color: #78aaa9; /* Light green background for table headers */
-  color: #134e4c; /* Dark blue-green text */
+  background-color: #78aaa9; 
+  color: #134e4c; 
 }
 
 .ticket-table tbody tr:nth-child(even) {
-  background-color: #e0f2f1; /* Light blue-green background for even rows */
+  background-color: #e0f2f1; 
 }
 
 .ticket-table tbody tr:hover {
-  background-color: #b2dfdb; /* Lighter hover color for better interaction */
+  background-color: #b2dfdb; 
 }

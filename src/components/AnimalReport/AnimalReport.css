@@ -1,13 +1,10 @@
-/* AnimalReport.css */
-
-/* General styles */
 .animal-report-container {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #1f6f78;
   margin-top: 50px;
-  max-width: 800px; /* Set maximum width for the container */
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -16,14 +13,12 @@
   text-align: center;
 }
 
-/* Title styles */
 .animal-report-title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: white; /* White text color */
+  color: white; 
 }
 
-/* Form styles */
 .animal-report-form {
   display: flex;
   flex-direction: column;
@@ -34,7 +29,7 @@
 .animal-species-input,
 .generate-report-button {
   margin-bottom: 10px;
-  width: 100%; /* Set width to 100% for better alignment */
+  width: 100%; 
 }
 
 .animal-species-input {
@@ -64,10 +59,10 @@
 }
 
 .report-table {
-  width: 100%; /* Set the table width to 100% of the container */
-  margin: 0 auto; /* Center the table within the container */
-  border-collapse: collapse; /* Collapse borders */
-  background-color: #f1f1f1; /* Light gray background for the table */
+  width: 100%; 
+  margin: 0 auto;
+  border-collapse: collapse; 
+  background-color: #f1f1f1; 
 }
 
 .report-table th,

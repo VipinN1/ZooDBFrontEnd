@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import './AddAnimal.css';
 
@@ -9,6 +9,7 @@ function AddAnimal() {
   const [animalDoB, setAnimalDoB] = useState('');
   const [animalEndangered, setAnimalEndangered] = useState(false);
   const [animalOrigin, setAnimalOrigin] = useState('');
+  const [donatedNames, setDonatedNames] = useState([]);
 
   const handleReset = () => {
     setAnimalName('');
@@ -18,6 +19,20 @@ function AddAnimal() {
     setAnimalEndangered(false);
     setAnimalOrigin('');
   };
+
+
+  useEffect(() => {
+    const fetchDonatedNames = async () => {
+      try {
+        const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetDonatedNames');
+        setDonatedNames(response.data); 
+      } catch (error) {
+        console.error('Failed to fetch donated names:', error);
+      }
+    };
+
+    fetchDonatedNames();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,7 +61,7 @@ function AddAnimal() {
       const response = await axios.post('http://localhost:5095/api/ZooDb/NewAnimal', userData);
       console.log('Response:', response);
       window.alert('Submit successful'); // Display alert when submit is successful
-      handleReset(); // Reset form fields
+      handleReset(); 
     } catch (error) {
       console.error('Error submitting data:', error);
       window.alert('Error submitting data'); // Display alert if there's an error
@@ -54,6 +69,13 @@ function AddAnimal() {
   };
 
   return (
+    <div className="donated-names-sidebar">
+    <h3>Donated Names</h3>
+    <ul>
+      {donatedNames.map((name, index) => (
+        <li key={index}>{name}</li>
+      ))}
+    </ul>
     <div className="add-animal-container">
       <h2>Add Animal</h2>
       <form onSubmit={handleSubmit}>
@@ -128,6 +150,7 @@ function AddAnimal() {
         </div>
         <button type="submit">Submit</button>
       </form>
+    </div>
     </div>
   );
 }

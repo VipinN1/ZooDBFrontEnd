@@ -15,15 +15,15 @@ body {
 }
 
 .buy-menu {
-  background-color: #327a7f; /* Coral pink background */
+  background-color: #327a7f;
   border-radius: 20px;
   padding: 50px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .buy-menu h1 {
   font-size: 48px;
-  color: #fff; /* White text */
+  color: #fff; 
   margin-bottom: 30px;
   text-align: center;
 }
@@ -39,18 +39,18 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 2px solid #fff; /* Add border between ticket types */
-  padding-bottom: 10px; /* Add some padding to separate items */
+  border-bottom: 2px solid #fff;
+  padding-bottom: 10px; 
 }
 
 .ticket-type:last-child {
-  margin-bottom: 0; /* Remove bottom margin from the last ticket type */
-  border-bottom: none; /* Remove border from the last ticket type */
+  margin-bottom: 0; 
+  border-bottom: none; 
 }
 
 .ticket-type label {
   font-size: 24px;
-  color: #fff; /* White text */
+  color: #fff; 
 }
 
 .ticket-type input {
@@ -65,33 +65,33 @@ body {
 
 .ticket-type span {
   font-size: 24px;
-  color: #fff; /* White text */
+  color: #fff; 
 }
 
 .datepicker-container {
   margin-bottom: 40px;
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center the content horizontally */
+  display: flex; 
+  justify-content: center;
 }
 
 .datepicker-container label {
   font-size: 24px;
-  color: #fff; /* White text */
-  margin-right: 10px; /* Add some space to the right of the label */
-  margin-top: -4px; /* Add some space to the right of the label */
+  color: #fff; 
+  margin-right: 10px; 
+  margin-top: -4px;
 }
 
 .total-cost {
   font-size: 24px;
-  color: #fff; /* White text */
+  color: #fff; 
   margin-bottom: 20px;
   text-align: center;
 }
 
 button {
   padding: 20px 40px;
-  background-color: #448d9b; /* Dark red button */
-  color: #fff; /* White text */
+  background-color: #448d9b; 
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -102,14 +102,13 @@ button {
 }
 
 button:hover {
-  background-color: #ff5252; /* Lighter red on hover */
+  background-color: #ff5252; 
 }
 
 .discounted-cost {
-  color: #040405; /* blue color */
-  font-size: 16px; /* adjust font size as needed */
-  margin-top: 10px; /* adjust spacing from the top */
+  color: #040405; 
+  font-size: 16px; 
+  margin-top: 10px; 
   padding-left: 120px;
   padding-bottom: 20px;
-  /* add any other styles you want */
 }

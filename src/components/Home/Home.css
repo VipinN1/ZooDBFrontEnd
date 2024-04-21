@@ -4,16 +4,15 @@ body {
 }
 
 .content {
-  flex-direction: column; /* Change to column layout */
+  flex-direction: column;
   display: flex;
   width: 100%;
-  height: 120vh; /* Set the height to be taller than the viewport */
+  height: 120vh; 
   background-image: url(../Image/LandingPage.jpg);
   background-size: cover;
   background-position: center;
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
-
+  justify-content: center; 
+  align-items: center;
 }
 
 .content::before {
@@ -23,8 +22,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* Adjust the opacity by changing the last value (0.3) */
-  pointer-events: none; /* This ensures that the pseudo-element doesn't capture pointer events */
+  background: rgba(0, 0, 0, 0.3); 
+  pointer-events: none; 
 }
 
 .content h1{
@@ -54,8 +53,8 @@ body {
   color:rgb(103, 206, 240);
   margin-bottom: 550px;
   margin-top: 5px;
-  padding: 10px 20px; /* Add padding to the link */
-  border: 3px solid rgb(103, 206, 240); /* Add border to the link */
+  padding: 10px 20px; 
+  border: 3px solid rgb(103, 206, 240);
   border-radius: 5px; 
   text-decoration: none;
 }

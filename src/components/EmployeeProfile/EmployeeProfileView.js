@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './EmployeeProfileView.css'; // Ensure correct CSS file is linked
+import './EmployeeProfileView.css';
 
 function EmployeeProfileView({ employeeId }) {
   const [employee, setEmployee] = useState(null);
@@ -10,16 +10,16 @@ function EmployeeProfileView({ employeeId }) {
   useEffect(() => {
     setIsLoading(true);
     console.log(employeeId);
-    axios.get(`http://localhost:5095/api/ZooDb/GetEmployeeProfile?employeeId=${employeeId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetEmployeeProfile?employeeId=${employeeId}`)
       .then(response => {
-        console.log("Fetched data:", response.data); // Debugging line
+        console.log("Fetched data:", response.data); 
         setEmployee(response.data);
         setError(null);
       })
       .catch(err => {
         console.error('Error fetching employee data:', err);
         setError('Failed to load employee data');
-        console.log(err.response); // Additional debugging information
+        console.log(err.response);
       })
       .finally(() => {
         setIsLoading(false);
@@ -39,7 +39,7 @@ function EmployeeProfileView({ employeeId }) {
     return <div className="error">No employee data available.</div>;
   }
 
-  // Handle default or null values effectively
+  
   const formatDate = (date) => {
     const d = new Date(date);
     return d.getFullYear() > 1 ? d.toLocaleDateString() : 'N/A'; // Handling unreal dates

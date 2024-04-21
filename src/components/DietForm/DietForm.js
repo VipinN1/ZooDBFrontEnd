@@ -17,7 +17,7 @@ function DietForm() {
     // Fetch animal species list when component mounts
     const fetchAnimalSpecies = async () => {
       try {
-        const response = await axios.get('http://localhost:5095/api/ZooDb/GetAllAnimalSpecies');
+        const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
         setAnimalSpeciesList(response.data);
       } catch (error) {
         console.error('Failed to fetch animal species:', error);
@@ -48,7 +48,7 @@ function DietForm() {
       dietSchedule: dietScheduleString // Send dietSchedule as a single string
     };
   
-    axios.post('http://localhost:5095/api/ZooDb/NewDiet', data)
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewDiet', data)
       .then((res) => {
         console.log(res);
         if (res.data === 'No such animal found') {

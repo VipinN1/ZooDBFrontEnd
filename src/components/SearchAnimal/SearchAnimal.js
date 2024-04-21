@@ -3,7 +3,6 @@ import './SearchAnimal.css';
 import axios from 'axios';
 
 function SearchAnimal() {
-  // State for each form field
   const [animalName, setAnimalName] = useState('');
   const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalGender, setAnimalGender] = useState('');
@@ -17,7 +16,6 @@ function SearchAnimal() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // Request payload
     const requestData = {
       animalName: animalName || null,
       animalSpecies: animalSpecies || null,
@@ -29,14 +27,12 @@ function SearchAnimal() {
     };
 
     try {
-      // Post request to fetch report data based on the input fields
-      const response = await axios.post('http://localhost:5095/api/ZooDb/SearchAnimal', requestData, {
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/SearchAnimal', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      // Set the report data based on the response from the back-end
       setQueryData(response.data);
     } catch (error) {
       console.error('Error fetching query data:', error);
@@ -110,7 +106,6 @@ function SearchAnimal() {
             className="input"
           />
         </div>
-        {/* Updated section for the animal origin field */}
         <div className="form-group">
           <label htmlFor="animalOrigin">Origin:</label>
           <select
@@ -128,7 +123,6 @@ function SearchAnimal() {
         <button type="submit" className="submit-button">Generate Query</button>
       </form>
 
-      {/* Display report data if available */}
       {queryData.length > 0 && (
         <div className="query-data">
           <h3>Animals Found:</h3>

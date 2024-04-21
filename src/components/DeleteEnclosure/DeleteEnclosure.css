@@ -1,4 +1,3 @@
-/* Delete enclosure form container styles */
 .delete-enclosure-container {
   max-width: 600px;
   margin: 0 auto;
@@ -9,7 +8,6 @@
   margin-top: 50px;
 }
 
-/* Delete enclosure form header styles */
 .delete-enclosure-container h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -39,18 +37,17 @@
 
 /* Button styles */
 .form-group-enclosure button[type="submit"] {
-  width: 100%; /* Set button width to 100% */
-  padding: 10px; /* Keep consistent padding */
-  font-size: 16px; /* Keep consistent font size */
-  background-color: #004445; /* Set background color */
-  color: #fff; /* Set text color */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Set border radius */
-  cursor: pointer; /* Use pointer cursor */
-  transition: background-color 0.3s ease; /* Add transition effect */
+  width: 100%; 
+  padding: 10px;
+  font-size: 16px; 
+  background-color: #004445; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
 }
 
-/* Button hover effect */
 .form-group-enclosure button[type="submit"]:hover {
-  background-color: #062925; /* Change background color on hover */
+  background-color: #062925; 
 }

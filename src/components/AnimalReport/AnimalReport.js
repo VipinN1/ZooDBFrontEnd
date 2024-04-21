@@ -3,21 +3,17 @@ import './AnimalReport.css';
 import axios from 'axios';
 
 function AnimalReport() {
-    // State for the required form fields
     const [animalName, setAnimalName] = useState('');
     const [animalSpecies, setAnimalSpecies] = useState('');
     const [animalDoB, setAnimalDoB] = useState('');
 
-    // State to store data from each report
     const [animalData, setAnimalData] = useState(null);
     const [dietData, setDietData] = useState([]);
     const [vetData, setVetData] = useState([]);
 
-    // Handler for form submission
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // Request payload with required fields
         const requestData = {
             animalName,
             animalSpecies,
@@ -26,7 +22,7 @@ function AnimalReport() {
 
         try {
             // Fetch animal data
-            const response = await axios.get('http://localhost:5095/api/ZooDb/Animal/Get', {
+            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Get', {
                 params: requestData,
             });
 
@@ -40,7 +36,7 @@ function AnimalReport() {
                 // Fetch vet data using the animalID
                 const animalID = data.animalID;
 
-                const dietResponse = await axios.get('http://localhost:5095/api/ZooDb/GetDiet', {
+                const dietResponse = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetDiet', {
                   params: {
                     animalName,
                     animalSpecies,
@@ -50,7 +46,7 @@ function AnimalReport() {
 
               setDietData(dietResponse.data);
 
-                const vetRecordsResponse = await axios.get('http://localhost:5095/api/ZooDb/GetVetRecords', {
+                const vetRecordsResponse = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetVetRecords', {
                     params: {
                         animalName,
                         animalSpecies,
@@ -70,7 +66,6 @@ function AnimalReport() {
         <div className="animal-report-container">
             <h2>Animal Report</h2>
             <form onSubmit={handleFormSubmit}>
-                {/* Form inputs */}
                 <div className="form-group">
                     <label htmlFor="animalName">Animal Name:</label>
                     <input
@@ -107,7 +102,6 @@ function AnimalReport() {
                 <button type="submit" className="submit-button">Generate Report</button>
             </form>
 
-            {/* Display animal data */}
             {animalData && (
                 <div className="query-data">
                     <h3>Animal Information:</h3>
@@ -138,7 +132,6 @@ function AnimalReport() {
                 </div>
             )}
 
-             {/* Display diet data */}
             {dietData.length > 0 && (
                 <div className="query-data">
                     <h3>Diet Records:</h3>
@@ -163,7 +156,6 @@ function AnimalReport() {
                 </div>
             )}
 
-                        {/* Display vet data */}
             {vetData.length > 0 && (
                 <div className="query-data">
                     <h3>Vet Records:</h3>

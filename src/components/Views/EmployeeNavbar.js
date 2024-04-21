@@ -17,7 +17,6 @@ export default function EmployeeNavbar({ handleSignOut }) {
           onMouseLeave={() => setIsHovered(false)}
         >
           Animals
-          {/* Display sub-menu if isHovered */}
           {isHovered && (
             <div
               className="sub-menu-customer"
@@ -29,6 +28,7 @@ export default function EmployeeNavbar({ handleSignOut }) {
               <CustomLink to="/modify-animal">Modify</CustomLink>
               <CustomLink to="/assign-enclosure">Transfer</CustomLink>
               <CustomLink to="/delete-animal">Delete</CustomLink>
+              <CustomLink to="/delete-donated-name">Deleted Donated Name</CustomLink>
             </div>
           )}
         </CustomLink>
@@ -70,11 +70,11 @@ export default function EmployeeNavbar({ handleSignOut }) {
               <CustomLink to="/add-enclosure">Add</CustomLink>
               <CustomLink to="/modify-enclosure">Modify</CustomLink>
               <CustomLink to="/delete-enclosure">Delete</CustomLink>
+              
             </div>
           )}
         </CustomLink>
 
-        {/* Other menu items */}
         <CustomLink to="/add-security-form">Security</CustomLink>
         <CustomLink to="/employee-profile-view">View Profile</CustomLink>
         <li className="nav-item">
