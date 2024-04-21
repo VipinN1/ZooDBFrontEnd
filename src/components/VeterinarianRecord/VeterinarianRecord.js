@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './VeterinarianRecord.css';
 
@@ -9,58 +9,113 @@ function VeterinarianRecord() {
   const [diagnosis, setDiagnosis] = useState('');
   const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalDoB, setAnimalDoB] = useState('');
+  const [animalName, setAnimalName] = useState('');
+  const [animalSpeciesList, setAnimalSpeciesList] = useState([]);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    // Function to fetch all animal species
+    const fetchAnimalSpecies = async () => {
+      try {
+        const response = await axios.get('http://localhost:5095/api/ZooDb/GetAllAnimalSpecies');
+        setAnimalSpeciesList(response.data);
+      } catch (error) {
+        console.error('Failed to fetch animal species:', error);
+        alert('Failed to fetch animal species.');
+      }
+    };
+
+    // Call the function when the component mounts
+    fetchAnimalSpecies();
+  }, []);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
+  
+    // Validate weight and height
+    const parsedWeight = parseFloat(weight);
+    const parsedHeight = parseFloat(height);
+  
+    if (isNaN(parsedWeight) || parsedWeight <= 0 || isNaN(parsedHeight) || parsedHeight <= 0) {
       alert('Please enter valid positive numbers for weight and height.');
       return;
     }
-
+  
+    // Check if animal name, species, and DoB are provided
+    if (!animalName || !animalSpecies || !animalDoB) {
+      alert('Please provide the animal name, species, and date of birth.');
+      return;
+    }
+  
+    // Check if the selected animal species exists in the list of available animal species
+    const animalExists = animalSpeciesList.some(species => species.animal_species === animalSpecies);
+    if (!animalExists) {
+      alert('The selected animal species does not exist.');
+      return;
+    }
+  
     const medicationsArray = medications.split(',').filter((med) => med.trim() !== '');
-
-    console.log('Weight:', weight);
-    console.log('Height:', height);
-    console.log('Diagnosis:', diagnosis);
-    const medicationJSON  = JSON.stringify(medicationsArray).replace(/^\[|\]$/g, '');
-    console.log('Medications:', medicationJSON);
-
-
-
-
-
-    // setWeight('');
-    // setHeight('');
-    // setMedications('');
-    // setDiagnosis('');
-
+  
+    const medicationJSON = JSON.stringify(medicationsArray).replace(/^\[|\]$/g, '');
+  
     const data = {
+      animalName: animalName,
       animalSpecies: animalSpecies,
       animalDoB: animalDoB,
-      weight: weight,
-      height: height,
+      weight: parsedWeight,
+      height: parsedHeight,
       medications: medicationJSON,
       diagnosis: diagnosis
+    };
+  
+    try {
+      const response = await axios.post('http://localhost:5095/api/ZooDb/NewVetRecords', data);
+  
+      // Check if the response indicates that no such animal is found
+      if (response.data === 'No such animal found') {
+        alert('No such animal found.');
+        return;
+      }
+  
+      console.log(response);
+      window.alert('Submit successful');
+    } catch (error) {
+      console.error('Error submitting data:', error);
+      window.alert('Error submitting data');
     }
-
-    axios.post('http://localhost:5095/api/ZooDb/NewVetRecords',data)
-      .then((res) =>{console.log(res); });
   };
+  
 
   return (
     <div className="veterinarian-records-container">
       <h2>Veterinarian Records</h2>
       <form onSubmit={handleSubmit}>
-      <div className="form-group-diet-form">
-          <label className='label-diet-form' htmlFor="animalSpecies">Animal Species:</label>
+        <div className="form-group-diet-form">
+          <label className='label-diet-form' htmlFor="animalName">Animal Name:</label>
           <input
             type="text"
+            id="animalName"
+            value={animalName}
+            onChange={(e) => setAnimalName(e.target.value)}
+            className="input-diet-form"
+            required
+          />
+        </div>
+        <div className="form-group-diet-form">
+          <label className='label-diet-form' htmlFor="animalSpecies">Animal Species:</label>
+          <select
             id="animalSpecies"
             value={animalSpecies}
             onChange={(e) => setAnimalSpecies(e.target.value)}
             className="input-diet-form"
-          />
+            required
+          >
+            <option value="">Select Species</option>
+            {animalSpeciesList.map((species, index) => (
+              <option key={index} value={species.animal_species}>
+                {species.animal_species}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group-diet-form">
           <label className='label-diet-form' htmlFor="animalDoB">Animal DoB:</label>
@@ -70,6 +125,7 @@ function VeterinarianRecord() {
             value={animalDoB}
             onChange={(e) => setAnimalDoB(e.target.value)}
             className="input-diet-form"
+            required
           />
         </div>
         <div className="form-group-vet">
@@ -78,10 +134,9 @@ function VeterinarianRecord() {
             type="number"
             id="weight"
             value={weight}
-            onChange={(e) => setWeight(Math.max(0, parseFloat(e.target.value)))}
-            min="0"
-            step="0.01"
+            onChange={(e) => setWeight(e.target.value)}
             className="input-vet"
+            required
           />
         </div>
         <div className="form-group-vet">
@@ -90,10 +145,9 @@ function VeterinarianRecord() {
             type="number"
             id="height"
             value={height}
-            onChange={(e) => setHeight(Math.max(0, parseFloat(e.target.value)))}
-            min="0"
-            step="0.01"
+            onChange={(e) => setHeight(e.target.value)}
             className="input-vet"
+            required
           />
         </div>
         <div className="form-group-vet">

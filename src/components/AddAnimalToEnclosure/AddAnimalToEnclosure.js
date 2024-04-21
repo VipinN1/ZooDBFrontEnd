@@ -87,8 +87,8 @@ function AddAnimalToEnclosure() {
         try {
             // Make the Axios call to update the animal's enclosure
             const response = await axios.put('http://localhost:5095/api/ZooDb/Animal/Transfer', updateData);
-            console.log('Response from API:', response.data); // Debugging statement
             alert(response.data); // Assuming the backend sends a success message directly in response.data
+            
         } catch (error) {
             console.error('Failed to update animal enclosure:', error);
             alert('Failed to add animal to the enclosure.');

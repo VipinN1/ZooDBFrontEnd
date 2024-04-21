@@ -30,6 +30,12 @@ function Donation({customerId}){
     // Add backend logic here to save donation information
     // For example, you can make an API call to send this data to the server
     // After saving the data, you can show a success message or handle errors accordingly
+    alert("Thank you for Donating");
+
+    setName('');
+    setEmail('');
+    setAmount('');
+
 
 
     const data = {

@@ -83,7 +83,6 @@ function App() {
             }
 
             setUserRole(response.data.userType);
-            setLoggedIn(true);
             setUserEmail(email);
 
             // Store user data in local storage
@@ -91,14 +90,33 @@ function App() {
             localStorage.setItem('userEmail', email);
 
             // Navigate to home page
-            navigate('/');
+            if(response.data.userType){
+                setLoggedIn(true);                
+                navigate('/');
+            }
+            else{
+                alert("invalid log in");
+            }
+            const data = {
+                CustomerId: response.data.customerId,
+            };
+            
+            if (response.data.userType === "customer") {
+                try {
+                    const response1 = await axios.put('http://localhost:5095/api/ZooDb/logging-in', data);
+                    console.log('Logging-in attribute updated successfully:', response1.data);
+                } catch (error) {
+                    console.error('Error updating logging-in attribute:', error);
+                }
+            }
+            
         } catch (error) {
             console.error('Error during sign-in:', error);
         }
     }
 
     // Function to handle sign-out
-    const handleSignOut = () => {
+    const handleSignOut = (CustomerId,userRole) => {
         // Reset authentication status
         setLoggedIn(false);
         /*setUserRole('');
@@ -112,6 +130,26 @@ function App() {
         localStorage.removeItem('employeeId');
         localStorage.removeItem('customerId');
 */
+
+try {
+    const data1 = {
+        CustomerId: CustomerId,
+    };
+
+    if (userRole === "customer") {
+        try {
+            const response1 =  axios.put('http://localhost:5095/api/ZooDb/logging-out', data1);
+            console.log('Logging-out attribute updated successfully:', response1.data);
+        } catch (error) {
+            console.error('Error updating logging-in attribute:', error);
+        }
+    }
+} catch (error) {
+    console.error('Error during sign-in:', error);
+}
+
+
+
         // Navigate to sign-in page
         navigate('/sign-in');
     };
@@ -121,7 +159,7 @@ function App() {
             <div className="container">
                 {loggedIn ? (
                     userRole === 'customer' ? (
-                        <CustomerNavbar handleSignOut={handleSignOut} />
+                        <CustomerNavbar handleSignOut={() => handleSignOut(customerId,userRole)} />
                     ) : userRole === 'employee' ? (
                         <EmployeeNavbar handleSignOut={handleSignOut} />
                     ) : userRole === 'manager' ? (

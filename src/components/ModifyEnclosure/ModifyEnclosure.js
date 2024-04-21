@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ModifyEnclosure.css';
 
@@ -26,6 +26,7 @@ function ModifyEnclosure() {
     });
 
     const [isEnclosureFetched, setIsEnclosureFetched] = useState(false);
+    const [uniqueEnclosureTypes, setUniqueEnclosureTypes] = useState([]);
 
     // Fetches the enclosure data from the server based on search criteria
     const fetchEnclosureData = async () => {
@@ -60,6 +61,20 @@ function ModifyEnclosure() {
             setIsEnclosureFetched(false);
         }
     };
+
+    // Fetch unique enclosure types from the server
+    useEffect(() => {
+        const fetchUniqueEnclosureTypes = async () => {
+            try {
+                const response = await axios.get('http://localhost:5095/api/ZooDb/GetUniqueEnclosureTypes');
+                setUniqueEnclosureTypes(response.data);
+            } catch (error) {
+                console.error('Failed to fetch unique enclosure types:', error);
+            }
+        };
+
+        fetchUniqueEnclosureTypes();
+    }, []);
 
     // Handles form submission
     const handleSubmit = async (event) => {
@@ -97,13 +112,17 @@ function ModifyEnclosure() {
                 </div>
                 <div className="form-group">
                     <label htmlFor="searchType">Enclosure Type:</label>
-                    <input
-                        type="text"
+                    <select
                         id="searchType"
                         value={searchData.enclosureType}
                         onChange={(e) => setSearchData({ ...searchData, enclosureType: e.target.value })}
                         required
-                    />
+                    >
+                        <option value="">Select Enclosure Type</option>
+                        {uniqueEnclosureTypes.map((type, index) => (
+                            <option key={index} value={type}>{type}</option>
+                        ))}
+                    </select>
                 </div>
                 <button type="button" onClick={fetchEnclosureData}>Search</button>
 

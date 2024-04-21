@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ModifyAnimal.css';
 import axios from 'axios';
 
@@ -25,6 +25,23 @@ function ModifyAnimal() {
         animalOrigin: ''
     });
     const [isAnimalFetched, setIsAnimalFetched] = useState(false);
+    const [animalSpeciesList, setAnimalSpeciesList] = useState([]);
+
+    useEffect(() => {
+        // Function to fetch all animal species
+        const fetchAnimalSpecies = async () => {
+            try {
+                const response = await axios.get('http://localhost:5095/api/ZooDb/GetAllAnimalSpecies');
+                setAnimalSpeciesList(response.data);
+            } catch (error) {
+                console.error('Failed to fetch animal species:', error);
+                alert('Failed to fetch animal species.');
+            }
+        };
+
+        // Call the function when the component mounts
+        fetchAnimalSpecies();
+    }, []);
 
     const fetchAnimalData = async () => {
         try {
@@ -72,6 +89,13 @@ function ModifyAnimal() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // Check if updated DoB is after today's date
+        const today = new Date().toISOString().split('T')[0];
+        if (updatedAnimalData.animalDoB > today) {
+            alert("Date of birth cannot be in the future.");
+            return;
+        }
+
         // Combine originalAnimalData and updatedAnimalData into a single object
         const combinedData = {
             originalAnimal: originalAnimalData,
@@ -108,16 +132,21 @@ function ModifyAnimal() {
                 </div>
                 <div className="form-group-animal">
                     <label htmlFor="searchSpecies">Animal Species:</label>
-                    <input
-                        type="text"
+                    <select
                         id="searchSpecies"
-                        value={searchData.animalSpecies}
                         onChange={(e) => setSearchData({
                             ...searchData,
                             animalSpecies: e.target.value
                         })}
                         required
-                    />
+                    >
+                        <option value="">Select Species</option>
+                        {animalSpeciesList.map((species, index) => (
+                            <option key={index} value={species.animal_species}>
+                                {species.animal_species}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group-animal">
                     <label htmlFor="searchDoB">Animal DoB:</label>

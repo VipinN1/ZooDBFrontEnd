@@ -36,7 +36,7 @@ function DeleteAnimal() {
             console.log('Animal deleted:', response);
             
             // Handle success scenario
-            alert('Animal deleted successfully.');
+            alert(response.data);
             
             // Clear input fields after deletion
             setAnimalName('');

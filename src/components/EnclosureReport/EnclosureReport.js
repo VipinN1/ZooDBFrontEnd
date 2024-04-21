@@ -14,7 +14,7 @@ function EnclosureReport() {
     const fetchUniqueEnclosureTypes = async () => {
         try {
             const response = await axios.get(
-                'http://localhost:5095/api/ZooDb/GetUniqueEnclosureTypes'
+                'http://localhost:5095/api/ZooDb/GetAllEnclosureTypes'
             );
             // Set the unique enclosure types to the state
             setUniqueEnclosureTypes(response.data);
@@ -119,13 +119,14 @@ function EnclosureReport() {
                         className="input"
                     >
                         <option value="">-- Select Enclosure Type --</option>
-                        {uniqueEnclosureTypes.map((type, index) => (
-                            <option key={index} value={type}>
-                                {type}
+                        {uniqueEnclosureTypes.map((enclosure, index) => (
+                            <option key={index} value={enclosure.enclosure_type}>
+                                {enclosure.enclosure_type}
                             </option>
                         ))}
                     </select>
                 </div>
+
 
                 {/* Date range inputs */}
                 <div className="form-group">

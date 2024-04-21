@@ -14,7 +14,7 @@ function CustomerProfileUpdate({ customerId }) {
   const [oldData, setOldData] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:5095/api/ZooDb/GetUserProfile?customerId=${customerId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUserProfile?customerId=${customerId}`)
       .then(response => {
         const data = response.data;
         setOldData(data);
@@ -84,21 +84,7 @@ function CustomerProfileUpdate({ customerId }) {
           Zip Code:
           <input type="text" value={zipCode} onChange={e => setZipCode(e.target.value)} required />
         </label>
-        <label>
-          Date of Birth:
-          <DatePicker
-            selected={dob}
-            onChange={date => setDob(date)}
-            dateFormat="yyyy-MM-dd"
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            yearDropdownItemNumber={100}
-            isClearable={true}
-            maxDate={new Date()}
-            required
-          />
-        </label>
+       
         <button type="submit">Update Profile</button>
       </form>
     </div>

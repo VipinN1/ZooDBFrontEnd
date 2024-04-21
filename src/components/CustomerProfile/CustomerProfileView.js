@@ -16,7 +16,7 @@ function CustomerProfileView({ customerId }) {
     }
 
     setIsLoading(true);
-    axios.get(`http://localhost:5095/api/ZooDb/GetUserProfile?customerId=${customerId}`)
+    axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetUserProfile?customerId=${customerId}`)
       .then(response => {
         setCustomer(response.data);
         setError(null);
@@ -52,7 +52,7 @@ function CustomerProfileView({ customerId }) {
         <p className="fade-in">📧 <strong>Email:</strong> {customer.email}</p>
         <p className="fade-in">🏠 <strong>Address:</strong> {customer.address}</p>
         <p className="fade-in">📮 <strong>Zip Code:</strong> {customer.zipCode}</p>
-        <p className="fade-in">🎂 <strong>Date of Birth:</strong> {new Date(customer.formattedDate).toLocaleDateString()}</p>
+        <p className="fade-in">🎂 <strong> Date of Birth:</strong> {new Date(customer.formattedDate).toLocaleDateString()} (Unable to be modified)</p>
       </div>
     </div>
   );

@@ -37,6 +37,9 @@ function AddSecurityForm({employeeId}) {
     }
     axios.post('http://localhost:5095/api/ZooDb/NewSecurityReport', data)
       .then((res) =>{console.log(res); });
+
+
+    alert('Security Form Submitted');
   };
 
   const handleTimeChange = (event) => {

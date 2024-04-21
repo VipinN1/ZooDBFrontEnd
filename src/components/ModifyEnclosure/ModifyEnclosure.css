@@ -1,4 +1,5 @@
-.modify-enclosure-container input {
+.modify-enclosure-container input,
+.modify-enclosure-container select {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -6,7 +7,6 @@
   border-radius: 5px;
   font-size: 16px;
 }
-
 
 .modify-enclosure-container button:hover {
   background-color: #062925;
@@ -26,7 +26,6 @@
   text-align: center;
 }
 
-
 .form-group-enclosure label {
   display: block;
   font-weight: bold;
@@ -35,19 +34,12 @@
 .form-group-enclosure input[type="number"],
 .form-group-enclosure input[type="text"],
 .form-group-enclosure input[type="date"],
-.form-group-enclosure input[type="time"] {
+.form-group-enclosure input[type="time"],
+.form-group-enclosure select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.form-group-enclosure select {
-  appearance: none;
-  padding: 10px 30px 10px 10px;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
 }
 
 .form-group-enclosure button[type="submit"] {

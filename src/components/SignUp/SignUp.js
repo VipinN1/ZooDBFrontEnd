@@ -21,27 +21,41 @@ function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add your sign-up logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Reset the form fields after submission
-    if(email && password){
-    navigate('/customer-profile');
-    setEmail('');
-    setPassword('');
+  
+    // Check if email contains "@" symbol
+    if (!email.includes('@')) {
+      alert('Email must contain "@" symbol');
+      return;
     }
-    else{
-      alert('enter both fields')
+  
+    // Check if both email and password are entered
+    if (!email || !password) {
+      alert('Enter both fields');
+      return;
     }
+  
+    // Proceed with form submission
     const data = {
       email: email,
       password: password,
       userType: 'customer'
     };
-
-    axios.post('http://localhost:5095/api/ZooDb/NewUser', data)
-      .then((res) =>{console.log(res); });
+  
+    axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewUser', data)
+      .then((res) => {
+        console.log(res);
+        alert('Successfully signed up!');
+        navigate('/customer-profile', { state: { email: email } });
+        setEmail('');
+        setPassword('');
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        // Handle error here
+      });
   };
+  
+  
 
   return (
     <div className="signup-container">

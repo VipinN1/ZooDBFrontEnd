@@ -11,6 +11,8 @@ function TicketBuy({ customerId }) {
   const [seniorTickets, setSeniorTickets] = useState(0);
   const [infantTickets, setInfantTickets] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [discount, setDiscount] = useState(false);
+
 
   const adultPrice = 10;
   const childPrice = 7;
@@ -37,17 +39,41 @@ function TicketBuy({ customerId }) {
     setInfantTickets(value >= 0 ? value : 0);
   };
 
-  const totalCost = (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice) + (infantTickets * infantPrice);
+  var totalCost = (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice) + (infantTickets * infantPrice);
+  const discountedCost = totalCost * 0.9; // 10% discount
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
-    // Check if the date is selected
     if (!selectedDate) {
       alert('Please select a date.');
       return;
     }
   
+    const userData = {
+      CustomerId: customerId,
+    };
+  
+    axios.post(`http://localhost:5095/api/ZooDb/CheckDiscountStatus`, userData)
+      .then(response => {
+        if (response.data.DiscountApplied) {
+          setDiscount(true);
+          // Update totalCost with discountedCost
+          totalCost = discountedCost;
+          console.log("This is total cost",totalCost);
+  
+          // Proceed with the purchase
+          proceedWithPurchase();
+        } else {
+          // Proceed with the purchase without discount
+          proceedWithPurchase();
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  };
+  
+  const proceedWithPurchase = () => {
     console.log('Adult Tickets:', adultTickets);
     console.log('Child Tickets:', childTickets);
     console.log('Senior Tickets:', seniorTickets);
@@ -55,7 +81,6 @@ function TicketBuy({ customerId }) {
     console.log('Selected Date:', selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }));
     console.log('Total Cost:', totalCost);
   
-    // Format the selected date
     const formattedDate = selectedDate ? `${('0' + (selectedDate.getMonth() + 1)).slice(-2)}/${('0' + selectedDate.getDate()).slice(-2)}/${selectedDate.getFullYear()}` : null;
   
     const data = {
@@ -63,15 +88,22 @@ function TicketBuy({ customerId }) {
       childTickets: childTickets,
       seniorTickets: seniorTickets,
       infantTickets: infantTickets,
-      formattedDate: formattedDate, // Use the formatted date
+      formattedDate: formattedDate,
       totalCost: totalCost,
       customerId: customerId
     };
-    console.log('Before Sending Date: ', formattedDate);
+  
     axios.post('http://localhost:5095/api/ZooDb/NewTickets', data)
-      .then((res) => { 
+      .then((res) => {
         console.log(res);
         alert('Tickets successfully purchased!');
+        setAdultTickets(0);
+        setChildTickets(0);
+        setSeniorTickets(0);
+        setInfantTickets(0);
+        setSelectedDate(null);
+        setDiscount(false);
+        
       })
       .catch((error) => {
         console.error('Error purchasing tickets:', error);
@@ -79,6 +111,7 @@ function TicketBuy({ customerId }) {
       });
   };
   
+
   return (
     <div className="ticket-buy-container">
       <div className="buy-menu">
@@ -131,6 +164,7 @@ function TicketBuy({ customerId }) {
           />
         </div>
         <div className="total-cost">Total Cost: ${totalCost}</div>
+        {discount && <div className="discounted-cost"> Birthday Discounted Cost (10% off): ${discountedCost.toFixed(2)}</div>}
         <button type="submit" onClick={handleSubmit}>Buy Tickets</button>
       </div>
     </div>

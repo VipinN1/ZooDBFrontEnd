@@ -104,3 +104,12 @@ button {
 button:hover {
   background-color: #ff5252; /* Lighter red on hover */
 }
+
+.discounted-cost {
+  color: #040405; /* blue color */
+  font-size: 16px; /* adjust font size as needed */
+  margin-top: 10px; /* adjust spacing from the top */
+  padding-left: 120px;
+  padding-bottom: 20px;
+  /* add any other styles you want */
+}

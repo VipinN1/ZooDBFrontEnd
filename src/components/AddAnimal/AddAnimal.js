@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import './AddAnimal.css';
 import axios from 'axios';
+import './AddAnimal.css';
 
 function AddAnimal() {
   const [animalName, setAnimalName] = useState('');
   const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalGender, setAnimalGender] = useState('');
   const [animalDoB, setAnimalDoB] = useState('');
-  const [animalEndangered, setAnimalEndangered] = useState(false); // Use boolean state
+  const [animalEndangered, setAnimalEndangered] = useState(false);
   const [animalOrigin, setAnimalOrigin] = useState('');
-  const [animalDoA, setAnimalDoA] = useState('');
 
-  // Function to reset form fields
   const handleReset = () => {
     setAnimalName('');
     setAnimalSpecies('');
@@ -21,24 +19,18 @@ function AddAnimal() {
     setAnimalOrigin('');
   };
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Get current date for Animal DoA
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
       .toString()
       .padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
 
-    setAnimalDoA(formattedDate);
-
-    console.log('Animal Name:', animalName);
-    console.log('Animal Species:', animalSpecies);
-    console.log('Animal Gender:', animalGender);
-    console.log('Animal DoB:', animalDoB);
-    console.log('Is Animal Endangered:', animalEndangered);
-    console.log('Animal Origin:', animalOrigin);
-    console.log('Animal DoA:', formattedDate);
+    if (animalDoB > formattedDate) {
+      window.alert('Date of birth cannot be in the future.');
+      return;
+    }
 
     const userData = {
       animalName,
@@ -53,16 +45,11 @@ function AddAnimal() {
     try {
       const response = await axios.post('http://localhost:5095/api/ZooDb/NewAnimal', userData);
       console.log('Response:', response);
-      // Handle success scenario
-      handleReset();
+      window.alert('Submit successful'); // Display alert when submit is successful
+      handleReset(); // Reset form fields
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Error data:', error.response?.data);
-        console.error('Error status:', error.response?.status);
-        console.error('Error headers:', error.response?.headers);
-      } else {
-        console.error('Non-Axios error:', error);
-      }
+      console.error('Error submitting data:', error);
+      window.alert('Error submitting data'); // Display alert if there's an error
     }
   };
 

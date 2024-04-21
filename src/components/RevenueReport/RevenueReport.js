@@ -3,41 +3,109 @@ import './RevenueReport.css';
 import axios from 'axios';
 
 function RevenueReport() {
-  // State for each form field
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [visitDate, setVisitDate] = useState('');
-  const [donationDate, setDonationDate] = useState('');
-  const [donationAmount, setDonationAmount] = useState('');
-  
+  // State for form fields
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [transactionType, setTransactionType] = useState('all');
+
   const [queryData, setQueryData] = useState([]);
+  const [showAdditionalColumns, setShowAdditionalColumns] = useState(false);
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [ticketTypePercentages, setTicketTypePercentages] = useState({
+    AdultTickets: 0,
+    ChildTickets: 0,
+    SeniorTickets: 0,
+    InfantTickets: 0,
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
   
     // Request payload
     const requestData = {
-      first_name: firstName.trim() || null,
-      last_name: lastName.trim() || null,
-      visit_date: visitDate || null,
-      donation_date: donationDate || null,
-      donation_amount: donationAmount || null,
+      transactionType,
+      ...(startDate && { startDate }),
+      ...(endDate && { endDate }),
     };
-    
-    console.log('Request Payload:', requestData);
-    
+
+    console.log('Request Data:', requestData);
+  
+    // Post request to fetch revenue data based on the input fields
     try {
-      // Post request to fetch revenue data based on the input fields
       const response = await axios.post('http://localhost:5095/api/ZooDb/RevenueReport', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       console.log('Response Data:', response.data);
-      // Set the report data based on the response from the back-end
-      setQueryData(response.data);
+  
+      // Sort the response data by TransactionDate
+      const sortedData = response.data.slice().sort((a, b) => {
+        return new Date(a.TransactionDate) - new Date(b.TransactionDate);
+      });
+  
+      // Set the report data based on the sorted response from the back-end
+      setQueryData(sortedData);
+  
+      // Calculate total revenue
+      const revenue = sortedData.reduce((acc, curr) => acc + curr.Amount, 0);
+      setTotalRevenue(revenue);
+  
+      // Calculate ticket type percentages
+      if (transactionType === 'ticket') {
+        const ticketTypeTotals = {
+          AdultTickets: 0,
+          ChildTickets: 0,
+          SeniorTickets: 0,
+          InfantTickets: 0,
+        };
+  
+        sortedData.forEach((transaction) => {
+          ticketTypeTotals.AdultTickets += transaction.AdultTickets || 0;
+          ticketTypeTotals.ChildTickets += transaction.ChildTickets || 0;
+          ticketTypeTotals.SeniorTickets += transaction.SeniorTickets || 0;
+          ticketTypeTotals.InfantTickets += transaction.InfantTickets || 0;
+        });
+  
+        const totalTickets = sortedData.reduce((acc, transaction) => {
+          if (transaction.TransactionType === 'Ticket Purchase') {
+            acc += transaction.AdultTickets + transaction.ChildTickets + transaction.SeniorTickets + transaction.InfantTickets;
+          }
+          return acc;
+        }, 0);
+  
+        const percentages = {
+          AdultTickets: (ticketTypeTotals.AdultTickets / totalTickets) * 100,
+          ChildTickets: (ticketTypeTotals.ChildTickets / totalTickets) * 100,
+          SeniorTickets: (ticketTypeTotals.SeniorTickets / totalTickets) * 100,
+          InfantTickets: (ticketTypeTotals.InfantTickets / totalTickets) * 100,
+        };
+  
+        setTicketTypePercentages(percentages);
+      } else {
+        // If transactionType is not 'ticket', reset ticketTypePercentages
+        setTicketTypePercentages({
+          AdultTickets: 0,
+          ChildTickets: 0,
+          SeniorTickets: 0,
+          InfantTickets: 0,
+        });
+      }
+  
+      // Show additional columns if transaction type is "Ticket Purchase"
+      setShowAdditionalColumns(transactionType === 'ticket');
     } catch (error) {
       console.error('Error fetching query data:', error);
+      // Clear query data in case of error
+      setQueryData([]);
+      // Reset total revenue and ticket type percentages
+      setTotalRevenue(0);
+      setTicketTypePercentages({
+        AdultTickets: 0,
+        ChildTickets: 0,
+        SeniorTickets: 0,
+        InfantTickets: 0,
+      });
     }
   };
   
@@ -47,84 +115,101 @@ function RevenueReport() {
       <h2>Zoo Revenue Report</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="form-group">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            type="text"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="visitDate">Visit Date:</label>
+          <label htmlFor="startDate">Start Date:</label>
           <input
             type="date"
-            id="visitDate"
-            value={visitDate}
-            onChange={(e) => setVisitDate(e.target.value)}
+            id="startDate"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
             className="input"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="donationDate">Donation Date:</label>
+          <label htmlFor="endDate">End Date:</label>
           <input
             type="date"
-            id="donationDate"
-            value={donationDate}
-            onChange={(e) => setDonationDate(e.target.value)}
+            id="endDate"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
             className="input"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="donationAmount">Donation Amount:</label>
-          <input
-            type="number"
-            id="donationAmount"
-            value={donationAmount}
-            onChange={(e) => setDonationAmount(e.target.value)}
+          <label htmlFor="transactionType">Transaction Type:</label>
+          <select
+            id="transactionType"
+            value={transactionType}
+            onChange={(e) => setTransactionType(e.target.value)}
             className="input"
-          />
+          >
+            <option value="all">All</option>
+            <option value="ticket">Ticket Purchase</option>
+            <option value="donation">Donation</option>
+          </select>
         </div>
-        <button type="submit" className="submit-button">Generate Report</button>
+        <button type="submit" className="submit-button">
+          Generate Report
+        </button>
       </form>
 
       {/* Display report data if available */}
-    {queryData.length > 0 && (
+      {queryData.length > 0 && (
         <div className="query-data">
-            <h3>Revenue Report:</h3>
-            <table className="query-table">
+          <h3>Revenue Report:</h3>
+          <p>Total Revenue: ${totalRevenue.toFixed(2)}</p>
+          {/* Display ticket type percentages only if "Ticket Purchase" is selected and the report is generated */}
+          {showAdditionalColumns && (
+            <div className="ticket-type-percentages">
+              <h4>Ticket Type Percentages:</h4>
+              <ul>
+                {Object.entries(ticketTypePercentages).map(([type, percentage]) => (
+                  <li key={type}>
+                    {type}: {percentage.toFixed(2)}%
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <table className="query-table">
             <thead>
-                <tr>
+              <tr>
                 <th>Customer Name</th>
                 <th>Transaction Type</th>
                 <th>Date</th>
                 <th>Amount</th>
-                </tr>
+                {/* Only show additional columns if "Ticket Purchase" is selected and the report is generated */}
+                {showAdditionalColumns && (
+                  <>
+                    <th>Adult Tickets</th>
+                    <th>Child Tickets</th>
+                    <th>Senior Tickets</th>
+                    <th>Infant Tickets</th>
+                  </>
+                )}
+              </tr>
             </thead>
             <tbody>
-                {queryData.map((transaction, index) => (
+              {queryData.map((transaction, index) => (
                 <tr key={index}>
-                    <td>{transaction.CustomerName}</td>
-                    <td>{transaction.TransactionType}</td>
-                    <td>{new Date(transaction.TransactionDate).toLocaleDateString()}</td>
-                    <td>${transaction.Amount.toFixed(2)}</td>
+                  <td>{transaction.CustomerName}</td>
+                  <td>{transaction.TransactionType}</td>
+                  <td>{transaction.TransactionDate ? new Date(transaction.TransactionDate).toLocaleDateString() : ""}</td>
+                  <td>${transaction.Amount ? transaction.Amount.toFixed(2) : ""}</td>
+                  {/* Display ticket type values only if the transaction type is "Ticket Purchase" */}
+                  {showAdditionalColumns && transaction.TransactionType === "Ticket Purchase" && (
+                    <>
+                      <td>{transaction.AdultTickets || 0}</td>
+                      <td>{transaction.ChildTickets || 0}</td>
+                      <td>{transaction.SeniorTickets || 0}</td>
+                      <td>{transaction.InfantTickets || 0}</td>
+                    </>
+                  )}
                 </tr>
-                ))}
+              ))}
             </tbody>
-            </table>
+          </table>
         </div>
-        )}
+      )}
     </div>
   );
 }
