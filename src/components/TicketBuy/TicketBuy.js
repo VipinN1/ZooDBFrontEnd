@@ -56,21 +56,22 @@ function TicketBuy({ customerId }) {
     };
   
     axios.post(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/CheckDiscountStatus`, userData)
-      .then(response => {
-        if (response.data.DiscountApplied) {
-          setDiscount(true);
-          // Update totalCost with discountedCost
-          totalCost = discountedCost;
-          console.log("This is total cost",totalCost);
-  
-          // Proceed with the purchase
-          proceedWithPurchase();
-        } else {
-          // Proceed with the purchase without discount
-          proceedWithPurchase();
-        }
-      })
-      .catch(error => console.error('Error:', error));
+  .then(response => {
+    console.log("Response data:", response.data); // Add this to see what you're actually getting back
+    if (response.data.DiscountApplied) {
+      setDiscount(true);
+      totalCost = discountedCost;
+      console.log("This is total cost",totalCost);
+      proceedWithPurchase();
+    } else {
+      proceedWithPurchase();
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    console.error('Detailed error:', error.response.data); // Log more error details if available
+  });
+
   };
   
   const proceedWithPurchase = () => {
