@@ -19,12 +19,10 @@ import AddEnclosureForm from './components/AddEnclosureForm/AddEnclosureForm';
 import ModifyEnclosure from './components/ModifyEnclosure/ModifyEnclosure';
 import DeleteEnclosure from './components/DeleteEnclosure/DeleteEnclosure';
 import SearchEnclosure from './components/SearchEnclosure/SearchEnclosure';
-import AddSecurityForm from './components/AddSecurityForm/AddSecurityForm';
 import ModifyAnimal from './components/ModifyAnimal/ModifyAnimal';
 import DeleteAnimal from './components/DeleteAnimal/DeleteAnimal';
 import SearchAnimal from './components/SearchAnimal/SearchAnimal';
 import AddAnimalToEnclosure from './components/AddAnimalToEnclosure/AddAnimalToEnclosure';
-import SecurityReport from './components/SecurityReport/SecurityReport';
 import EnclosureReport from './components/EnclosureReport/EnclosureReport';
 import AnimalReport from './components/AnimalReport/AnimalReport';
 import EmployeeProfileView from './components/EmployeeProfile/EmployeeProfileView';
@@ -35,7 +33,7 @@ import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavbarTemp from './components/Navbar/NavbarTemp';
 import DeleteDonatedNameForm from './components/DeleteDonatedName/DeleteDonatedName';
-
+import MembershipPage from './components/MembershipPage/MembershipPage';
 import axios from 'axios';
 
 function App() {
@@ -194,12 +192,11 @@ try {
                     <Route path="/modify-animal" element={<ModifyAnimal />} />
                     <Route path="/delete-animal" element={<DeleteAnimal />} />
                     <Route path="/assign-enclosure" element={<AddAnimalToEnclosure />} />
-                    <Route path="/add-security-form" element={<AddSecurityForm employeeId={employeeId} />} />
-                    <Route path="/security-report" element={<SecurityReport />} />
                     <Route path="/enclosure-report" element={<EnclosureReport />} />
                     <Route path="/animal-report" element={<AnimalReport />} />
                     <Route path="/revenue-report" element={<RevenueReport />} />
                     <Route path="/delete-donated-name" element={<DeleteDonatedNameForm />} />
+                    <Route path="/membership-page" element={<MembershipPage />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </div>

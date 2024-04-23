@@ -11,6 +11,65 @@ export default function ManagerNavbar({handleSignOut}) {
         Zoo
       </Link>
       <ul>
+      <CustomLink
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Animals
+          {isHovered && (
+            <div
+              className="sub-menu-customer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CustomLink to="/search-animal">Search</CustomLink>
+              <CustomLink to="/add-animal">Add</CustomLink>
+              <CustomLink to="/modify-animal">Modify</CustomLink>
+              <CustomLink to="/assign-enclosure">Transfer</CustomLink>
+              <CustomLink to="/delete-animal">Delete</CustomLink>
+              <CustomLink to="/delete-donated-name">Deleted Donated Name</CustomLink>
+            </div>
+          )}
+        </CustomLink>
+
+        <CustomLink
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Records
+          {/* Display sub-menu if isHovered */}
+          {isHovered && (
+            <div
+              className="sub-menu-customer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CustomLink to="/animal-report">Animal Report</CustomLink>
+              <CustomLink to="/veterinarian-record">Vet Records</CustomLink>
+              <CustomLink to="/diet-entry">Diets</CustomLink>
+            </div>
+          )}
+        </CustomLink>
+        <CustomLink
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Enclosures
+          {/* Display sub-menu if isHovered */}
+          {isHovered && (
+            <div
+              className="sub-menu-customer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CustomLink to="/search-enclosure">Search</CustomLink>
+              <CustomLink to="/add-enclosure">Add</CustomLink>
+              <CustomLink to="/modify-enclosure">Modify</CustomLink>
+              <CustomLink to="/delete-enclosure">Delete</CustomLink>
+              
+            </div>
+          )}
+        </CustomLink>
         <CustomLink
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -19,9 +78,7 @@ export default function ManagerNavbar({handleSignOut}) {
           {isHovered && (
             <div className="sub-menu-customer">
               <CustomLink to="/enclosure-report">Enclosure Report</CustomLink>
-              <CustomLink to="/animal-report">Animal Report</CustomLink>
               <CustomLink to="/revenue-report">Revenue Report</CustomLink>
-              <CustomLink to="/security-report">Security Report</CustomLink>
             </div>
           )}
         </CustomLink>

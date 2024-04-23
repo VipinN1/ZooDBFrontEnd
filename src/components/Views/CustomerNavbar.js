@@ -25,6 +25,8 @@ export default function CustomerNavbar({ handleSignOut }) {
 
           
         </CustomLink>
+        <CustomLink to="/donation">Donate</CustomLink>
+        <CustomLink to="/membership-page">Memberships</CustomLink>
         <CustomLink
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -39,7 +41,6 @@ export default function CustomerNavbar({ handleSignOut }) {
 
           
         </CustomLink>
-        <CustomLink to="/donation">Donate</CustomLink>
         <CustomLink to="/about-us">About Us</CustomLink>
         <li className="nav-item">
         <button onClick={handleSignOut}>Sign Out</button>

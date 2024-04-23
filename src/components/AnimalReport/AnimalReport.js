@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AnimalReport.css';
 import axios from 'axios';
 
 function AnimalReport() {
+    // State for the required form fields
     const [animalName, setAnimalName] = useState('');
     const [animalSpecies, setAnimalSpecies] = useState('');
     const [animalDoB, setAnimalDoB] = useState('');
+    const [animalSpeciesOptions, setAnimalSpeciesOptions] = useState([]); // State for animal species options
 
+    // State to store data from each report
     const [animalData, setAnimalData] = useState(null);
     const [dietData, setDietData] = useState([]);
     const [vetData, setVetData] = useState([]);
 
+    // Fetch animal species options
+    useEffect(() => {
+        fetchAnimalSpeciesOptions();
+    }, []);
+
+    const fetchAnimalSpeciesOptions = async () => {
+        try {
+            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
+            setAnimalSpeciesOptions(response.data.map(species => species.animal_species));
+        } catch (error) {
+            console.error('Error fetching animal species:', error);
+        }
+    };
+
+    // Handler for form submission
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        // Request payload with required fields
         const requestData = {
             animalName,
             animalSpecies,
@@ -28,6 +47,13 @@ function AnimalReport() {
 
             const data = response.data;
 
+            if (!data) {
+                // Reset data and show alert if animal does not exist
+                resetData();
+                alert('No such animal found!');
+                return;
+            }
+
             // Set the animal data state with the retrieved data
             setAnimalData(data);
 
@@ -37,21 +63,13 @@ function AnimalReport() {
                 const animalID = data.animalID;
 
                 const dietResponse = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetDiet', {
-                  params: {
-                    animalName,
-                    animalSpecies,
-                    animalDoB
-                  },
-              });
+                    params: requestData,
+                });
 
-              setDietData(dietResponse.data);
+                setDietData(dietResponse.data);
 
                 const vetRecordsResponse = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetVetRecords', {
-                    params: {
-                        animalName,
-                        animalSpecies,
-                        animalDoB
-                    }
+                    params: requestData,
                 });
 
                 // Set the vet data state with the retrieved data
@@ -59,13 +77,24 @@ function AnimalReport() {
             }
         } catch (error) {
             console.error('Error fetching data:', error);
+            // Reset data and show alert if there's an error
+            resetData();
+            alert('An error occurred while fetching data!');
         }
+    };
+
+    // Function to reset all data
+    const resetData = () => {
+        setAnimalData(null);
+        setDietData([]);
+        setVetData([]);
     };
 
     return (
         <div className="animal-report-container">
             <h2>Animal Report</h2>
             <form onSubmit={handleFormSubmit}>
+                {/* Form inputs */}
                 <div className="form-group">
                     <label htmlFor="animalName">Animal Name:</label>
                     <input
@@ -79,14 +108,18 @@ function AnimalReport() {
                 </div>
                 <div className="form-group">
                     <label htmlFor="animalSpecies">Animal Species:</label>
-                    <input
-                        type="text"
+                    <select
                         id="animalSpecies"
                         value={animalSpecies}
                         onChange={(e) => setAnimalSpecies(e.target.value)}
                         className="input"
                         required
-                    />
+                    >
+                        <option value="">Select Animal Species</option>
+                        {animalSpeciesOptions.map((species, index) => (
+                            <option key={index} value={species}>{species}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="animalDoB">Date of Birth:</label>
@@ -102,6 +135,7 @@ function AnimalReport() {
                 <button type="submit" className="submit-button">Generate Report</button>
             </form>
 
+            {/* Display animal data */}
             {animalData && (
                 <div className="query-data">
                     <h3>Animal Information:</h3>
@@ -132,6 +166,7 @@ function AnimalReport() {
                 </div>
             )}
 
+             {/* Display diet data */}
             {dietData.length > 0 && (
                 <div className="query-data">
                     <h3>Diet Records:</h3>
@@ -156,6 +191,7 @@ function AnimalReport() {
                 </div>
             )}
 
+            {/* Display vet data */}
             {vetData.length > 0 && (
                 <div className="query-data">
                     <h3>Vet Records:</h3>

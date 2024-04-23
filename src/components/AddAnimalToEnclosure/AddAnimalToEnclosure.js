@@ -15,12 +15,12 @@ function AddAnimalToEnclosure() {
         animalDoB: '',
         enclosureID: ''
     });
-    const [enclosures, setEnclosures] = useState([]);
-    const [selectedEnclosure, setSelectedEnclosure] = useState(''); 
+    const [enclosures, setEnclosures] = useState([]); // State for enclosures
+    const [selectedEnclosure, setSelectedEnclosure] = useState(''); // State for selected enclosure
 
     const fetchAnimalData = async () => {
         try {
-            
+            // Fetch animal data based on searchData
             const response = await axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Get`, {
                 params: {
                     animalName: searchData.animalName,
@@ -31,9 +31,10 @@ function AddAnimalToEnclosure() {
 
             const data = response.data;
 
-            // Format the date of birth to 
+            // Format the date of birth to 'YYYY-MM-DD'
             const formattedDoB = data.animalDoB.split('T')[0];
 
+            // Update the animalData state
             setAnimalData({
                 animalID: data.animalID,
                 animalName: data.animalName,
@@ -49,6 +50,7 @@ function AddAnimalToEnclosure() {
 
     const fetchEnclosures = async () => {
         try {
+            // Fetch the list of enclosures
             const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosures');
             setEnclosures(response.data);
         } catch (error) {
@@ -60,6 +62,7 @@ function AddAnimalToEnclosure() {
     useEffect(() => {
         const fetchEnclosures = async () => {
             try {
+                // Fetch the list of enclosures
                 const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosures');
                 console.log('Fetched enclosures:', response.data); // Debugging statement
                 setEnclosures(response.data);
@@ -68,22 +71,24 @@ function AddAnimalToEnclosure() {
                 alert('Failed to fetch enclosures.');
             }
         };
-        fetchEnclosures();
+        fetchEnclosures(); // Fetch enclosures when the component loads
     }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Selected Enclosure ID:', selectedEnclosure); 
+        console.log('Selected Enclosure ID:', selectedEnclosure); // Debugging statement
         
+        // Construct the payload with updated enclosure ID
         const updateData = {
             animalID: animalData.animalID,
             enclosureID: selectedEnclosure
         };
     
         try {
-            const response = await axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Transfer', updateData);
-            alert(response.data); 
-
+            // Make the Axios call to update the animal's enclosure
+            const response = await axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Transfer', updateData);
+            console.log('Response from API:', response.data); // Debugging statement
+            alert(response.data); // Assuming the backend sends a success message directly in response.data
         } catch (error) {
             console.error('Failed to update animal enclosure:', error);
             alert('Failed to add animal to the enclosure.');
@@ -94,6 +99,7 @@ function AddAnimalToEnclosure() {
         <div className="modify-animal-container">
             <h2>Assign Animal to Enclosure</h2>
             <form onSubmit={handleSubmit}>
+                {/* Search form for original animal data */}
                 <div className="form-group-animal">
                     <label htmlFor="searchName">Animal Name:</label>
                     <input
