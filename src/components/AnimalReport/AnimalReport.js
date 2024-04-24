@@ -82,7 +82,7 @@ function AnimalReport() {
                         onChange={(e) => setAnimalSpecies(e.target.value)}
                         className="input"
                     >
-                        <option value="">Select Animal Species</option>
+                        <option value="">Select Species</option>
                         {allAnimalSpecies.map((species, index) => (
                             <option key={index} value={species}>{species}</option>
                         ))}
