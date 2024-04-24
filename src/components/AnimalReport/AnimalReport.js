@@ -18,7 +18,9 @@ function AnimalReport() {
         async function fetchAllAnimalSpecies() {
             try {
                 const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
-                setAllAnimalSpecies(response.data);
+                // Extracting species names from the response
+                const speciesNames = response.data.map(item => item.animal_species);
+                setAllAnimalSpecies(speciesNames);
             } catch (error) {
                 console.error('Error fetching animal species:', error);
             }
