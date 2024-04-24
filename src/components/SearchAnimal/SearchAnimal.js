@@ -28,6 +28,7 @@ function SearchAnimal() {
 
     fetchAnimalSpecies();
   }, []);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const month = date.getMonth() + 1; // Month is zero-based
@@ -96,16 +97,17 @@ function SearchAnimal() {
         </div>
         <div className="form-group">
           <label htmlFor="animalGender">Animal Gender:</label>
-            <select
-              id="animalGender"
-              value={animalGender}
-              onChange={(e) => setAnimalGender(e.target.value)}
-              className="input"
-            >
-              <option value="">Select Gender</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-            </select>
+          <select
+            id="animalGender"
+            value={animalGender}
+            onChange={(e) => setAnimalGender(e.target.value)}
+            className="input"
+          >
+            <option value="">Select Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
         <div className="form-group">
           <label htmlFor="animalDoBStart">Date of Birth (From):</label>
           <input
