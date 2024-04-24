@@ -22,17 +22,6 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
       return;
     }
 
-
-
-    // Logging variables
-    console.log('Name:', name);
-    console.log('Enclosure Type:', enclosure_type);
-    console.log('Build Date:', build_date);
-    console.log('Cleaning Start Time:', cleaning_start);
-    console.log('Cleaning End Time:', cleaning_end);
-
-
-
     const userData = {
       enclosureName: name,
       enclosureType: enclosure_type,
@@ -48,6 +37,8 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
     try {
       const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewEnclosure', userData);
       console.log('Response:', response);
+      // Display success alert
+      alert('Enclosure added successfully!');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('Error data:', error.response?.data);
@@ -55,13 +46,9 @@ const AddEnclosureForm = ({ onAddEnclosure }) => {
         console.error('Error headers:', error.response?.headers);
       } else {
         console.error('Non-Axios error:', error);
-
-
       }
     }
-
-    
-  };
+  }
 
   // Function to reset form fields
   const handleReset = () => {
