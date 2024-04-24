@@ -20,6 +20,16 @@ function EnclosureReport() {
             console.error('Error fetching unique enclosure types:', error);
         }
     };
+        // Function to format time string
+    const formatTime = (timeString) => {
+      if (!timeString) return '';
+      const timeParts = timeString.split(':');
+      const hours = parseInt(timeParts[0]);
+      const minutes = parseInt(timeParts[1]);
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+      return `${formattedHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    };
 
     useEffect(() => {
         fetchUniqueEnclosureTypes();
