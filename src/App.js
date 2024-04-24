@@ -29,7 +29,7 @@ import AnimalReport from './components/AnimalReport/AnimalReport';
 import AddSecurityForm from './components/AddSecurityForm/AddSecurityForm';
 import SecurityReport from './components/SecurityReport/SecurityReport';
 import EmployeeProfileView from './components/EmployeeProfile/EmployeeProfileView';
-import ManageEmployees from './components/EmployeeProfile/ManageEmployees';
+import ManageEmployees from './components/ManageEmployee/ManageEmployees';
 import CustomerProfileUpdate from './components/CustomerProfile/CustomerProfileUpdate';
 import CustomerProfileView from './components/CustomerProfile/CustomerProfileView';
 import RevenueReport from './components/RevenueReport/RevenueReport';
