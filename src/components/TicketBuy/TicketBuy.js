@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TicketBuy.css';
@@ -12,12 +12,63 @@ function TicketBuy({ customerId }) {
   const [infantTickets, setInfantTickets] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
   const [discount, setDiscount] = useState(false);
+  const [membershipDiscount,setMembershipDiscount] = useState(0);
+  const [membershipType,setMembershipType] = useState('');
+  const [adultPrice, setAdultPrice] = useState(10);
+  const [childPrice, setChildPrice] = useState(7);
+  const [seniorPrice, setSeniorPrice] = useState(6);
+  const [infantPrice, setInfantPrice] = useState(5);
 
 
-  const adultPrice = 10;
-  const childPrice = 7;
-  const seniorPrice = 6;
-  const infantPrice = 5;
+  useEffect(() => {
+    const fetchMembership = async () => {
+      try {
+        const response = await axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetMemberships?customerId=${customerId}`);
+        //console.log("Membership type:", response.data.MembershipType);
+        console.log("Membership type:", response.data.Discount);
+        setMembershipDiscount(response.data.Discount);
+        setMembershipType(response.data.MembershipType);
+        if (response.data.MembershipType === "Tier 1") {
+          setAdultPrice(Number((10 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setChildPrice(Number((7 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setSeniorPrice(Number((6 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setInfantPrice(Number((5 * (1 - (response.data.Discount / 100))).toFixed(2)));
+      } else if (response.data.MembershipType === "Tier 2") {
+          setAdultPrice(Number((10 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setChildPrice(Number((7 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setSeniorPrice(Number((6 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setInfantPrice(Number((5 * (1 - (response.data.Discount / 100))).toFixed(2)));
+      } else if (response.data.MembershipType === "Tier 3") {
+          setAdultPrice(Number((10 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setChildPrice(Number((7 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setSeniorPrice(Number((6 * (1 - (response.data.Discount / 100))).toFixed(2)));
+          setInfantPrice(Number((5 * (1 - (response.data.Discount / 100))).toFixed(2)));
+      }
+      
+
+
+      } catch (error) {
+        console.error('Failed to fetch new memberships:', error);
+      }
+    };
+
+    fetchMembership();
+  }, [customerId]); 
+
+
+  // console.log(membershipDiscount);
+  // console.log(membershipType);
+
+  console.log(infantPrice);
+
+
+
+
+  // const adultPrice = 10;
+  // const childPrice = 7;
+  // const seniorPrice = 6;
+  // const infantPrice = 5;
+  
 
   const handleAdultChange = (event) => {
     const value = Number(event.target.value);
@@ -74,12 +125,12 @@ function TicketBuy({ customerId }) {
   };
   
   const proceedWithPurchase = () => {
-    console.log('Adult Tickets:', adultTickets);
-    console.log('Child Tickets:', childTickets);
-    console.log('Senior Tickets:', seniorTickets);
-    console.log('Infant Tickets:', infantTickets);
-    console.log('Selected Date:', selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }));
-    console.log('Total Cost:', totalCost);
+    // console.log('Adult Tickets:', adultTickets);
+    // console.log('Child Tickets:', childTickets);
+    // console.log('Senior Tickets:', seniorTickets);
+    // console.log('Infant Tickets:', infantTickets);
+    // console.log('Selected Date:', selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }));
+    // console.log('Total Cost:', totalCost);
   
     const formattedDate = selectedDate ? `${('0' + (selectedDate.getMonth() + 1)).slice(-2)}/${('0' + selectedDate.getDate()).slice(-2)}/${selectedDate.getFullYear()}` : null;
   
