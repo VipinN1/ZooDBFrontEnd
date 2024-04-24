@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AnimalReport.css';
 import axios from 'axios';
 
@@ -11,6 +11,21 @@ function AnimalReport() {
     const [reportData, setReportData] = useState([]);
     const [isGenerating, setIsGenerating] = useState(false);
     const [reportGenerated, setReportGenerated] = useState(false); // Track if report has been generated
+    const [allAnimalSpecies, setAllAnimalSpecies] = useState([]); // State to hold all animal species
+
+    // Fetch all animal species when component mounts
+    useEffect(() => {
+        async function fetchAllAnimalSpecies() {
+            try {
+                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
+                setAllAnimalSpecies(response.data);
+            } catch (error) {
+                console.error('Error fetching animal species:', error);
+            }
+        }
+
+        fetchAllAnimalSpecies();
+    }, []);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -59,23 +74,31 @@ function AnimalReport() {
                 <div className="form-group">
                 <h2>Animal Report</h2>
                     <label htmlFor="animalSpecies">Animal Species:</label>
-                    <input
-                        type="text"
+                    <select
                         id="animalSpecies"
                         value={animalSpecies}
                         onChange={(e) => setAnimalSpecies(e.target.value)}
                         className="input"
-                    />
+                    >
+                        <option value="">Select Animal Species</option>
+                        {allAnimalSpecies.map((species, index) => (
+                            <option key={index} value={species}>{species}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="dietType">Diet Type:</label>
-                    <input
-                        type="text"
+                    <select
                         id="dietType"
                         value={dietType}
                         onChange={(e) => setDietType(e.target.value)}
                         className="input"
-                    />
+                    >
+                        <option value="">Select Diet Type</option>
+                        <option value="carnivore">Carnivore</option>
+                        <option value="herbivore">Herbivore</option>
+                        <option value="omnivore">Omnivore</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="diagnosis">Diagnosis:</label>
@@ -95,7 +118,6 @@ function AnimalReport() {
                         onChange={handleReportTypeChange}
                         className="input"
                     >
-                        <option value="animal">Animal</option>
                         <option value="diet">Diet</option>
                         <option value="vet">Vet Records</option>
                     </select>
