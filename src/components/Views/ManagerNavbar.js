@@ -70,6 +70,7 @@ export default function ManagerNavbar({handleSignOut}) {
             </div>
           )}
         </CustomLink>
+        <CustomLink to="/manage-employees">Manage Employees</CustomLink>    
         <CustomLink
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
