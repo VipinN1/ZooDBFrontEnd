@@ -100,6 +100,9 @@ const MembershipPage = ({ customerId }) => {
   return (
     <div className="membership-page">
       <h2>Choose Your Membership</h2>
+      <h3> Tier 1:100$, 10% off</h3>
+      <h3> Tier 2:200$, 20% off</h3>
+      <h3> Tier 3:300$, 30% off</h3>
       <div className="membership-options">
         {['Tier 1', 'Tier 2', 'Tier 3'].map((tier, index) => (
           <div key={index} className="membership-option">
