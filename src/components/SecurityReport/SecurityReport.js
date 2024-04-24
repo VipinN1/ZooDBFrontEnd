@@ -6,9 +6,22 @@ function SecurityReport() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [location, setLocation] = useState('');
-  const [queryOption, setQueryOption] = useState('dates');
   const [errorMessage, setErrorMessage] = useState('');
   const [reportData, setReportData] = useState([]);
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+    setErrorMessage('');
+  };
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+    setErrorMessage('');
+  };
+
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +32,7 @@ function SecurityReport() {
       setErrorMessage('End date cannot be after the present date');
       return;
     }
-    if (queryOption === 'dates' && startDate > endDate) {
+    if (startDate > endDate) {
       setErrorMessage('Start date cannot be after end date');
       return;
     }
@@ -27,20 +40,20 @@ function SecurityReport() {
     setErrorMessage('');
 
     try {
-      const endpointUrl = queryOption === 'dates'
-        ? 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/ZooDb/GenerateSecurityReportByDates'
-        : 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateSecurityReportByDatesAndLocation';
+      // Define the API endpoint URL
+      const endpointUrl = 'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateSecurityReport';
 
-      const payload = queryOption === 'dates'
-        ? { startDate, endDate }
-        : { startDate, endDate, location };
+      // Define the request payload
+      const payload = { startDate, endDate, location };
 
+      // Send the POST request to the backend
       const response = await axios.post(endpointUrl, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
+      // Set the report data based on the response from the backend
       setReportData(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -48,35 +61,10 @@ function SecurityReport() {
     }
   };
 
-  const handleStartDateChange = (e) => {
-    setStartDate(e.target.value);
-    setErrorMessage('');
-  };
-
-  const handleEndDateChange = (e) => {
-    setEndDate(e.target.value);
-    setErrorMessage('');
-  };
-
-  const handleLocationChange = (e) => {
-    setLocation(e.target.value);
-  };
-
-  const handleQueryOptionChange = (e) => {
-    setQueryOption(e.target.value);
-  };
-
   return (
     <div className="security-report-container">
       <h2 className="security-report-title">Security Report</h2>
       <form onSubmit={handleSubmit} className="security-report-form">
-        <div className="security-form-group">
-          <label htmlFor="queryOption" className="security-label">Query Option:</label>
-          <select id="queryOption" value={queryOption} onChange={handleQueryOptionChange} className="security-select">
-            <option value="dates">By Dates</option>
-            <option value="datesAndLocation">By Dates and Location</option>
-          </select>
-        </div>
         <div className="security-form-group">
           <label htmlFor="startDate" className="security-label">Start Date:</label>
           <input
@@ -84,8 +72,8 @@ function SecurityReport() {
             id="startDate"
             value={startDate}
             onChange={handleStartDateChange}
-            required={queryOption !== 'location'}
             className="security-input"
+            required
           />
         </div>
         <div className="security-form-group">
@@ -95,22 +83,20 @@ function SecurityReport() {
             id="endDate"
             value={endDate}
             onChange={handleEndDateChange}
-            required={queryOption !== 'location'}
+            className="security-input"
+            required
+          />
+        </div>
+        <div className="security-form-group">
+          <label htmlFor="location" className="security-label">Location:</label>
+          <input
+            type="text"
+            id="location"
+            value={location}
+            onChange={handleLocationChange}
             className="security-input"
           />
         </div>
-        {queryOption === 'datesAndLocation' && (
-          <div className="security-form-group">
-            <label htmlFor="location" className="security-label">Location:</label>
-            <input
-              type="text"
-              id="location"
-              value={location}
-              onChange={handleLocationChange}
-              className="security-input"
-            />
-          </div>
-        )}
         <button type="submit" className="security-button">Generate Report</button>
         {errorMessage && <p className="security-error-message">{errorMessage}</p>}
       </form>
@@ -131,17 +117,17 @@ function SecurityReport() {
               </tr>
             </thead>
             <tbody>
-                {reportData.map((report, index) => (
-                    <tr key={index}>
-                        <td>{report.logID}</td>
-                        <td>{report.empID}</td>
-                        <td>{new Date(report.date).toLocaleDateString()}</td>
-                        <td>{report.time}</td>
-                        <td>{report.eventDescription}</td>
-                        <td>{report.location}</td>
-                        <td>{report.severityLevel}</td>
-                    </tr>
-                ))}
+              {reportData.map((report, index) => (
+                <tr key={index}>
+                  <td>{report.logID}</td>
+                  <td>{report.empID}</td>
+                  <td>{new Date(report.date).toLocaleDateString()}</td>
+                  <td>{report.time}</td>
+                  <td>{report.eventDescription}</td>
+                  <td>{report.location}</td>
+                  <td>{report.severityLevel}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
