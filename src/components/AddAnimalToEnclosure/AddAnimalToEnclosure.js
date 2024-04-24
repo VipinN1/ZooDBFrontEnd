@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './AddAnimalToEnclosure.css';
 import axios from 'axios';
 
@@ -16,12 +16,12 @@ function AddAnimalToEnclosure() {
         enclosureID: ''
     });
     const [enclosures, setEnclosures] = useState([]); // State for enclosures
-    const [animalSpeciesList, setAnimalSpeciesList] = useState([]); // State for animal species list
     const [selectedEnclosure, setSelectedEnclosure] = useState(''); // State for selected enclosure
+    const [isAnimalFetched, setIsAnimalFetched] = useState(false);
+    const [animalSpeciesList, setAnimalSpeciesList] = useState([]);
 
     const fetchAnimalData = async () => {
         try {
-            // Fetch animal data based on searchData
             const response = await axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Get`, {
                 params: {
                     animalName: searchData.animalName,
@@ -32,10 +32,8 @@ function AddAnimalToEnclosure() {
 
             const data = response.data;
 
-            // Format the date of birth to 'YYYY-MM-DD'
             const formattedDoB = data.animalDoB.split('T')[0];
 
-            // Update the animalData state
             setAnimalData({
                 animalID: data.animalID,
                 animalName: data.animalName,
@@ -43,15 +41,17 @@ function AddAnimalToEnclosure() {
                 animalDoB: formattedDoB,
                 enclosureID: data.enclosureID
             });
+
+            setIsAnimalFetched(true);
         } catch (error) {
             console.error('Failed to fetch animal data:', error);
             alert('Failed to fetch animal data.');
+            setIsAnimalFetched(false);
         }
     };
 
     const fetchEnclosures = async () => {
         try {
-            // Fetch the list of enclosures
             const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosures');
             setEnclosures(response.data);
         } catch (error) {
@@ -62,7 +62,6 @@ function AddAnimalToEnclosure() {
 
     const fetchAnimalSpecies = async () => {
         try {
-            // Fetch the list of animal species
             const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
             setAnimalSpeciesList(response.data);
         } catch (error) {
@@ -71,26 +70,19 @@ function AddAnimalToEnclosure() {
         }
     };
 
-    useEffect(() => {
-        fetchEnclosures(); // Fetch enclosures when the component loads
-        fetchAnimalSpecies(); // Fetch animal species when the component loads
-    }, []);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Selected Enclosure ID:', selectedEnclosure); // Debugging statement
-        
-        // Construct the payload with updated enclosure ID
+        console.log('Selected Enclosure ID:', selectedEnclosure);
+
         const updateData = {
             animalID: animalData.animalID,
             enclosureID: selectedEnclosure
         };
     
         try {
-            // Make the Axios call to update the animal's enclosure
             const response = await axios.put('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/Animal/Transfer', updateData);
-            console.log('Response from API:', response.data); // Debugging statement
-            alert(response.data); // Assuming the backend sends a success message directly in response.data
+            console.log('Response from API:', response.data);
+            alert(response.data);
         } catch (error) {
             console.error('Failed to update animal enclosure:', error);
             alert('Failed to add animal to the enclosure.');
@@ -101,7 +93,6 @@ function AddAnimalToEnclosure() {
         <div className="modify-animal-container">
             <h2>Assign Animal to Enclosure</h2>
             <form onSubmit={handleSubmit}>
-                {/* Search form for original animal data */}
                 <div className="form-group-animal">
                     <label htmlFor="searchName">Animal Name:</label>
                     <input
@@ -119,16 +110,17 @@ function AddAnimalToEnclosure() {
                     <label htmlFor="searchSpecies">Animal Species:</label>
                     <select
                         id="searchSpecies"
-                        value={searchData.animalSpecies}
                         onChange={(e) => setSearchData({
                             ...searchData,
                             animalSpecies: e.target.value
                         })}
                         required
                     >
-                        <option value="">-- Select an Animal Species --</option>
+                        <option value="">Select Species</option>
                         {animalSpeciesList.map((species, index) => (
-                            <option key={index} value={species}>{species}</option>
+                            <option key={index} value={species.animal_species}>
+                                {species.animal_species}
+                            </option>
                         ))}
                     </select>
                 </div>
@@ -147,8 +139,7 @@ function AddAnimalToEnclosure() {
                 </div>
                 <button type="button" onClick={fetchAnimalData}>Search</button>
 
-                {/* Form to select an enclosure, only shown after animal data is fetched */}
-                {animalData.animalID && (
+                {isAnimalFetched && (
                     <>
                         <div className="form-group-animal">
                             <label htmlFor="enclosure">Choose an Enclosure:</label>
@@ -165,7 +156,6 @@ function AddAnimalToEnclosure() {
                                     </option>
                                 ))}
                             </select>
-
                         </div>
 
                         <button type="submit">Add Animal to Enclosure</button>
