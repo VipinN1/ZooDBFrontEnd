@@ -15,7 +15,7 @@ const MembershipPage = ({ customerId }) => {
   useEffect(() => {
     const fetchMembership = async () => {
       try {
-        const response = await axios.get(`http://localhost:5095/api/ZooDb/GetMemberships?customerId=${customerId}`);
+        const response = await axios.get(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetMemberships?customerId=${customerId}`);
         //console.log("Membership type:", response.data.MembershipType);
         console.log("Membership type:", response.data.MembershipType);
         setMembershipType(response.data.MembershipType);
@@ -84,7 +84,7 @@ const MembershipPage = ({ customerId }) => {
     console.log("Data to be sent:", data);
     
     try {
-      const response = await axios.post('http://localhost:5095/api/ZooDb/NewMembership', data);
+      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/NewMembership', data);
       console.log(response);
       setShowPopup(false);
     } catch (error) {
