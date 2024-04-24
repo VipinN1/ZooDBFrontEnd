@@ -1,41 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchEnclosure.css';
 import axios from 'axios';
 
 function SearchEnclosure() {
-  // State variables for each form field
   const [enclosureName, setEnclosureName] = useState('');
   const [enclosureType, setEnclosureType] = useState('');
-  const [builtDate, setBuiltDate] = useState('');
+  const [builtDateStart, setBuiltDateStart] = useState('');
+  const [builtDateEnd, setBuiltDateEnd] = useState('');
   const [cleaningScheduleStart, setCleaningScheduleStart] = useState('');
   const [cleaningScheduleEnd, setCleaningScheduleEnd] = useState('');
-
   const [queryData, setQueryData] = useState([]);
+  const [enclosureTypes, setEnclosureTypes] = useState([]);
+  const [error, setError] = useState(null); // State to hold error
 
+  useEffect(() => {
+    async function fetchEnclosureTypes() {
+      try {
+        const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosureTypes');
+        setEnclosureTypes(response.data);
+      } catch (error) {
+        console.error('Error fetching enclosure types:', error);
+        setError('Error fetching enclosure types. Please try again.'); // Set error state
+      }
+    }
+
+    fetchEnclosureTypes();
+  }, []);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1; // Month is zero-based
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const requestData = {
       enclosureName: enclosureName || null,
       enclosureType: enclosureType || null,
-      builtDate: builtDate || null,
+      builtDateStart: builtDateStart || null,
+      builtDateEnd: builtDateEnd || null,
       cleaningScheduleStart: cleaningScheduleStart || null,
       cleaningScheduleEnd: cleaningScheduleEnd || null,
     };
 
     try {
-      // Post request to fetch enclosure data based on the input fields
-      console.log('Request Data:', requestData);
       const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/SearchEnclosure', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      // Set the enclosure data based on the response from the back-end
       setQueryData(response.data);
     } catch (error) {
       console.error('Error fetching query data:', error);
+      setError('Error fetching query data. Please try again.'); // Set error state
     }
   };
 
@@ -55,21 +75,35 @@ function SearchEnclosure() {
         </div>
         <div className="form-group">
           <label htmlFor="enclosureType">Enclosure Type:</label>
-          <input
-            type="text"
+          <select
             id="enclosureType"
             value={enclosureType}
             onChange={(e) => setEnclosureType(e.target.value)}
             className="input"
+          >
+            <option value="">Select Enclosure Type</option>
+            {enclosureTypes.map((type, index) => (
+              <option key={index} value={type.enclosure_type}>{type.enclosure_type}</option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="builtDateStart">Built Date Start:</label>
+          <input
+            type="date"
+            id="builtDateStart"
+            value={builtDateStart}
+            onChange={(e) => setBuiltDateStart(e.target.value)}
+            className="input"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="builtDate">Built Date:</label>
+          <label htmlFor="builtDateEnd">Built Date End:</label>
           <input
             type="date"
-            id="builtDate"
-            value={builtDate}
-            onChange={(e) => setBuiltDate(e.target.value)}
+            id="builtDateEnd"
+            value={builtDateEnd}
+            onChange={(e) => setBuiltDateEnd(e.target.value)}
             className="input"
           />
         </div>
@@ -96,6 +130,10 @@ function SearchEnclosure() {
         <button type="submit" className="submit-button">Search Enclosures</button>
       </form>
 
+      {/* Error message */}
+      {error && <div className="error">{error}</div>}
+
+      {/* Query results */}
       {queryData.length > 0 && (
         <div className="query-data">
           <h3>Enclosures Found:</h3>
@@ -114,13 +152,9 @@ function SearchEnclosure() {
                 <tr key={index}>
                   <td>{enclosure.enclosureName}</td>
                   <td>{enclosure.enclosureType}</td>
-                  <td>{new Date(enclosure.builtDate).toDateString()}</td>
-                  <td>
-                    {new Date(`1970-01-01T${enclosure.cleaningScheduleStart}Z`).toTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </td>
-                  <td>
-                    {new Date(`1970-01-01T${enclosure.cleaningScheduleEnd}Z`).toTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </td>
+                  <td>{formatDate(enclosure.builtDate)}</td>
+                  <td>{enclosure.cleaningScheduleStart}</td>
+                  <td>{enclosure.cleaningScheduleEnd}</td>
                 </tr>
               ))}
             </tbody>
