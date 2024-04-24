@@ -14,6 +14,7 @@ import TicketView from './components/TicketView/TicketView';
 import Donation from './components/Donation/Donation';
 import VeterinarianRecord from './components/VeterinarianRecord/VeterinarianRecord';
 import DietForm from './components/DietForm/DietForm';
+import SearchRecords from './components/SearchRecords/SearchRecords';
 import AddAnimal from './components/AddAnimal/AddAnimal';
 import AddEnclosureForm from './components/AddEnclosureForm/AddEnclosureForm';
 import ModifyEnclosure from './components/ModifyEnclosure/ModifyEnclosure';
@@ -187,6 +188,7 @@ try {
                     <Route path="/donation" element={<Donation customerId={customerId} />} />
                     <Route path="/veterinarian-record" element={<VeterinarianRecord />} />
                     <Route path="/diet-entry" element={<DietForm />} />
+                    <Route path="/search-records" element={<SearchRecords />} />
                     <Route path="/add-enclosure" element={<AddEnclosureForm />} />
                     <Route path="/modify-enclosure" element={<ModifyEnclosure />} />
                     <Route path="/delete-enclosure" element={<DeleteEnclosure />} />
