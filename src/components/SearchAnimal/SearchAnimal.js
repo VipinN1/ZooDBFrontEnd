@@ -96,13 +96,16 @@ function SearchAnimal() {
         </div>
         <div className="form-group">
           <label htmlFor="animalGender">Animal Gender:</label>
-          <input
-            type="text"
+          <select
             id="animalGender"
             value={animalGender}
             onChange={(e) => setAnimalGender(e.target.value)}
             className="input"
-          />
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="animalDoBStart">Date of Birth (From):</label>
