@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AddAnimalToEnclosure.css';
 import axios from 'axios';
 
@@ -19,6 +19,31 @@ function AddAnimalToEnclosure() {
     const [selectedEnclosure, setSelectedEnclosure] = useState(''); // State for selected enclosure
     const [isAnimalFetched, setIsAnimalFetched] = useState(false);
     const [animalSpeciesList, setAnimalSpeciesList] = useState([]);
+
+    useEffect(() => {
+        const fetchEnclosures = async () => {
+            try {
+                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosures');
+                setEnclosures(response.data);
+            } catch (error) {
+                console.error('Failed to fetch enclosures:', error);
+                alert('Failed to fetch enclosures.');
+            }
+        };
+
+        const fetchAnimalSpecies = async () => {
+            try {
+                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
+                setAnimalSpeciesList(response.data);
+            } catch (error) {
+                console.error('Failed to fetch animal species:', error);
+                alert('Failed to fetch animal species.');
+            }
+        };
+
+        fetchEnclosures();
+        fetchAnimalSpecies();
+    }, []);
 
     const fetchAnimalData = async () => {
         try {
@@ -47,26 +72,6 @@ function AddAnimalToEnclosure() {
             console.error('Failed to fetch animal data:', error);
             alert('Failed to fetch animal data.');
             setIsAnimalFetched(false);
-        }
-    };
-
-    const fetchEnclosures = async () => {
-        try {
-            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosures');
-            setEnclosures(response.data);
-        } catch (error) {
-            console.error('Failed to fetch enclosures:', error);
-            alert('Failed to fetch enclosures.');
-        }
-    };
-
-    const fetchAnimalSpecies = async () => {
-        try {
-            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
-            setAnimalSpeciesList(response.data);
-        } catch (error) {
-            console.error('Failed to fetch animal species:', error);
-            alert('Failed to fetch animal species.');
         }
     };
 
