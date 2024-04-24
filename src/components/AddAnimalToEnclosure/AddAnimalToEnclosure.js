@@ -16,6 +16,7 @@ function AddAnimalToEnclosure() {
         enclosureID: ''
     });
     const [enclosures, setEnclosures] = useState([]); // State for enclosures
+    const [animalSpeciesList, setAnimalSpeciesList] = useState([]); // State for animal species list
     const [selectedEnclosure, setSelectedEnclosure] = useState(''); // State for selected enclosure
 
     const fetchAnimalData = async () => {
@@ -59,19 +60,20 @@ function AddAnimalToEnclosure() {
         }
     };
 
+    const fetchAnimalSpecies = async () => {
+        try {
+            // Fetch the list of animal species
+            const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
+            setAnimalSpeciesList(response.data);
+        } catch (error) {
+            console.error('Failed to fetch animal species:', error);
+            alert('Failed to fetch animal species.');
+        }
+    };
+
     useEffect(() => {
-        const fetchEnclosures = async () => {
-            try {
-                // Fetch the list of enclosures
-                const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosures');
-                console.log('Fetched enclosures:', response.data); // Debugging statement
-                setEnclosures(response.data);
-            } catch (error) {
-                console.error('Failed to fetch enclosures:', error);
-                alert('Failed to fetch enclosures.');
-            }
-        };
         fetchEnclosures(); // Fetch enclosures when the component loads
+        fetchAnimalSpecies(); // Fetch animal species when the component loads
     }, []);
 
     const handleSubmit = async (event) => {
@@ -115,8 +117,7 @@ function AddAnimalToEnclosure() {
                 </div>
                 <div className="form-group-animal">
                     <label htmlFor="searchSpecies">Animal Species:</label>
-                    <input
-                        type="text"
+                    <select
                         id="searchSpecies"
                         value={searchData.animalSpecies}
                         onChange={(e) => setSearchData({
@@ -124,7 +125,12 @@ function AddAnimalToEnclosure() {
                             animalSpecies: e.target.value
                         })}
                         required
-                    />
+                    >
+                        <option value="">-- Select an Animal Species --</option>
+                        {animalSpeciesList.map((species, index) => (
+                            <option key={index} value={species}>{species}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group-animal">
                     <label htmlFor="searchDoB">Animal DoB:</label>
