@@ -35,14 +35,14 @@ function SearchEnclosure() {
     return `${month}/${day}/${year}`;
   };
 
-  // Function to format time to 12-hour format without seconds
+  // Function to format time to 12-hour format with AM/PM
   const formatTimeTo12Hour = (timeString) => {
     if (!timeString) return '';
     const [hours, minutes] = timeString.split(':');
     const hour = parseInt(hours, 10);
     const period = hour >= 12 ? 'PM' : 'AM';
     const formattedHour = hour % 12 || 12;
-    return `${formattedHour}:${minutes} ${period}`;
+    return `${formattedHour}:${minutes.padStart(2, '0')} ${period}`;
   };
 
   const handleFormSubmit = async (event) => {
