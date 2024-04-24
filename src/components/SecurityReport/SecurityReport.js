@@ -73,7 +73,6 @@ function SecurityReport() {
             value={startDate}
             onChange={handleStartDateChange}
             className="security-input"
-            required
           />
         </div>
         <div className="security-form-group">
@@ -84,7 +83,6 @@ function SecurityReport() {
             value={endDate}
             onChange={handleEndDateChange}
             className="security-input"
-            required
           />
         </div>
         <div className="security-form-group">
