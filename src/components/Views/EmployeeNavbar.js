@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import "./CustomerNavbar.css";
 
-export default function EmployeeNavbar({handleSignOut}) {
+export default function EmployeeNavbar({ handleSignOut }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -11,37 +11,84 @@ export default function EmployeeNavbar({handleSignOut}) {
         Zoo
       </Link>
       <ul>
+        {/* Animals menu */}
         <CustomLink
-          to="/add-animal"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           Animals
           {isHovered && (
-            <div className="sub-menu-customer">
+            <div
+              className="sub-menu-customer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CustomLink to="/search-animal">Search</CustomLink>
+              <CustomLink to="/add-animal">Add</CustomLink>
+              <CustomLink to="/modify-animal">Modify</CustomLink>
+              <CustomLink to="/assign-enclosure">Transfer</CustomLink>
+              <CustomLink to="/delete-animal">Delete</CustomLink>
+              <CustomLink to="/delete-donated-name">Deleted Donated Name</CustomLink>
+            </div>
+          )}
+        </CustomLink>
+
+        {/* Records menu */}
+        <CustomLink
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Records
+          {/* Display sub-menu if isHovered */}
+          {isHovered && (
+            <div
+              className="sub-menu-customer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CustomLink to="/search-records">Search</CustomLink>
               <CustomLink to="/veterinarian-record">Vet Records</CustomLink>
               <CustomLink to="/diet-entry">Diets</CustomLink>
             </div>
           )}
         </CustomLink>
-        <CustomLink to="/clock-in">Clock In</CustomLink>
-        <CustomLink to="/add-enclosure-form">Enclosure Entry</CustomLink>
-        <CustomLink to="/orders">Orders</CustomLink>
-        <CustomLink to="/add-security-form">Security</CustomLink>
+
+        {/* Enclosures menu */}
+        <CustomLink
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          Enclosures
+          {/* Display sub-menu if isHovered */}
+          {isHovered && (
+            <div
+              className="sub-menu-customer"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CustomLink to="/search-enclosure">Search</CustomLink>
+              <CustomLink to="/add-enclosure">Add</CustomLink>
+              <CustomLink to="/modify-enclosure">Modify</CustomLink>
+              <CustomLink to="/delete-enclosure">Delete</CustomLink>
+              
+            </div>
+          )}
+        </CustomLink>
+        <CustomLink to="/employee-profile-view">View Profile</CustomLink>
         <li className="nav-item">
-        <button onClick={handleSignOut}>Sign out</button>
+          <button onClick={handleSignOut}>Sign out</button>
         </li>
       </ul>
     </nav>
   );
 }
 
-function CustomLink({ to, children, onMouseEnter, onMouseLeave, ...props }) {
+function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? "active" : ""} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <li className={isActive ? "active" : ""}>
       <Link to={to} {...props}>
         {children}
       </Link>
