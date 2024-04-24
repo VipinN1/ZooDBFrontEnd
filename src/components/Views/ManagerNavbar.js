@@ -44,7 +44,7 @@ export default function ManagerNavbar({handleSignOut}) {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <CustomLink to="/animal-report">Animal Report</CustomLink>
+              <CustomLink to="/search-records">Search Records</CustomLink>
               <CustomLink to="/veterinarian-record">Vet Records</CustomLink>
               <CustomLink to="/diet-entry">Diets</CustomLink>
             </div>
@@ -70,7 +70,6 @@ export default function ManagerNavbar({handleSignOut}) {
             </div>
           )}
         </CustomLink>
-        <CustomLink to="/add-security">Security</CustomLink>
         <CustomLink
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -78,9 +77,9 @@ export default function ManagerNavbar({handleSignOut}) {
           Zoo Reports
           {isHovered && (
             <div className="sub-menu-customer">
+              <CustomLink to="/animal-report">Animal Report</CustomLink>
               <CustomLink to="/enclosure-report">Enclosure Report</CustomLink>
               <CustomLink to="/revenue-report">Revenue Report</CustomLink>
-              <CustomLink to="/security-report">Security Report</CustomLink>
             </div>
           )}
         </CustomLink>
