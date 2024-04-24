@@ -92,7 +92,7 @@ function SearchRecords() {
 
     return (
         <div className="animal-report-container">
-            <h2>Animal Report</h2>
+            <h2>Search Records</h2>
             <form onSubmit={handleFormSubmit}>
                 {/* Form inputs */}
                 <div className="form-group">
@@ -115,7 +115,7 @@ function SearchRecords() {
                         className="input"
                         required
                     >
-                        <option value="">Select Animal Species</option>
+                        <option value="">Select Species</option>
                         {animalSpeciesOptions.map((species, index) => (
                             <option key={index} value={species}>{species}</option>
                         ))}
