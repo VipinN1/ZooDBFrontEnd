@@ -204,7 +204,7 @@ try {
                     <Route path="/animal-report" element={<AnimalReport />} />
                     <Route path="/revenue-report" element={<RevenueReport />} />
                     <Route path="/delete-donated-name" element={<DeleteDonatedNameForm />} />
-                    <Route path="/membership-page" element={<MembershipPage />} />
+                    <Route path="/membership-page" element={<MembershipPage customerId={customerId} />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
