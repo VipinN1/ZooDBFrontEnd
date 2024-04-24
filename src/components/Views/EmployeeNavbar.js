@@ -46,7 +46,7 @@ export default function EmployeeNavbar({ handleSignOut }) {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <CustomLink to="/animal-report">Animal Report</CustomLink>
+              <CustomLink to="/search-records">Search</CustomLink>
               <CustomLink to="/veterinarian-record">Vet Records</CustomLink>
               <CustomLink to="/diet-entry">Diets</CustomLink>
             </div>
@@ -74,7 +74,6 @@ export default function EmployeeNavbar({ handleSignOut }) {
             </div>
           )}
         </CustomLink>
-        <CustomLink to="/add-security">Security</CustomLink>
         <CustomLink to="/employee-profile-view">View Profile</CustomLink>
         <li className="nav-item">
           <button onClick={handleSignOut}>Sign out</button>
