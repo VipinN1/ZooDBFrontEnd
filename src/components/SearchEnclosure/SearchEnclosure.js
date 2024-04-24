@@ -26,6 +26,7 @@ function SearchEnclosure() {
 
     fetchEnclosureTypes();
   }, []);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const month = date.getMonth() + 1; // Month is zero-based
@@ -33,6 +34,17 @@ function SearchEnclosure() {
     const year = date.getFullYear();
     return `${month}/${day}/${year}`;
   };
+
+  // Function to format time to 12-hour format without seconds
+  const formatTimeTo12Hour = (timeString) => {
+    if (!timeString) return '';
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours, 10);
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 || 12;
+    return `${formattedHour}:${minutes} ${period}`;
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -153,8 +165,8 @@ function SearchEnclosure() {
                   <td>{enclosure.enclosureName}</td>
                   <td>{enclosure.enclosureType}</td>
                   <td>{formatDate(enclosure.builtDate)}</td>
-                  <td>{enclosure.cleaningScheduleStart}</td>
-                  <td>{enclosure.cleaningScheduleEnd}</td>
+                  <td>{formatTimeTo12Hour(enclosure.cleaningScheduleStart)}</td>
+                  <td>{formatTimeTo12Hour(enclosure.cleaningScheduleEnd)}</td>
                 </tr>
               ))}
             </tbody>
