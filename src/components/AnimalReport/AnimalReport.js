@@ -120,6 +120,7 @@ function AnimalReport() {
                         onChange={handleReportTypeChange}
                         className="input"
                     >
+                        <option value="animal">Animal</option>    
                         <option value="diet">Diet</option>
                         <option value="vet">Vet Records</option>
                     </select>
