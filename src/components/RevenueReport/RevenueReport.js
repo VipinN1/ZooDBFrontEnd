@@ -176,7 +176,6 @@ function RevenueReport() {
                     <th>Child Tickets</th>
                     <th>Senior Tickets</th>
                     <th>Infant Tickets</th>
-                    <th>Membership Type</th> {/* Added Membership Type column */}
                   </>
                 )}
               </tr>
