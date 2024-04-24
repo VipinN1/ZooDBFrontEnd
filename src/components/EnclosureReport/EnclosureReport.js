@@ -31,6 +31,16 @@ function EnclosureReport() {
       return `${formattedHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
     };
 
+    // Function to format time to 12-hour format without seconds
+const formatTimeTo12Hour = (timeString) => {
+    if (!timeString) return '';
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours, 10);
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 || 12;
+    return `${formattedHour}:${minutes} ${period}`;
+};
+
     useEffect(() => {
         fetchUniqueEnclosureTypes();
     }, []);
