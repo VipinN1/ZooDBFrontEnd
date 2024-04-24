@@ -10,7 +10,7 @@ export default function AboutUs() {
       <div className="content-box vision-content">
         <h2>Vision:</h2>
         <ul>
-          <li>The Cougar Zoo & Aquarium, with its world-class exhibits and exceptional programs, attracts visitors from around the world and families from close to home.</li>
+          <li>The Cougar Zoo with its world-class exhibits and exceptional programs, attracts visitors from around the world and families from close to home, in order to education about the world around us.</li>
         </ul>
       </div>
       <div className="content-box mission-content">
