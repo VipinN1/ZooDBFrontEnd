@@ -1,134 +1,206 @@
-import React, { useState } from 'react';
-import './SearchEnclosure.css';
+import React, { useState, useEffect } from 'react';
+import './EnclosureReport.css';
 import axios from 'axios';
 
-function SearchEnclosure() {
-  // State variables for each form field
-  const [enclosureName, setEnclosureName] = useState('');
-  const [enclosureType, setEnclosureType] = useState('');
-  const [builtDate, setBuiltDate] = useState('');
-  const [cleaningScheduleStart, setCleaningScheduleStart] = useState('');
-  const [cleaningScheduleEnd, setCleaningScheduleEnd] = useState('');
+function EnclosureReport() {
+    const [enclosures, setEnclosures] = useState([]); 
+    const [enclosureName, setEnclosureName] = useState('');
+    const [enclosureType, setEnclosureType] = useState('');
+    const [dateRange, setDateRange] = useState({ start: '', end: '' });
+    const [timeRange, setTimeRange] = useState({ start: '', end: '' });
+    const [uniqueEnclosureTypes, setUniqueEnclosureTypes] = useState([]); 
 
-  const [queryData, setQueryData] = useState([]);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    const requestData = {
-      enclosureName: enclosureName || null,
-      enclosureType: enclosureType || null,
-      builtDate: builtDate || null,
-      cleaningScheduleStart: cleaningScheduleStart || null,
-      cleaningScheduleEnd: cleaningScheduleEnd || null,
+    const fetchUniqueEnclosureTypes = async () => {
+        try {
+            const response = await axios.get(
+                'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllEnclosureTypes'
+            );
+            setUniqueEnclosureTypes(response.data);
+        } catch (error) {
+            console.error('Error fetching unique enclosure types:', error);
+        }
     };
 
-    try {
-      // Post request to fetch enclosure data based on the input fields
-      console.log('Request Data:', requestData);
-      const response = await axios.post('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/SearchEnclosure', requestData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    useEffect(() => {
+        fetchUniqueEnclosureTypes();
+    }, []);
 
-      // Set the enclosure data based on the response from the back-end
-      setQueryData(response.data);
-    } catch (error) {
-      console.error('Error fetching query data:', error);
-    }
-  };
+    const handleFormSubmit = async (event) => {
+        event.preventDefault(); 
 
-  return (
-    <div className="enclosure-query-container">
-      <h2>Zoo Enclosure Search</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="form-group">
-          <label htmlFor="enclosureName">Enclosure Name:</label>
-          <input
-            type="text"
-            id="enclosureName"
-            value={enclosureName}
-            onChange={(e) => setEnclosureName(e.target.value)}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="enclosureType">Enclosure Type:</label>
-          <input
-            type="text"
-            id="enclosureType"
-            value={enclosureType}
-            onChange={(e) => setEnclosureType(e.target.value)}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="builtDate">Built Date:</label>
-          <input
-            type="date"
-            id="builtDate"
-            value={builtDate}
-            onChange={(e) => setBuiltDate(e.target.value)}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="cleaningScheduleStart">Cleaning Schedule Start:</label>
-          <input
-            type="time"
-            id="cleaningScheduleStart"
-            value={cleaningScheduleStart}
-            onChange={(e) => setCleaningScheduleStart(e.target.value)}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="cleaningScheduleEnd">Cleaning Schedule End:</label>
-          <input
-            type="time"
-            id="cleaningScheduleEnd"
-            value={cleaningScheduleEnd}
-            onChange={(e) => setCleaningScheduleEnd(e.target.value)}
-            className="input"
-          />
-        </div>
-        <button type="submit" className="submit-button">Search Enclosures</button>
-      </form>
+        //  fetch enclosures based on the current filter parameters
+        try {
+            const response = await axios.post(
+                'https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GenerateEnclosureReport',
+                {
+                    enclosureName,
+                    enclosureType,
+                    dateRangeStart: dateRange.start,
+                    dateRangeEnd: dateRange.end,
+                    timeRangeStart: timeRange.start,
+                    timeRangeEnd: timeRange.end,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
 
-      {queryData.length > 0 && (
-        <div className="query-data">
-          <h3>Enclosures Found:</h3>
-          <table className="query-table">
-            <thead>
-              <tr>
-                <th>Enclosure Name</th>
-                <th>Enclosure Type</th>
-                <th>Built Date</th>
-                <th>Cleaning Schedule Start</th>
-                <th>Cleaning Schedule End</th>
-              </tr>
-            </thead>
-            <tbody>
-              {queryData.map((enclosure, index) => (
-                <tr key={index}>
-                  <td>{enclosure.enclosureName}</td>
-                  <td>{enclosure.enclosureType}</td>
-                  <td>{new Date(enclosure.builtDate).toLocaleDateString()}</td>
-                  <td>
-                    {new Date(`1970-01-01T${enclosure.cleaningScheduleStart}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </td>
-                  <td>
-                    {new Date(`1970-01-01T${enclosure.cleaningScheduleEnd}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            // Store the enclosures data in state
+            const enclosuresData = response.data;
+
+            //  fetch animals for each enclosure
+            const updatedEnclosures = await Promise.all(
+                enclosuresData.map(async (enclosure) => {
+                    const animalsData = await fetchAnimalsForEnclosure(enclosure.enclosureID);
+                    return { ...enclosure, animals: animalsData };
+                })
+            );
+
+            // Update the state with the enclosures including the animals data
+            setEnclosures(updatedEnclosures);
+        } catch (error) {
+            console.error('Error fetching enclosures:', error);
+        }
+    };
+
+    // Fetch animals for a specific enclosure
+    const fetchAnimalsForEnclosure = async (enclosureID) => {
+        try {
+            const response = await axios.get(
+                `https://zoodatabasebackend.azurewebsites.net/api/ZooDb/FetchAnimalsForEnclosure/${enclosureID}`
+            );
+            return response.data;
+        } catch (error) {
+            console.error(`Error fetching animals for enclosure ${enclosureID}:`, error);
+            return [];
+        }
+    };
+
+    // Function to convert time to 12-hour format without seconds
+    const formatTimeTo12Hour = (time) => {
+        const date = new Date(`1970-01-01T${time}Z`);
+        const options = {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+        };
+        return date.toTimeString([], options);
+    };
+
+    return (
+        <div className="enclosure-report-container">
+            <h2 className="enclosure-report-title">Zoo Enclosure Report</h2>
+            <form onSubmit={handleFormSubmit} className="enclosure-report-form">
+                {/* Form inputs */}
+                <div className="form-group">
+                    <label htmlFor="enclosureName" className="enclosure-name-label">Enclosure Name:</label>
+                    <input
+                        type="text"
+                        id="enclosureName"
+                        value={enclosureName}
+                        onChange={(event) => setEnclosureName(event.target.value)}
+                        className="input"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="enclosureType" className="enclosure-type-label">Enclosure Type:</label>
+                    <select
+                        id="enclosureType"
+                        value={enclosureType}
+                        onChange={(event) => setEnclosureType(event.target.value)}
+                        className="input"
+                    >
+                        <option value="">-- Select Enclosure Type --</option>
+                        {uniqueEnclosureTypes.map((enclosure, index) => (
+                            <option key={index} value={enclosure.enclosure_type}>
+                                {enclosure.enclosure_type}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+
+                <div className="form-group">
+                    <label htmlFor="dateRangeStart" className="date-range-label">Built Date Range:</label>
+                    <input
+                        type="date"
+                        id="dateRangeStart"
+                        value={dateRange.start}
+                        onChange={(event) => setDateRange({ ...dateRange, start: event.target.value })}
+                        className="input"
+                    />
+                    <input
+                        type="date"
+                        id="dateRangeEnd"
+                        value={dateRange.end}
+                        onChange={(event) => setDateRange({ ...dateRange, end: event.target.value })}
+                        className="input"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="timeRangeStart" className="time-range-label">Cleaning Schedule Time Range:</label>
+                    <input
+                        type="time"
+                        id="timeRangeStart"
+                        value={timeRange.start}
+                        onChange={(event) => setTimeRange({ ...timeRange, start: event.target.value })}
+                        className="input"
+                    />
+                    <input
+                        type="time"
+                        id="timeRangeEnd"
+                        value={timeRange.end}
+                        onChange={(event) => setTimeRange({ ...timeRange, end: event.target.value })}
+                        className="input"
+                    />
+                </div>
+
+                <button type="submit" className="submit-button">Generate Report</button>
+            </form>
+
+            {enclosures.length > 0 && (
+                <div className="report-data">
+                    <h3>Enclosures:</h3>
+                    <table className="report-table">
+                        <thead>
+                            <tr>
+                                <th>Enclosure Name</th>
+                                <th>Enclosure Type</th>
+                                <th>Built Date</th>
+                                <th>Cleaning Schedule Start</th>
+                                <th>Cleaning Schedule End</th>
+                                <th>Animals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {enclosures.map((enclosure, index) => (
+                                <tr key={index}>
+                                    <td>{enclosure.enclosureName}</td>
+                                    <td>{enclosure.enclosureType}</td>
+                                    <td>{enclosure.builtDate.split('T')[0]}</td>
+                                    <td>{formatTimeTo12Hour(enclosure.cleaningScheduleStart)}</td>
+                                    <td>{formatTimeTo12Hour(enclosure.cleaningScheduleEnd)}</td>
+                                    <td>
+                                        <ul>
+                                            {enclosure.animals && enclosure.animals.map((animal, index) => (
+                                                <li key={index}>
+                                                    {animal.animalName} ({animal.animalSpecies})
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
-export default SearchEnclosure;
+export default EnclosureReport;
