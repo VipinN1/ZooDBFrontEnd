@@ -96,17 +96,16 @@ function SearchAnimal() {
         </div>
         <div className="form-group">
           <label htmlFor="animalGender">Animal Gender:</label>
-          <select
-            id="animalGender"
-            value={animalGender}
-            onChange={(e) => setAnimalGender(e.target.value)}
-            className="input"
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-        </div>
+            <select
+              id="animalGender"
+              value={animalGender}
+              onChange={(e) => setAnimalGender(e.target.value)}
+              className="input"
+            >
+              <option value="">Select Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
         <div className="form-group">
           <label htmlFor="animalDoBStart">Date of Birth (From):</label>
           <input
@@ -197,7 +196,7 @@ function SearchAnimal() {
                 <tr key={index}>
                   <td>{animal.animalName}</td>
                   <td>{animal.animalSpecies}</td>
-                  <td>{animal.animalGender}</td>
+                  <td>{animal.animalGender === 'M' ? 'Male' : 'Female'}</td>
                   <td>{formatDate(animal.animalDoB)}</td>
                   <td>{animal.animalEndangered ? 'Yes' : 'No'}</td>
                   <td>{formatDate(animal.animalDoA)}</td>
