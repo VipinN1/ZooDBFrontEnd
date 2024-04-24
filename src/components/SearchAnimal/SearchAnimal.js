@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchAnimal.css';
 import axios from 'axios';
 
@@ -6,12 +6,35 @@ function SearchAnimal() {
   const [animalName, setAnimalName] = useState('');
   const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalGender, setAnimalGender] = useState('');
-  const [animalDoB, setAnimalDoB] = useState('');
+  const [animalDoBStart, setAnimalDoBStart] = useState('');
+  const [animalDoBEnd, setAnimalDoBEnd] = useState('');
   const [animalEndangered, setAnimalEndangered] = useState('');
-  const [animalDoA, setAnimalDoA] = useState('');
+  const [animalDoAStart, setAnimalDoAStart] = useState('');
+  const [animalDoAEnd, setAnimalDoAEnd] = useState('');
   const [animalOrigin, setAnimalOrigin] = useState('');
-  
+
   const [queryData, setQueryData] = useState([]);
+  const [animalSpeciesList, setAnimalSpeciesList] = useState([]);
+
+  useEffect(() => {
+    const fetchAnimalSpecies = async () => {
+      try {
+        const response = await axios.get('https://zoodatabasebackend.azurewebsites.net/api/ZooDb/GetAllAnimalSpecies');
+        setAnimalSpeciesList(response.data.map(species => species.animal_species));
+      } catch (error) {
+        console.error('Error fetching animal species:', error);
+      }
+    };
+
+    fetchAnimalSpecies();
+  }, []);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1; // Month is zero-based
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -20,9 +43,11 @@ function SearchAnimal() {
       animalName: animalName || null,
       animalSpecies: animalSpecies || null,
       animalGender: animalGender || null,
-      animalDoB: animalDoB || null,
+      animalDoBStart: animalDoBStart || null,
+      animalDoBEnd: animalDoBEnd || null,
       animalEndangered: animalEndangered || null,
-      animalDoA: animalDoA || null,
+      animalDoAStart: animalDoAStart || null,
+      animalDoAEnd: animalDoAEnd || null,
       animalOrigin: animalOrigin || null,
     };
 
@@ -55,13 +80,19 @@ function SearchAnimal() {
         </div>
         <div className="form-group">
           <label htmlFor="animalSpecies">Animal Species:</label>
-          <input
-            type="text"
+          <select
             id="animalSpecies"
             value={animalSpecies}
             onChange={(e) => setAnimalSpecies(e.target.value)}
             className="input"
-          />
+          >
+            <option value="">Select Species</option>
+            {animalSpeciesList.map((species, index) => (
+              <option key={index} value={species}>
+                {species}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="animalGender">Animal Gender:</label>
@@ -74,12 +105,22 @@ function SearchAnimal() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="animalDoB">Date of Birth:</label>
+          <label htmlFor="animalDoBStart">Date of Birth (From):</label>
           <input
             type="date"
-            id="animalDoB"
-            value={animalDoB}
-            onChange={(e) => setAnimalDoB(e.target.value)}
+            id="animalDoBStart"
+            value={animalDoBStart}
+            onChange={(e) => setAnimalDoBStart(e.target.value)}
+            className="input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="animalDoBEnd">Date of Birth (To):</label>
+          <input
+            type="date"
+            id="animalDoBEnd"
+            value={animalDoBEnd}
+            onChange={(e) => setAnimalDoBEnd(e.target.value)}
             className="input"
           />
         </div>
@@ -97,12 +138,22 @@ function SearchAnimal() {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="animalDoA">Date of Arrival:</label>
+          <label htmlFor="animalDoAStart">Date of Arrival (From):</label>
           <input
             type="date"
-            id="animalDoA"
-            value={animalDoA}
-            onChange={(e) => setAnimalDoA(e.target.value)}
+            id="animalDoAStart"
+            value={animalDoAStart}
+            onChange={(e) => setAnimalDoAStart(e.target.value)}
+            className="input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="animalDoAEnd">Date of Arrival (To):</label>
+          <input
+            type="date"
+            id="animalDoAEnd"
+            value={animalDoAEnd}
+            onChange={(e) => setAnimalDoAEnd(e.target.value)}
             className="input"
           />
         </div>
@@ -144,9 +195,9 @@ function SearchAnimal() {
                   <td>{animal.animalName}</td>
                   <td>{animal.animalSpecies}</td>
                   <td>{animal.animalGender}</td>
-                  <td>{new Date(animal.animalDoB).toLocaleDateString()}</td>
+                  <td>{formatDate(animal.animalDoB)}</td>
                   <td>{animal.animalEndangered ? 'Yes' : 'No'}</td>
-                  <td>{new Date(animal.animalDoA).toLocaleDateString()}</td>
+                  <td>{formatDate(animal.animalDoA)}</td>
                   <td>{animal.animalOrigin}</td>
                 </tr>
               ))}
