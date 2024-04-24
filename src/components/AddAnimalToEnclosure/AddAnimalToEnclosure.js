@@ -81,7 +81,7 @@ function AddAnimalToEnclosure() {
 
         const updateData = {
             animalID: animalData.animalID,
-            enclosureID: selectedEnclosure
+            enclosureID: selectedEnclosure === 'null' ? null : selectedEnclosure
         };
     
         try {
@@ -160,6 +160,7 @@ function AddAnimalToEnclosure() {
                                         {enclosure.enclosure_name}
                                     </option>
                                 ))}
+                                <option value="null">Not in an Enclosure</option>
                             </select>
                         </div>
 
