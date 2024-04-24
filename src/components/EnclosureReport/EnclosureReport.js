@@ -20,26 +20,16 @@ function EnclosureReport() {
             console.error('Error fetching unique enclosure types:', error);
         }
     };
-        // Function to format time string
-    const formatTime = (timeString) => {
-      if (!timeString) return '';
-      const timeParts = timeString.split(':');
-      const hours = parseInt(timeParts[0]);
-      const minutes = parseInt(timeParts[1]);
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-      return `${formattedHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-    };
 
     // Function to format time to 12-hour format without seconds
-const formatTimeTo12Hour = (timeString) => {
-    if (!timeString) return '';
-    const [hours, minutes] = timeString.split(':');
-    const hour = parseInt(hours, 10);
-    const period = hour >= 12 ? 'PM' : 'AM';
-    const formattedHour = hour % 12 || 12;
-    return `${formattedHour}:${minutes} ${period}`;
-};
+    const formatTimeTo12Hour = (timeString) => {
+        if (!timeString) return '';
+        const [hours, minutes] = timeString.split(':');
+        const hour = parseInt(hours, 10);
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const formattedHour = hour % 12 || 12;
+        return `${formattedHour}:${minutes} ${period}`;
+    };
 
     useEffect(() => {
         fetchUniqueEnclosureTypes();
@@ -96,17 +86,6 @@ const formatTimeTo12Hour = (timeString) => {
             console.error(`Error fetching animals for enclosure ${enclosureID}:`, error);
             return [];
         }
-    };
-
-    // Function to convert time to 12-hour format without seconds
-    const formatTimeTo12Hour = (time) => {
-        const date = new Date(`1970-01-01T${time}Z`);
-        const options = {
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true,
-        };
-        return date.toTimeString([], options);
     };
 
     return (
