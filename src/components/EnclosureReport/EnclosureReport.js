@@ -86,7 +86,7 @@ function EnclosureReport() {
             minute: 'numeric',
             hour12: true,
         };
-        return date.toLocaleTimeString([], options);
+        return date.toTimeString([], options);
     };
 
     return (
