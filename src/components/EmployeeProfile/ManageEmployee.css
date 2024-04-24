@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  form {
+    margin-bottom: 20px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"] {
+    margin-right: 10px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+
+  h1 {
+    color: #333;
+  }
