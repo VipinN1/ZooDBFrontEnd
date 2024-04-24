@@ -153,7 +153,7 @@ function RevenueReport() {
             <option value="all">All</option>
             <option value="ticket">Ticket Purchase</option>
             <option value="donation">Donation</option>
-            <option value="membership">Membership</option> {/* Added membership option */}
+            <option value="Membership">Membership</option> {/* Added membership option */}
           </select>
         </div>
         <button type="submit" className="submit-button">
