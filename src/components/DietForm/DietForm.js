@@ -131,7 +131,7 @@ function DietForm() {
           className="input-diet-form"
           required
         >
-          <option value="">Select Animal Species</option>
+          <option value="">Select Species</option>
           {animalSpeciesList.map((species, index) => (
             <option key={index} value={species.animal_species}>
               {species.animal_species}
