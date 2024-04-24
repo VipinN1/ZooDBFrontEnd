@@ -1,127 +1,47 @@
-/* General Styles */
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff; /* A light green background for a fresh look */
+.vision-content{
+  width: 700px;
+  padding: 15px;
+  background-color: #497458 ;
+  border-radius: 5px;
 }
 
-/* Centralize the content with Flexbox */
-.entire-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 100vh;
+
+.about-header{
+  margin-top: 100px;
 }
 
-/* Reusable box styling for vision and mission sections */
-.content-box {
-  width: 90%; /* Widening the banner */
-  max-width: 1100px; /* Adjusted maximum width */
-  margin: 2rem auto; /* Centering */
-  padding: 2rem;
-  background-color: #7aaaa4;
-  color: #333;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s ease forwards;
-  transition: transform 0.3s ease-in-out;
+.why-header{
+  margin-top: 20px;
 }
 
-.content-box:hover {
-  transform: scale(1.03);
+.vision-content h3{
+  font-weight: normal;
 }
 
-/* Apply gradient to all headers */
-.content-box h2, .content-box h3, .about-header, .why-header {
-  background: -webkit-linear-gradient(45deg, rgb(91, 167, 158), #aef);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 3rem; /* Increase font size for headers */
-  padding-top: 2rem; /* Adjusting padding for headers */
-  font-weight: 500;
-  color: #fff;
-  width: 90%; /* Adjust width */
-  margin: 0 auto; /* Center the heading */
+
+.mission-content{
+  width: 700px;
+  padding: 15px;
+  background-color: #497458 ;
+  border-radius: 5px;
+  margin-top: 30px;
+
+
 }
 
-/* Fine-tune heading styles */
-.content-box h2, .content-box h3, .about-header, .why-header {
-  font-size: 3rem; /* Increase font size for headers */
-  padding-top: 2rem; /* Adjusting padding for headers */
-  font-weight: 500;
-  color: #fff;
+.mission-content h3{
+  font-weight: normal;
 }
 
-/* Paragraph and list styles for readability */
-.content-box p, .content-box ul {
-  line-height: 1.6;
-  color: #effff4;
+.why-content{
+  width: 700px;
+
 }
 
-.content-box ul {
-  list-style: none;
-  padding: 0;
+.why-content h3{
+  font-weight: normal;
 }
 
-/* Increase font size for bullet points */
-.content-box li:before {
-  font-size: 1.5rem; /* Increase font size for bullet points */
-  position: absolute;
-  left: -2rem; /* Adjusting position of bullet points */
-  top: 0;
-}
-
-/* Custom emojis for each bullet point */
-.vision-content li:before { content: "🌟"; }
-.mission-content li:before { content: "🌍"; }
-.why-content li:before { content: "🐾"; }
-
-/* Keyframes for fadeInUp animation */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Keyframes for slideInFromLeft animation */
-@keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Apply slideInFromLeft animation with delay */
-.vision-content {
-  animation: slideInFromLeft 0.5s ease-out forwards;
-  animation-delay: 0.5s;
-}
-
-.mission-content {
-  animation: slideInFromLeft 0.5s ease-out forwards;
-  animation-delay: 1s;
-}
-
-.why-content {
-  animation: slideInFromLeft 0.5s ease-out forwards;
-  animation-delay: 1.5s;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .content-box {
-    width: 90%;
-    margin: 1rem auto; /* Centering */
-    padding: 1.5rem;
-  }
+.entire-page{
+  margin-left: 100px;
 }

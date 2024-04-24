@@ -8,7 +8,7 @@ export default function EmployeeNavbar({ handleSignOut }) {
   return (
     <nav className="nav-customer">
       <Link to="/" className="site-title-customer">
-        Cougar Zoo
+        Zoo
       </Link>
       <ul>
         {/* Animals menu */}
