@@ -193,7 +193,6 @@ function RevenueReport() {
                       <td>{transaction.ChildTickets || 0}</td>
                       <td>{transaction.SeniorTickets || 0}</td>
                       <td>{transaction.InfantTickets || 0}</td>
-                      <td></td> {/* Leave empty cell for Membership Type */}
                     </>
                   )}
                   {showAdditionalColumns && transaction.TransactionType === "Membership" && (
