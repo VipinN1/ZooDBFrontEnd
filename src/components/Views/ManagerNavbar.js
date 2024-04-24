@@ -70,6 +70,7 @@ export default function ManagerNavbar({handleSignOut}) {
             </div>
           )}
         </CustomLink>
+        <CustomLink to="/add-security">Security</CustomLink>
         <CustomLink
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -79,6 +80,7 @@ export default function ManagerNavbar({handleSignOut}) {
             <div className="sub-menu-customer">
               <CustomLink to="/enclosure-report">Enclosure Report</CustomLink>
               <CustomLink to="/revenue-report">Revenue Report</CustomLink>
+              <CustomLink to="/security-report">Security Report</CustomLink>
             </div>
           )}
         </CustomLink>

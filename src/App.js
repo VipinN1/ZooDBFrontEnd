@@ -25,6 +25,8 @@ import SearchAnimal from './components/SearchAnimal/SearchAnimal';
 import AddAnimalToEnclosure from './components/AddAnimalToEnclosure/AddAnimalToEnclosure';
 import EnclosureReport from './components/EnclosureReport/EnclosureReport';
 import AnimalReport from './components/AnimalReport/AnimalReport';
+import AddSecurityForm from './components/AddSecurityForm/AddSecurityForm';
+import SecurityReport from './components/SecurityReport/SecurityReport';
 import EmployeeProfileView from './components/EmployeeProfile/EmployeeProfileView';
 import CustomerProfileUpdate from './components/CustomerProfile/CustomerProfileUpdate';
 import CustomerProfileView from './components/CustomerProfile/CustomerProfileView';
@@ -193,6 +195,8 @@ try {
                     <Route path="/delete-animal" element={<DeleteAnimal />} />
                     <Route path="/assign-enclosure" element={<AddAnimalToEnclosure />} />
                     <Route path="/enclosure-report" element={<EnclosureReport />} />
+                    <Route path="/add-security" element={<AddSecurityForm />} />
+                    <Route path="/security-report" element={<SecurityReport />} />
                     <Route path="/animal-report" element={<AnimalReport />} />
                     <Route path="/revenue-report" element={<RevenueReport />} />
                     <Route path="/delete-donated-name" element={<DeleteDonatedNameForm />} />
