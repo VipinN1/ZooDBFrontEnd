@@ -16,6 +16,7 @@ function RevenueReport() {
     SeniorTickets: 0,
     InfantTickets: 0,
   });
+  const [reportGenerated, setReportGenerated] = useState(false); // Track if report has been generated
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -27,6 +28,9 @@ function RevenueReport() {
       endDate: endDate || null,
     };
   
+    // Log the request payload
+    console.log('Request Payload:', requestData);
+  
     // Post request to fetch revenue data based on the input fields
     try {
       const response = await axios.post(`https://zoodatabasebackend.azurewebsites.net/api/ZooDb/RevenueReport/${transactionType}`, requestData, {
@@ -34,6 +38,9 @@ function RevenueReport() {
           'Content-Type': 'application/json',
         },
       });
+  
+      // Log the response data
+      console.log('Response Data:', response.data);
   
       // Sort the response data by TransactionDate
       const sortedData = response.data.slice().sort((a, b) => {
@@ -90,6 +97,9 @@ function RevenueReport() {
   
       // Show additional columns if transaction type is "Ticket Purchase"
       setShowAdditionalColumns(transactionType === 'ticket');
+  
+      // Set reportGenerated to true after generating the report
+      setReportGenerated(true);
     } catch (error) {
       console.error('Error fetching query data:', error);
       // Clear query data in case of error
@@ -102,6 +112,8 @@ function RevenueReport() {
         SeniorTickets: 0,
         InfantTickets: 0,
       });
+      // Set reportGenerated to false if error occurs
+      setReportGenerated(false);
     }
   };
   
@@ -141,6 +153,7 @@ function RevenueReport() {
             <option value="all">All</option>
             <option value="ticket">Ticket Purchase</option>
             <option value="donation">Donation</option>
+            <option value="membership">Membership</option> {/* Added membership option */}
           </select>
         </div>
         <button type="submit" className="submit-button">
@@ -148,8 +161,8 @@ function RevenueReport() {
         </button>
       </form>
 
-      {/* Display report data if available */}
-      {queryData.length > 0 && (
+      {/* Display report data if available and if reportGenerated is true */}
+      {queryData.length > 0 && reportGenerated && (
         <div className="query-data">
           <h3>Revenue Report:</h3>
           <p>Total Revenue: ${totalRevenue.toFixed(2)}</p>
@@ -173,7 +186,7 @@ function RevenueReport() {
                 <th>Transaction Type</th>
                 <th>Date</th>
                 <th>Amount</th>
-                {/* Only show additional columns if "Ticket Purchase" is selected and the report is generated */}
+                {/* Only show additional columns if "Ticket Purchase" or "Membership" is selected and the report is generated */}
                 {showAdditionalColumns && (
                   <>
                     <th>Adult Tickets</th>
@@ -198,6 +211,16 @@ function RevenueReport() {
                       <td>{transaction.ChildTickets || 0}</td>
                       <td>{transaction.SeniorTickets || 0}</td>
                       <td>{transaction.InfantTickets || 0}</td>
+                    </>
+                  )}
+                  {/* Display membership type value only if the transaction type is "Membership" */}
+                  {showAdditionalColumns && transaction.TransactionType === "Membership" && (
+                    <>
+                      <td></td> {/* Leave empty cell for Ticket Types */}
+                      <td></td> {/* Leave empty cell for Ticket Types */}
+                      <td></td> {/* Leave empty cell for Ticket Types */}
+                      <td></td> {/* Leave empty cell for Ticket Types */}
+                      <td>{transaction.MembershipType}</td>
                     </>
                   )}
                 </tr>
