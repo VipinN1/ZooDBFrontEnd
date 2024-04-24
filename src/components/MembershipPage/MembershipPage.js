@@ -101,7 +101,7 @@ const MembershipPage = ({ customerId }) => {
     <div className="membership-page">
       <h2>Choose Your Membership</h2>
       <div className="membership-options">
-        {['Tier 1 /100$', 'Tier 2 /200$', 'Tier 3 /300$'].map((tier, index) => (
+        {['Tier 1', 'Tier 2', 'Tier 3'].map((tier, index) => (
           <div key={index} className="membership-option">
             <h3>{tier}</h3>
             <button onClick={() => handleBuyClick(tier)} disabled={isDisabled}>Buy</button>
