@@ -1,4 +1,3 @@
-// SignIn.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignIn.css';
@@ -17,11 +16,9 @@ function SignIn({ handleSignIn }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSignIn(email, password); // Call the function passed from App.js
+    handleSignIn(email, password);
     setEmail('');
     setPassword('');
-    
-    
   };
 
   return (
@@ -45,11 +42,12 @@ function SignIn({ handleSignIn }) {
         <button type="submit" className="submit-button-sign-in">
           Sign In
         </button>
+        <div className="reset-password-link-sign-in">
+          <Link to="/reset-password">Forgot Password?</Link>
+        </div>
       </form>
       <div className="signup-link-sign-in">
-        <p>
-          Not already a user? <Link to="/sign-up">Sign up</Link>
-        </p>
+        <p>Not already a user? <Link to="/sign-up">Sign up</Link></p>
       </div>
     </div>
   );

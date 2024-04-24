@@ -36,15 +36,17 @@ function Donation({ customerId }) {
   return (
     <div className="App-donation">
       <main className="Main-donation">
-        <p>To make a donation, please fill out the form below:</p>
+        <p>To make a donation, please fill out the form below. </p>
+          <p>  Donating 100$ or more gives you the option to choose a potential name for a future animal
+        </p>
         <form className={`DonationForm ${formDisabled ? 'DonationForm-disabled' : ''}`} onSubmit={handleSubmit}>
           <label htmlFor="amount">Amount (USD):</label>
           <input type="number" id="amount" name="amount" min="1" required value={amount} onChange={(e) => setAmount(parseFloat(e.target.value))} />
           {amount >= 100 && (
             <>
-              <label htmlFor="specialName">Special Name for a new animal (required):</label>
-              <input type="text" id="specialName" name="specialName" value={specialName} onChange={(e) => setSpecialName(e.target.value)} required />
-              <p>This name may be selected for a name for a new animal.</p>
+              <label htmlFor="specialName">Special Name for a new animal (optional):</label>
+              <input type="text" id="specialName" name="specialName" value={specialName} onChange={(e) => setSpecialName(e.target.value)}  />
+              <p>This name may be selected as a name for a new animal.</p>
             </>
           )}
           <button type="submit">Donate</button>

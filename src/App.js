@@ -36,6 +36,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavbarTemp from './components/Navbar/NavbarTemp';
 import DeleteDonatedNameForm from './components/DeleteDonatedName/DeleteDonatedName';
 import MembershipPage from './components/MembershipPage/MembershipPage';
+import ResetPassword from './components/SignIn/ResetPassword';
+
 import axios from 'axios';
 
 function App() {
@@ -201,6 +203,7 @@ try {
                     <Route path="/revenue-report" element={<RevenueReport />} />
                     <Route path="/delete-donated-name" element={<DeleteDonatedNameForm />} />
                     <Route path="/membership-page" element={<MembershipPage />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </div>
